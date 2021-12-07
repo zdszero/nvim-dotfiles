@@ -1,0 +1,63 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+priority -50
+
+extends plaintex
+
+###################
+# Text formatting #
+###################
+
+snippet '(?<!\\)([0-9])([0-9])tb' "new table" r
+$1`!p 
+rows = match.group(1)
+cols = match.group(2)
+row1 = ""
+row2 = "" 
+for i in range(int(cols)):
+    row1 += "| <++> "
+    row2 += "|:-:"
+row1 += "|\n"
+row2 += "|\n"
+out = row1 + row2 + (int(rows)-1) * row1
+snip.rv = out
+`$0
+endsnippet
+
+snippet pandoc_meta "pandoc metadata" b
+---
+title: adbs homework 3
+author: 丁子枫 SA21011205
+numbersections: false
+codeBlockCaptions: false
+geometry:
+- top=10mm
+- left=30mm
+- right=30mm
+- bottom=30mm
+---
+endsnippet

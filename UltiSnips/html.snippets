@@ -1,0 +1,70 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+priority -50
+
+extends javascript
+
+snippet html:5 "html5 template" b
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>$1</title>
+</head>
+<body>
+	$2
+</body>
+</html>
+endsnippet
+
+snippet div "divison" b
+<div$2>$1</div>$0
+endsnippet
+
+snippet p "paragraph" b
+<p$2>$1</p>$0
+endsnippet
+
+snippet li "list item" b
+<li>$1</li>$0
+endsnippet
+
+snippet ul "unordered list" b
+<ul>$1</ul>$0
+endsnippet
+
+snippet img "image" b
+<img src="$1" alt="$2"></img>$0
+endsnippet
+
+snippet sp "span" b
+<span$2>$1</span>$0
+endsnippet
+
+snippet btn "button" b
+<button$2>$1</button>$0
+endsnippet

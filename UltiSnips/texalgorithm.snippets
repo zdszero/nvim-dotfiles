@@ -1,0 +1,66 @@
+priority -50
+
+snippet if "algorithm if" b
+\If{$1}
+	$0
+\EndIf
+endsnippet
+
+snippet ife "algorithm if else" b
+\If{$1}
+	$2
+\Else
+	$0
+\EndIf
+endsnippet
+
+snippet eli "algorithm else if" b
+\ElsIf{$1}
+	$0
+endsnippet
+
+snippet for "algorithm for" b
+\For{$1}
+	$0
+\EndFor
+endsnippet
+
+snippet wh "algorithm while" b
+\While{$1}
+	$0
+\EndWhile
+endsnippet
+
+snippet proc "algorithm procedure" b
+\Procedure{$1}{$2}
+	$0
+\EndProcedure
+endsnippet
+
+snippet comm "algorithm comment" w
+\Comment{$0}
+endsnippet
+
+snippet st "algorithm state" b
+\State $0
+endsnippet
+
+snippet sta "algorithm state assign" b
+\State \$$1 \gets $0\$
+endsnippet
+
+snippet rt "algorithm return" b
+\Return $0
+endsnippet
+
+snippet alg "algorithm" b
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\begin{algorithm}
+\caption{$1}
+\begin{algorithmic}
+$0
+\end{algorithmic}
+\end{algorithm}
+endsnippet

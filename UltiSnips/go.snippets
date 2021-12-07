@@ -1,0 +1,155 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+snippet main "main func" b
+func main() {
+	$0
+}
+endsnippet
+
+snippet for "for" b
+for ${1:i} := ${2:0}; ${1} < ${3}; ${1}++ {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet if "if" b
+if $1 {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet ife "if else" b
+if $1 {
+	$2
+} else {
+	$0
+}
+endsnippet
+
+snippet fin "for in" b
+for ${1:_}, $2 := range $3 {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet /^import/ "Import declaration" r
+import (
+	"${1:package}"
+)
+endsnippet
+
+snippet /^cons/ "Constants declaration" r
+const (
+	${1:constant}${2/(.+)/ /}${2:type} = ${0:value}
+)
+endsnippet
+
+snippet /^con/ "Constant declaration" r
+const ${1:name}${2/(.+)/ /}${2:type} = ${0:value}
+endsnippet
+
+snippet vars "Variables declaration" b
+var (
+	${1:name}${2/(.+)/ /}${2:type}${3: = ${0:value} }
+)
+endsnippet
+
+snippet ifer "error handling" b
+if err != nil {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet fpe "fprintf stderr" b
+fmt.Fprintf(os.Stderr, "$0")
+endsnippet
+
+snippet st "struct" b
+type $1 struct {
+	$0
+}
+endsnippet
+
+snippet app "slice append" b
+${1} = append(${1}, $0)
+endsnippet
+
+snippet pop "slice pop" b
+$1 = $1[:len($1) - 1]
+endsnippet
+
+snippet popf "pop front" b
+$1 = $1[${2:1}:]$0
+endsnippet
+
+snippet last "slice last element" b
+$1 := $2[len($2) - 1]
+endsnippet
+
+snippet sw "switch" b
+switch $1 {
+$0
+}
+endsnippet
+
+snippet ca "case" b
+case $1:
+	$0
+endsnippet
+
+snippet de "default" b
+default:
+	$0
+endsnippet
+
+snippet Test "Test" b
+func Test$1(t *testing.T) {
+	$0
+}
+endsnippet
+
+snippet es "error assign" w
+${1:_}, err := $0
+endsnippet
+
+snippet lamb "labmda fucntion" w
+func($1) {
+	$0
+}
+endsnippet
+
+snippet fne "labmda function execution" w
+func($1) {
+	$0
+}($2)
+endsnippet
+
+snippet gfn "labmda function execution" w
+go func($1) {
+	$0
+}($2)
+endsnippet

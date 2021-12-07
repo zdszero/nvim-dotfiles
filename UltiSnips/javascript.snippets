@@ -1,0 +1,113 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+priority -50
+
+snippet log "console.log" b
+console.log($1)$0
+endsnippet
+
+snippet if "if" b
+if (${1:/* condition */}) {
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet eli "else if" w
+else if (${1:/* condition */}) {
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet el "else" w
+else {
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet ife "if .. else (ife)"
+if (${1:/* condition */}) {
+	${VISUAL}${2}
+} else {
+	${3:/* else */}
+}${0}
+endsnippet
+
+snippet wh "while loop"
+while (${1:/* condition */}) {
+	${VISUAL}${2}
+}
+endsnippet
+
+snippet do "do...while loop (do)"
+do {
+	${VISUAL}${2}
+} while(${1:/* condition */});${0}
+endsnippet
+
+snippet for "for" b
+for (let ${1:i} = ${2:0}; $1 < ${3:size}; $1++) {
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet forr "for reverse" b
+for (let ${1:i} = ${2:upper}; $1 >= ${3:size}; $1--) {
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet foro "for-of" b
+for (const ${1:val} of ${2:iter}) {
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet fori "for-in" b
+for (const ${1:key} in ${2:iter}) {
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet la "lambda one line" w
+($1) => { $2 }$0
+endsnippet
+
+snippet fn "function" b
+function ${1:name} (${2:parameters}) {
+	${VISUAL}$3
+}$0
+endsnippet
+
+snippet afn "anonymous function" w
+function ($1) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet re "require nodejs" b
+var ${1:name} = require('${VISUAL}${2:module}')${0}
+endsnippet
