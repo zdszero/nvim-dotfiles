@@ -40,6 +40,9 @@ function! s:is_in_git_directory()
   return 0
 endfunction
 
+function! s:find_dotfiles()
+  silent! exe 'Telescope find_files theme=get_dropdown cwd=' . g:config_dir
+endfunction
 
 nmap <silent> gr :Telescope coc references<cr>
 nmap <silent> <leader>sd :Telescope coc diagnostics<cr>
@@ -47,6 +50,7 @@ nmap <silent> <leader>so :Telescope coc document_symbols<cr>
 
 nmap <silent> <expr> <leader>sf <SID>is_in_git_directory() ?
       \'<cmd>Telescope git_files theme=get_dropdown<cr>' : '<cmd>Telescope find_files theme=get_dropdown<cr>'
+nmap <silent> <leader>sn :call <SID>find_dotfiles()<cr>
 nmap <silent> <leader>sb :Telescope buffers theme=get_dropdown<cr>
 nmap <silent> <leader>st :Telescope colorscheme theme=get_dropdown<cr>
 nmap <silent> <leader>sl :Telescope current_buffer_fuzzy_find<cr>

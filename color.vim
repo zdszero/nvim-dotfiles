@@ -13,7 +13,8 @@ let g:sql_type_default = 'mysql'
 " let g:indent_blankline_char = '•'
 let g:indent_blankline_space_char_blankline = ' '
 " let g:indent_blankline_filetype = ['python', 'go']
-let g:indent_blankline_buftype_exclude = ['terminal', 'help']
+" let g:indent_blankline_filetype = ['startify']
+let g:indent_blankline_buftype_exclude = ['terminal', 'help', 'startify']
 
 au FileType racket,scheme call rainbow#load()
 
