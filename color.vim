@@ -24,7 +24,7 @@ require'nvim-treesitter.configs'.setup {
   ignore_install = { "verilog" }, -- List of parsers to ignore installing
   highlight = {
     enable = true,              -- false will disable the whole extension
-    disable = {"markdown", "vim", "cmake"},     -- list of language that will be disabled
+    disable = {"markdown", "cmake"},     -- list of language that will be disabled
   },
 }
 require("bufferline").setup{}

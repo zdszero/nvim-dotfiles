@@ -13,6 +13,10 @@ function! s:cocActionsOpenFromSelected(type) abort
 endfunctio
 
 let g:coc_global_extensions = [
+      \ 'coc-pairs',
+      \ 'coc-snippets',
+      \ 'coc-explorer',
+      \ 'coc-highlight',
       \ 'coc-cmake',
       \ 'coc-sh',
       \ 'coc-pyright',
@@ -20,13 +24,9 @@ let g:coc_global_extensions = [
       \ 'coc-lua',
       \ 'coc-html',
       \ 'coc-css',
-      \ 'coc-go',
       \ 'coc-tsserver',
       \ 'coc-vimlsp',
-      \ 'coc-json',
-      \ 'coc-highlight',
-      \ 'coc-explorer',
-      \ 'coc-pairs']
+      \ 'coc-json']
 
 let g:coc_filetype_map = {
   \ 'h': 'c',
@@ -90,10 +90,12 @@ vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(
 "       \ coc#expandable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand',''])\<cr>" :
 "       \ coc#jumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-jump',''])\<cr>" :
 "       \ "\<TAB>"
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? coc#_select_confirm() :
-"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-"       \ "\<TAB>"
+inoremap <silent><expr> <TAB>
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ pumvisible() ? coc#_select_confirm() :
+      \ "\<TAB>"
+let g:coc_snippet_next = '<tab>'
+let g:coc_snippet_prev = '<s-tab>'
 inoremap <silent><expr> <cr> "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 xmap <tab> <Plug>(coc-snippets-select)
 xmap <leader>x <Plug>(coc-convert-snippet)
@@ -114,33 +116,3 @@ command! -nargs=0 OI   :call CocAction('runCommand', 'editor.action.organizeImpo
 " nmap [h <Plug>(coc-git-prevchunk)
 " nmap ]h <Plug>(coc-git-nextchunk)
 " nmap <leader>st :CocCommand git.chunkStage<cr>
-
-""""""""""""""""""""""""""
-"  super tab completion  "
-""""""""""""""""""""""""""
-
-function! g:UltiSnips_Complete()
-  call UltiSnips#ExpandSnippet()
-  if g:ulti_expand_res == 0
-    if pumvisible()
-      return "\<C-n>"
-    else
-      call UltiSnips#JumpForwards()
-      if g:ulti_jump_forwards_res == 0
-        return "\<TAB>"
-      endif
-    endif
-  endif
-  return ""
-endfunction
-
-let g:UltiSnipsExpandTrigger = "<nop>"
-let g:UltiSnipsListSnippets = "<nop>"
-let g:UltiSnipsJumpForwardTrigger = "<nop>"
-let g:UltiSnipsJumpBackwardTrigger = "<nop>"
-let g:coc_snippet_next = '<tab>'
-let g:coc_snippet_prev = '<s-tab>'
-
-inoremap <expr> <tab>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ "<C-R>=g:UltiSnips_Complete()<cr>"

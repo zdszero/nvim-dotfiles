@@ -1,16 +1,82 @@
 priority -50
 
+##########################
+#    MARCO  DEFINATIONS  #
+##########################
+
 snippet def "#define ..."
-#ifndef ${1}
-#define ${1} ${2}
-#endif
+#define $0
 endsnippet
 
-snippet #if "#if #endif" b
+snippet ndef "define guard"
+#ifndef $1
+#define ${1:SYMBOL} ${2:value}
+#endif /* ifndef $1 */
+endsnippet
+
+snippet #if "#if #endif"
 #if ${1:0}
 ${VISUAL}${0}
 #endif
 endsnippet
+
+snippet once "header include guard"
+#ifndef $1
+#define $1
+
+${0}
+
+#endif /* end of include guard: $1 */
+endsnippet
+
+snippet nocxx  "disable c++ name mangling"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+${0}
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif
+endsnippet
+
+snippet td "typedef" b
+typedef ${1:int} ${2:MyCustomType};
+endsnippet
+
+snippet tds "typedef structure" b
+/*! \struct $2
+ *  \brief ${5:Brief struct description}
+ *
+ *  ${6:Detailed description}
+ */
+typedef struct ${2:_$1 }{
+	m_${3:Data} /*!< ${4:Description} */
+} ${1:`vim_snippets#Filename('$1_t', 'name')`};
+endsnippet
+
+snippet tde "typedef enumeatte" b
+/*! \enum $2
+ *
+ *  ${4:Detailed description}
+ */
+typedef enum {
+	${1:Data} /*!< ${3:Description} */
+} ${2:foo};
+endsnippet
+
+snippet enum "enumerate" b
+/*! \enum $1
+ *
+ *  ${2:Detailed description}
+ */
+enum ${1:name} { ${0} };
+endsnippet
+
+########################
+#       STRUCTURES     #
+########################
 
 snippet Inc "#include local header (inc)"
 #include "${1:`!p snip.rv = snip.basename + '.h'`}"
@@ -18,15 +84,6 @@ endsnippet
 
 snippet inc "#include <> (Inc)"
 #include <${1:.h}>
-endsnippet
-
-snippet mark "#pragma mark (mark)"
-#if 0
-${1:#pragma mark -
-}#pragma mark $2
-#endif
-
-$0
 endsnippet
 
 snippet main "main() (main)"
@@ -49,6 +106,22 @@ struct ${1:/* name */} {
 };${0}
 endsnippet
 
+snippet enum "Enumeration"
+typedef enum {
+	$1
+} $0;
+endsnippet
+
+snippet fun "function" b
+${1:void} ${2:function_name}(${3}) {
+	${VISUAL}${4}
+}${0}
+endsnippet
+
+######################
+#     STATEMENTS     #
+######################
+
 snippet for "for loop" b
 for (${1:int }${2:i} = ${3:0}; $2 < ${4:count}; $2++) {
 	${VISUAL}${0}
@@ -61,33 +134,6 @@ for (${1:int }${2:upper} = ${3:0}; $2 >= ${4:lower}; $2++) {
 }
 endsnippet
 
-snippet enum "Enumeration"
-typedef enum {
-	$1
-} $0;
-endsnippet
-
-snippet once "Include header once only guard"
-#ifndef ${1:`!p
-if not snip.c:
-	import random, string
-	name = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
-	rand = ''.join(random.sample(string.ascii_letters+string.digits, 8))
-	snip.rv = ('%s_%s' % (name,rand)).upper()
-else:
-	snip.rv = snip.c`}
-#define $1
-
-${VISUAL}${0}
-
-#endif /* end of include guard: $1 */
-
-endsnippet
-
-snippet td "Typedef"
-typedef ${1:int} ${2:MyCustomType};
-endsnippet
-
 snippet wh "while loop"
 while (${1:/* condition */}) {
 	${VISUAL}${2}
@@ -98,10 +144,6 @@ snippet do "do...while loop (do)"
 do {
 	${VISUAL}${2}
 } while(${1:/* condition */});${0}
-endsnippet
-
-snippet fpf "fprintf ..."
-fprintf(${1:stderr}, "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
 endsnippet
 
 snippet if "if .. (if)"
@@ -148,11 +190,10 @@ default:
 	break;${0}
 endsnippet
 
-snippet fn "function" b
-${1:void} ${2:function_name}(${3}) {
-	${VISUAL}${4}
-}${0}
-endsnippet
+
+######################
+#       HEADER       #
+######################
 
 snippet head "File Header" b
 /******************************************************************************
@@ -165,7 +206,7 @@ snippet head "File Header" b
 ${0}
 endsnippet
 
-snippet func "Function Header" 
+snippet dfun "Function Header" 
 /******************************************************************************
 * Function:         $1
 * Description:      ${4:${VISUAL}}
@@ -183,5 +224,75 @@ snip << 2
 *****************************************************************************/
 ${1}($2){
 	${0}
+}
+endsnippet
+
+#############################
+#     SOME CODING TEMPLATE  #
+#############################
+
+snippet pr "printf" b
+printf("${1:%s}", ${0});
+endsnippet
+
+snippet fpr "fprintf" b
+fprintf(${1:stderr}, "${2:%s}\n"${3});
+endsnippet
+
+snippet getopt "getopt template" b
+int choice;
+while (1)
+{
+	static struct option long_options[] =
+	{
+		/* Use flags like so:
+		{"verbose",	no_argument,	&verbose_flag, 'V'}*/
+		/* Argument styles: no_argument, required_argument, optional_argument */
+		{"version", no_argument,	0,	'v'},
+		{"help",	no_argument,	0,	'h'},
+		${1}
+		{0,0,0,0}
+	};
+
+	int option_index = 0;
+
+	/* Argument parameters:
+		no_argument: " "
+		required_argument: ":"
+		optional_argument: "::" */
+
+	choice = getopt_long( argc, argv, "vh",
+				long_options, &option_index);
+
+	if (choice == -1)
+		break;
+
+	switch( choice )
+	{
+		case 'v':
+			${2}
+			break;
+
+		case 'h':
+			${3}
+			break;
+
+		case '?':
+			/* getopt_long will have already printed an error */
+			break;
+
+		default:
+			/* Not sure how to get here... */
+			return EXIT_FAILURE;
+	}
+}
+
+/* Deal with non-option arguments here */
+if ( optind < argc )
+{
+	while ( optind < argc )
+	{
+		${0}
+	}
 }
 endsnippet

@@ -1,37 +1,99 @@
-# A valid snippet should starts with:
-#
-#		snippet trigger_word [ "description" [ options ] ]
-#
-# and end with:
-#
-#		endsnippet
-#
-# Snippet options:
-#
-#		b - Beginning of line.
-#		i - In-word expansion.
-#		w - Word boundary.
-#		r - Regular expression
-#		e - Custom context snippet
-#		A - Snippet will be triggered automatically, when condition matches.
-#
-# Basic example:
-#
-#		snippet emitter "emitter properties" b
-#		private readonly ${1} = new Emitter<$2>()
-#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
-#		endsnippet
-#
-# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+snippet init
+	cmake_minimum_required(VERSION ${1:2.8.2})
+	project(${2:ProjectName})
 
-snippet project_source_dir "project source directory" w
-$\{PROJECT_SOURCE_DIR\}$0
+	find_package(${3:library})
+
+	include_directories(${$3_INCLUDE_DIRS})
+
+	add_subdirectory(${0:src})
+
+	add_executable($2)
+
+	target_link_libraries($2 ${$3_LIBRARIES})
 endsnippet
 
-snippet ife "if else" b
-if($1)
-	$2
-else($1)
-	$3
-endif($1)
+snippet proj
+	project(${0:Name})
+endsnippet
+
+snippet min
+	cmake_minimum_required(VERSION ${0:2.8.2})
+endsnippet
+
+snippet include
+	include_directories(${${0:include_dir}})
+endsnippet
+
+snippet find
+	find_package(${1:library} ${0:REQUIRED})
+endsnippet
+
+snippet glob
+	file(glob ${1:srcs} *.${0:cpp})
+endsnippet
+
+snippet subdir
+	add_subdirectory(${0:src})
+endsnippet
+
+snippet lib
+	add_library(${1:lib} ${${0:srcs}})
+endsnippet
+
+snippet link
+	target_link_libraries(${1:bin} ${0:somelib})
+endsnippet
+
+snippet bin
+	add_executable(${1:bin})
+endsnippet
+
+snippet set
+	set(${1:var} ${0:val})
+endsnippet
+
+snippet dep
+	add_dependencies(${1:target}
+		${0:dep}
+	)
+endsnippet
+
+snippet Ext_url
+	include(ExternalProject)
+	ExternalProject_Add(${1:googletest}
+	  URL ${2:http://googletest.googlecode.com/files/gtest-1.7.0.zip}
+	  URL_HASH SHA1=${3:f85f6d2481e2c6c4a18539e391aa4ea8ab0394af}
+	  SOURCE_DIR "${4:${CMAKE_BINARY_DIR}/gtest-src}"
+	  BINARY_DIR "${0:${CMAKE_BINARY_DIR}/gtest-build}"
+	  CONFIGURE_COMMAND ""
+	  BUILD_COMMAND     ""
+	  INSTALL_COMMAND   ""
+	  TEST_COMMAND      ""
+	)
+endsnippet
+
+snippet Ext_git
+	include(ExternalProject)
+	ExternalProject_Add(${1:googletest}
+	  GIT_REPOSITORY    ${2:https://github.com/google/googletest.git}
+	  GIT_TAG           ${3:master}
+	  SOURCE_DIR        "${4:${CMAKE_BINARY_DIR}/googletest-src}"
+	  BINARY_DIR        "${0:${CMAKE_BINARY_DIR}/googletest-build}"
+	  CONFIGURE_COMMAND ""
+	  BUILD_COMMAND     ""
+	  INSTALL_COMMAND   ""
+	  TEST_COMMAND      ""
+	)
+endsnippet
+
+snippet props
+	set_target_properties(${1:target}
+		${2:properties} ${3:compile_flags}
+		${0:"-O3 -Wall -pedantic"}
+	)
+endsnippet
+
+snippet test
+	add_test(${1:ATestName} ${0:testCommand --options})
 endsnippet

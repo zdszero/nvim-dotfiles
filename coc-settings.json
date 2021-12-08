@@ -63,18 +63,8 @@
     },
     "highlight.colorNames.enable": false,
     "snippets.ultisnips.enable": true,
+    "snippets.snipmate.enable": false,
     "snippets.loadFromExtensions": false,
-    "snippets.extends": {
-      "cpp": [
-        "c"
-      ],
-      "html": [
-        "javascript"
-      ],
-      "zsh": [
-        "sh"
-      ]
-    },
     "pairs.disableLanguages": [
       "racket",
       "scheme"
@@ -87,11 +77,8 @@
       "\"",
       "`"
     ],
-    "git.enableGutters": false,
     "cmake.lsp.enable": true,
-    "go.goplsOptions": {
-      "usePlaceholders": true
-    },
+    "pyright.completion.snippetSupport": false,
     "languageserver": {
       "ccls": {
         "command": "ccls",
@@ -112,7 +99,18 @@
           "cache": {
             "directory": "/tmp/ccls"
           }
-        }
+        },
+        "disableSnippetCompletion": true
+      },
+      "golang": {
+        "command": "gopls",
+        "rootPatterns": [
+          "go.mod"
+        ],
+        "filetypes": [
+          "go"
+        ],
+        "disableSnippetCompletion": true
       }
     }
   }

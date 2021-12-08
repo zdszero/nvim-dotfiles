@@ -21,11 +21,7 @@ function ef#Commander(...)
   elseif l:arg == 'c'
     call s:EditFile('command.vim')
   elseif l:arg == 's'
-    let v:errmsg = ''
-    silent! exe 'UltiSnipsEdit'
-    if v:errmsg != ''
-      exe 'CocCommand snippets.editSnippets'
-    endif
+    call s:EditFile('UltiSnips/' . &ft . '.snippets')
   elseif l:arg == 't'
     call s:EditFile('ftplugin/' .. &ft  .. '.vim')
   else

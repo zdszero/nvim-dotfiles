@@ -36,6 +36,115 @@ snippet el "std::endl" w
 std::endl;$0
 endsnippet
 
+######################
+#  STL COLLECTION    #
+######################
+
+# std::array
+snippet array
+std::array<${1:T}, ${2:N}> ${3};
+endsnippet
+
+# std::vector
+snippet vector
+std::vector<${1:T}> ${2};
+endsnippet
+
+# std::deque
+snippet deque
+std::deque<${1:T}> ${2};
+endsnippet
+
+# std::forward_list
+snippet flist
+std::forward_list<${1:T}> ${2};
+endsnippet
+
+# std::list
+snippet list
+std::list<${1:T}> ${2};
+endsnippet
+
+# std::set
+snippet set
+std::set<${1:T}> ${2};
+endsnippet
+
+# std::map
+snippet map
+std::map<${1:Key}, ${2:T}> ${3};
+endsnippet
+
+# std::multiset
+snippet mset
+std::multiset<${1:T}> ${2};
+endsnippet
+
+# std::multimap
+snippet mmap
+std::multimap<${1:Key}, ${2:T}> ${3};
+endsnippet
+
+# std::unordered_set
+snippet uset
+std::unordered_set<${1:T}> ${2};
+endsnippet
+
+# std::unordered_map
+snippet umap
+std::unordered_map<${1:Key}, ${2:T}> ${3};
+endsnippet
+
+# std::unordered_multiset
+snippet umset
+std::unordered_multiset<${1:T}> ${2};
+endsnippet
+
+# std::unordered_multimap
+snippet ummap
+std::unordered_multimap<${1:Key}, ${2:T}> ${3};
+endsnippet
+
+# std::stack
+snippet stack
+std::stack<${1:T}> ${2};
+endsnippet
+
+# std::queue
+snippet queue
+std::queue<${1:T}> ${2};
+endsnippet
+
+# std::priority_queue
+snippet pqueue
+std::priority_queue<${1:T}> ${2};
+endsnippet
+
+########################
+#  STL smart pointers  #
+########################
+
+snippet msp "make shared_ptr" b
+std::shared_ptr<${1:T}> ${2} = std::make_shared<$1>(${3});
+endsnippet
+
+snippet amsp "make shared_ptr -> auto" b
+auto ${1} = std::make_shared<${2:T}>(${3});
+endsnippet
+
+# std::unique_ptr
+snippet mup "make unique_ptr" b
+std::unique_ptr<${1:T}> ${2} = std::make_unique<$1>(${3});
+endsnippet
+
+snippet amup "make unique_ptr -> auto" b
+auto ${1} = std::make_unique<${2:T}>(${3});
+endsnippet
+
+######################
+#   GOOGLE TEST      #
+######################
+
 snippet Test "Google Test" b
 TEST(${1:SomethingTest}, ${2:SampleTest}) {
 	$0

@@ -31,7 +31,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'gcmt/wildfire.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'SirVer/ultisnips'
 " theme
 Plug 'tomasiser/vim-code-dark'
 Plug 'rakr/vim-one'
