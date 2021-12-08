@@ -4,15 +4,15 @@ let g:lightline = {
       \ 'colorscheme': 'one',
       \ }
 
-let g:vscode_style = "dark"
-colorscheme vscode
 set background=dark
+let g:one_allow_italics = 1 " I love italic for comments
+colorscheme one
 
 let g:sql_type_default = 'mysql'
 
 " let g:indent_blankline_char = '•'
 let g:indent_blankline_space_char_blankline = ' '
-let g:indent_blankline_filetype = ['python', 'go']
+" let g:indent_blankline_filetype = ['python', 'go']
 let g:indent_blankline_buftype_exclude = ['terminal', 'help']
 
 au FileType racket,scheme call rainbow#load()
@@ -28,10 +28,6 @@ require'nvim-treesitter.configs'.setup {
 }
 require("bufferline").setup{}
 EOF
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                LIGHTLINE                                   "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Plug 'itchyny/lightline.vim'
 " Plug 'josa42/vim-lightline-coc'

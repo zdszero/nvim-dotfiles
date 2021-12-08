@@ -28,10 +28,12 @@ Plug 'mhartington/formatter.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'gcmt/wildfire.vim'
 Plug 'junegunn/vim-easy-align'
 " theme
-Plug 'Mofiqul/vscode.nvim'
+Plug 'tomasiser/vim-code-dark'
+Plug 'rakr/vim-one'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'akinsho/bufferline.nvim'
@@ -39,8 +41,12 @@ Plug 'frazrepo/vim-rainbow'
 
 call plug#end()
 
-" SOURCE CONFIG FILE
-execute 'source ' . g:config_dir . 'color.vim'
-execute 'source ' . g:config_dir . 'coc.vim'
-execute 'source ' . g:config_dir . 'format.vim'
-execute 'source ' . g:config_dir . 'util.vim'
+let s:plug_config_files = ['color.vim', 'coc.vim', 'format.vim', 'util.vim']
+
+function! s:load_plug_config()
+  for l:filename in s:plug_config_files
+    exe 'source ' . g:config_dir . l:filename
+  endfor
+endfunction
+
+call s:load_plug_config()

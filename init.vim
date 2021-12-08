@@ -1,6 +1,6 @@
 let &packpath = &runtimepath
 
-let g:config_dir = expand("%:p:h") . '/'
+let g:config_dir = expand("<sfile>:p:h") . '/'
 let s:config_files = [ 'option.vim', 'mapping.vim', 'plugin.vim', 'command.vim']
 
 function s:load_config()

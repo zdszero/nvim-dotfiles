@@ -1,5 +1,5 @@
 function! s:EditFile(filename)
-  exe 'edit ' . g:config_dir . g:os_separator . a:filename
+  exe 'edit ' . g:config_dir . a:filename
 endfunction
 
 function ef#Commander(...)
