@@ -50,6 +50,12 @@ if $1 {
 }
 endsnippet
 
+snippet eli "else if" b
+else if ($1) {
+	$0
+}
+endsnippet
+
 snippet fin "for in" b
 for ${1:_}, $2 := range $3 {
 	${VISUAL}$0
@@ -136,19 +142,19 @@ snippet es "error assign" w
 ${1:_}, err := $0
 endsnippet
 
+snippet fun "function" b
+func ${1:name}(${2:parameters}) {
+	$3
+}
+endsnippet
+
 snippet lamb "labmda fucntion" w
 func($1) {
 	$0
 }
 endsnippet
 
-snippet fne "labmda function execution" w
-func($1) {
-	$0
-}($2)
-endsnippet
-
-snippet gfn "labmda function execution" w
+snippet gofun "labmda function execution" w
 go func($1) {
 	$0
 }($2)
