@@ -47,6 +47,13 @@ command! OpenPdf call s:OpenPdfFile()
 
 inoremap ;m $$<left>
 inoremap ;M \[\]<left><left>
+inoremap ;f <Esc>/<++><CR>:nohlsearch<CR>d4li
+inoremap <c-f> <Esc>/<++><CR>:nohlsearch<CR>d4li
+inoremap ;b \textbf{} <++><Esc>F}i
+inoremap ;i \textit{} <++><Esc>F}i
+inoremap ;1 \section{} <++><Esc>F}i
+inoremap ;2 \subsection{} <++><Esc>F}i
+inoremap ;3 \subsubsection{} <++><Esc>F}i
 nmap <leader>p :call mdip#TexClipboardImage()<cr>
 nmap <leader>rr :call <SID>CompileTex()<cr>
 nmap <silent> <leader>d :call mdip#DeleteTexPicture()<CR>

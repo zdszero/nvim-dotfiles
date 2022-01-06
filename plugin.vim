@@ -14,13 +14,14 @@ Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 Plug 'wlangstroth/vim-racket'
+Plug 'lervag/vimtex'
+" Plug 'fatih/vim-go'
 " utilities
 Plug 'voldikss/vim-floaterm'
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'fannheyward/telescope-coc.nvim'
 Plug 'liuchengxu/vista.vim', {'on': 'Vista'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'antoinemadec/coc-fzf'
 Plug 'skywind3000/asyncrun.vim'
 " coding
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -41,7 +42,7 @@ Plug 'frazrepo/vim-rainbow'
 
 call plug#end()
 
-let s:plug_config_files = ['color.vim', 'coc.vim', 'format.vim', 'util.vim']
+let s:plug_config_files = ['color.vim', 'coc.vim', 'format.vim', 'util.vim', 'lang.vim']
 
 function! s:load_plug_config()
   for l:filename in s:plug_config_files

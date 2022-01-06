@@ -29,6 +29,7 @@ set nocursorcolumn
 " set gcr=a:block
 
 set showcmd
+set cmdheight=1
 set wildmenu
 set wrap
 set wrapmargin=0
@@ -49,3 +50,5 @@ set history=1000
 set nolist
 " true color support
 set termguicolors
+
+let g:sql_type_default = 'mysql'

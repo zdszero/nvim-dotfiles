@@ -1,3 +1,63 @@
+""""""""""""""""""""""""""""""""""
+"             OPTIONS            "
+""""""""""""""""""""""""""""""""""
+set nocompatible
+syntax on
+filetype plugin indent on
+set encoding=utf8
+
+" always open the signcolumn
+set signcolumn=number
+
+" expand tab to spaces
+set expandtab
+set softtabstop=2
+set tabstop=2
+" set backspace=indent,eol,start	"use backspace to delete indent and line
+set shiftwidth=2
+
+set autoindent smartindent
+set laststatus=2
+set noshowmode
+
+" mouse enable
+" set mouse-=a
+set mouse=n
+
+" change cursor for different modes
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+set number
+set relativenumber
+set nocursorline
+set nocursorcolumn
+" set gcr=a:block
+
+set showcmd
+set wildmenu
+set wrap
+set wrapmargin=0
+set scrolloff=5
+set ruler
+
+set hlsearch
+set incsearch
+exec "nohlsearch"
+set ignorecase
+set smartcase
+set magic
+
+set autochdir
+set nobackup
+set undofile
+set history=1000 
+set nolist
+" true color support
+
+""""""""""""""""""""""""""""""""""
+"             MAPPINGS           "
+""""""""""""""""""""""""""""""""""
+
 let mapleader=" "
 
 " abbrevations
@@ -99,21 +159,6 @@ nnoremap <down> :res -5<CR>
 nnoremap <left> :vertical resize-5<CR>
 nnoremap <right> :vertical resize+5<CR>
 
-function! s:last_edit_file()
-  let v:errmsg = ''
-  silent! normal 
-  if v:errmsg == ''
-    return
-  endif
-  bprevious
-endfunction
-
-function! s:BDelete()
-  let l:bufnum = bufnr()
-  call s:last_edit_file()
-  exe 'bdelete ' . l:bufnum
-endfunction
-
 " file navigation
 nnoremap [t :tabprevious<CR>
 nnoremap ]t :tabnext<CR>
@@ -121,8 +166,6 @@ nnoremap [b :bprevious<CR>
 nnoremap ]b :bnext<CR>
 nnoremap [B :bfirst<CR>
 nnoremap ]B :blast<CR>
-nnoremap [f <cmd> call <SID>last_edit_file()<cr>
-command! BD call <SID>BDelete()
 
 " window navigation
 nnoremap <leader>j <c-w>h
@@ -132,25 +175,45 @@ nnoremap <leader>; <c-w>l
 nnoremap <leader>h <c-w>J
 nnoremap <leader>v <c-w>H
 
-" terminal
-tnoremap <c-[> <C-\><C-N>
-tnoremap <esc> <C-\><C-N>
-tnoremap <silent> <c-t> <C-\><C-N>:FloatermToggle<cr>
-nnoremap <silent> <c-t> :FloatermToggle<cr>
+""""""""""""""""""""""""""""""""""
+"             COMMANDS           "
+""""""""""""""""""""""""""""""""""
 
-function! s:Retab() range
-  exe a:firstline . ',' . a:lastline . 's/    /  /g'
-endfunction
+augroup TabOptions
+   autocmd!
+   autocmd FileType asm,python,sql,go setlocal softtabstop=4 | setlocal tabstop=4 | setlocal shiftwidth=4
+augroup END
 
-vnoremap <leader>rt :call <SID>Retab()<CR>
+augroup RunFile
+  autocmd!
+  autocmd FileType python nmap <leader>rr :!python %<CR>
+  autocmd FileType c      nmap <leader>rr :!gcc %<CR>
+  autocmd FileType cpp    nmap <leader>rr :!clang++ %<CR>
+augroup END
 
-function! s:ConvertVSCodeSnippet() range
-  let l:before_lastline = a:lastline - 1
-  silent! exe a:firstline . ',' . a:lastline . 's/^\s*//g'
-  silent! exe a:firstline . ',' . l:before_lastline . 's/\v"(.*)",/\1/g'
-  silent! exe a:lastline . 's/\v"(.*)"/\1/g'
-  silent! exe a:firstline . ',' . a:lastline . 's/\\t/	/g'
-  silent! exe a:firstline . ',' . a:lastline . 's/\\"/"/g'
-endfunction
+""""""""""""""""""""""""""""""""""
+"             PLUGINS            "
+""""""""""""""""""""""""""""""""""
 
-vnoremap <leader>cs :call <SID>ConvertVSCodeSnippet()<CR>
+if !filereadable(expand('~/.vim/autoload/plug.vim'))
+  finish
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-commentary'
+Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/vim-easy-align'
+Plug 'gcmt/wildfire.vim'
+Plug 'rakr/vim-one'
+Plug 'Raimondi/delimitMate'
+call plug#end()
+
+let g:delimitMate_expand_space = 1
+let g:delimitMate_expand_cr = 1
+
+map ge <Plug>(wildfire-fuel)
+
+set background=light
+let g:one_allow_italics = 1
+color one

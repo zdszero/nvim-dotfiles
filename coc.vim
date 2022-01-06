@@ -8,10 +8,6 @@ set nowritebackup
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
-function! s:cocActionsOpenFromSelected(type) abort
-  execute 'CocCommand actions.open ' . a:type
-endfunctio
-
 let g:coc_global_extensions = [
       \ 'coc-pairs',
       \ 'coc-snippets',
@@ -74,10 +70,9 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> <leader>rn <Plug>(coc-rename)
 " diagnostics
-let g:ale_enabled = 0
 nmap [e <plug>(coc-diagnostic-prev)
 nmap ]e <plug>(coc-diagnostic-next)
-nmap <silent> <leader>ca <Plug>(coc-codelens-action)
+nmap <silent> <leader>ca <plug>(coc-codeaction)
 nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
 nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
 inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<c-d>"
@@ -89,10 +84,11 @@ vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(
 "       \ pumvisible() ? coc#_select_confirm() :
 "       \ coc#expandable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand',''])\<cr>" :
 "       \ coc#jumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-jump',''])\<cr>" :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
 "       \ "\<TAB>"
 inoremap <silent><expr> <TAB>
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ "\<TAB>"
 let g:coc_snippet_next = '<tab>'
 let g:coc_snippet_prev = '<s-tab>'
@@ -108,9 +104,6 @@ xmap ic <Plug>(coc-classobj-i)
 omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
-
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
-command! -nargs=0 OI   :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " navigate chunks of current buffer
 " nmap [h <Plug>(coc-git-prevchunk)

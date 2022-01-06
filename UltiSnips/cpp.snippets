@@ -2,14 +2,43 @@ priority -50
 
 extends c
 
-snippet cl "class .. (class)" b
-class ${1:`!p snip.rv = snip.basename or "name"`} {
+snippet class "class" b
+class ${1:MyClass}
+{
 public:
-	explicit ${1/(\w+).*/$1/}(${2:arguments});
-	virtual ~${1/(\w+).*/$1/}();
+	$1();
+	$1($1 &&) = default;
+	$1(const $1 &) = default;
+	$1 &operator=($1 &&) = default;
+	$1 &operator=(const $1 &) = default;
+	~$1();
 
 private:
-	${0:/* data */}
+	$2
+};
+
+$1::$1()
+{
+}
+
+$1::~$1()
+{
+}
+endsnippet
+
+snippet class "class with inline constructor" b
+class ${1:MyClass}
+{
+public:
+	$1() = default;
+	$1($1 &&) = default;
+	$1(const $1 &) = default;
+	$1 &operator=($1 &&) = default;
+	$1 &operator=(const $1 &) = default;
+	~$1() = default;
+
+private:
+	$2
 };
 endsnippet
 
@@ -34,6 +63,14 @@ endsnippet
 
 snippet el "std::endl" w
 std::endl;$0
+endsnippet
+
+snippet try "try catch clause" b
+try {
+	
+} catch (const std::exception&) {
+	$1
+}
 endsnippet
 
 ######################

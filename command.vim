@@ -1,5 +1,6 @@
 command! -nargs=? EF call ef#Commander(<f-args>)
 command! Go silent exe '!google-chrome-stable %'
+command Q exe 'q!'
 
 augroup TabOptions
    autocmd!
