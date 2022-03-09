@@ -20,3 +20,76 @@ nmap <silent> <leader>sl :Telescope current_buffer_fuzzy_find<cr>
 nmap <silent> <leader>sg :Telescope live_grep<cr>
 nmap <silent> <leader>sC :Telescope commands<cr>
 nmap <silent> <leader>sh :Telescope help_tags<cr>
+
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = { "verilog" }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = {"markdown", "cmake", "tex"},     -- list of language that will be disabled
+  },
+}
+EOF
+
+
+" Plug 'itchyny/lightline.vim'
+" Plug 'josa42/vim-lightline-coc'
+" let g:lightline = {
+"   \ 'colorscheme': 'one',
+"   \   'active': {
+"   \     'left': [['mode', 'paste'], [  'filename', 'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]]
+"   \   }
+"   \ }
+
+" register compoments:
+" call lightline#coc#register()
+
+lua<<EOF
+require('formatter').setup({
+filetype = {
+  javascript = {
+    -- prettier
+    function()
+      return {
+        exe = "prettier",
+        args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), '--single-quote'},
+        stdin = true
+      }
+    end
+  },
+  python = {
+    -- autopep8
+    function()
+      return {
+        exe = 'autopep8',
+        args = {vim.api.nvim_buf_get_name(0)},
+        stdin = true
+      }
+    end
+  },
+  cpp = {
+      -- clang-format
+     function()
+        return {
+          exe = "clang-format",
+          args = {"--style=\"{BasedOnStyle: LLVM, IndentWidth: 2}\"", "--assume-filename", vim.api.nvim_buf_get_name(0)},
+          stdin = true,
+          cwd = vim.fn.expand('%:p:h')  -- Run clang-format in cwd of the file.
+        }
+      end
+  },
+  c = {
+      -- clang-format
+     function()
+        return {
+          exe = "clang-format",
+          args = {"--style=\"{BasedOnStyle: LLVM, IndentWidth: 2}\"", "--assume-filename", vim.api.nvim_buf_get_name(0)},
+          stdin = true,
+          cwd = vim.fn.expand('%:p:h')  -- Run clang-format in cwd of the file.
+        }
+      end
+  },
+}
+})
+EOF

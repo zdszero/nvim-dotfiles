@@ -2,42 +2,19 @@ priority -50
 
 extends c
 
-snippet class "class" b
-class ${1:MyClass}
-{
-public:
-	$1();
-	$1($1 &&) = default;
-	$1(const $1 &) = default;
-	$1 &operator=($1 &&) = default;
-	$1 &operator=(const $1 &) = default;
-	~$1();
-
-private:
-	$2
-};
-
-$1::$1()
-{
-}
-
-$1::~$1()
-{
-}
-endsnippet
-
 snippet class "class with inline constructor" b
-class ${1:MyClass}
-{
-public:
-	$1() = default;
-	$1($1 &&) = default;
-	$1(const $1 &) = default;
-	$1 &operator=($1 &&) = default;
-	$1 &operator=(const $1 &) = default;
+class ${1:MyClass} {
+ public:
+	explicit $1() = default;
 	~$1() = default;
 
-private:
+	$1 &operator=(const $1 &) = default;
+	$1(const $1 &) = default;
+
+	$1($1 &&) = default;
+	$1 &operator=($1 &&) = default;
+
+ private:
 	$2
 };
 endsnippet
@@ -180,6 +157,34 @@ endsnippet
 
 snippet amup "make unique_ptr -> auto" b
 auto ${1} = std::make_unique<${2:T}>(${3});
+endsnippet
+
+snippet mt19937 "mt19937 random number generator" b
+std::random_device rd;
+std::mt19937 rng(rd());
+std::uniform_int_distribution<int> dist($1);
+// dist(rng)
+endsnippet
+
+snippet copy_move_macro "COPY MOVE MACRO" b
+// Macros to disable copying and moving
+#define DISALLOW_COPY(cname)                             \
+  cname(const cname &) = delete;            /* NOLINT */ \
+  cname &operator=(const cname &) = delete; /* NOLINT */
+
+#define DISALLOW_MOVE(cname)                        \
+  cname(cname &&) = delete;            /* NOLINT */ \
+  cname &operator=(cname &&) = delete; /* NOLINT */
+
+#define DISALLOW_COPY_AND_MOVE(cname) \
+  DISALLOW_COPY(cname);               \
+  DISALLOW_MOVE(cname);
+endsnippet
+
+snippet lambda "lambda function" w
+[$1]($2) {
+  $0
+};
 endsnippet
 
 ######################

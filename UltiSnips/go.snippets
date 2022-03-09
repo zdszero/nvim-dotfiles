@@ -130,6 +130,10 @@ snippet popf "pop front" b
 $1 = $1[${2:1}:]$0
 endsnippet
 
+snippet remove "remove intermidiate" b
+$1 = append($1[:${2:idx}], $1[$2+1:]...)
+endsnippet
+
 snippet last "slice last element" b
 $1 := $2[len($2) - 1]
 endsnippet
@@ -240,4 +244,26 @@ type ${1:SortBy} []${2:Type}
 func (a $1) Len() int           { return len(a) }
 func (a $1) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a $1) Less(i, j int) bool { ${3:return a[i] < a[j]} }
+endsnippet
+
+snippet mkdir "os.Mkdir" b
+dirname := $1
+if _, err := os.Stat(dirname); os.IsNotExist(err) {
+	err = os.Mkdir(dirname, os.ModePerm)
+	if err != nil {
+		log.Fatalf("create directory %v failed\n", dirname)
+	}
+}
+endsnippet
+
+snippet http.Get "http.Get" b
+resp, err := http.Get(${1:url})
+if err != nil {
+	return nil, err
+}
+if resp.StatusCode != http.StatusOK {
+	resp.Body.Close()
+	return nil, fmt.Errorf("getting %s: %s", url, resp.Status)
+}
+resp.Body.Close()
 endsnippet

@@ -19,7 +19,7 @@ function! s:HasCJK()
   let l:linenum = 1
   while l:linenum <= line('$')
     let l:line = getline(l:linenum)
-    if l:line =~# '\v^$'
+    if l:line =~# '\v^$' || l:line =~# '\v^\%'
       let l:linenum = l:linenum + 1
       continue
     elseif l:line =~# '\\documentclass' || l:line =~# '\\usepackage'

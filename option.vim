@@ -5,7 +5,6 @@ set encoding=utf8
 
 " always open the signcolumn
 set signcolumn=number
-set guifont=FiraCode\ Nerd\ Font\ Medium:h11
 
 " expand tab to spaces
 set expandtab

@@ -1,7 +1,6 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                Telescope                                   "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+"
+" FZF
+"
 function! s:is_in_git_directory()
   silent !git rev-parse --is-inside-work-tree
   if v:shell_error == 0
@@ -44,3 +43,30 @@ let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'coc'
 let g:vista_close_on_jump=0
 let g:vista#renderer#enable_icon = 1
+
+lua <<EOF
+require("bufferline").setup{}
+EOF
+
+"
+" HUGO
+"
+let g:hugo_home_path = '~/Documents/blog'
+let g:hugo_post_template = [
+      \ '---',
+      \ 'title: HUGO_TITLE',
+      \ 'date: HUGO_DATE',
+      \ 'tags: []',
+      \ 'draft: true',
+      \ '---',
+      \ '' ]
+let g:hugo_build_script_path = '~/Documents/blog/update_blog'
+
+"
+" VIM TEX
+"
+let g:vimtex_fold_enabled = 1
+let g:vimtex_indent_enabled = 1
+let g:vimtex_compiler_enabled = 0
+
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']

@@ -99,6 +99,7 @@ nnoremap <down> :res -5<CR>
 nnoremap <left> :vertical resize-5<CR>
 nnoremap <right> :vertical resize+5<CR>
 
+" file navigation
 function! s:last_edit_file()
   let v:errmsg = ''
   silent! normal 
@@ -110,19 +111,21 @@ endfunction
 
 function! s:BDelete()
   let l:bufnum = bufnr()
-  call s:last_edit_file()
+  BufferLineCyclePrev
   exe 'bdelete ' . l:bufnum
 endfunction
 
 " file navigation
-nnoremap [t :tabprevious<CR>
-nnoremap ]t :tabnext<CR>
-nnoremap [b :bprevious<CR>
-nnoremap ]b :bnext<CR>
-nnoremap [B :bfirst<CR>
-nnoremap ]B :blast<CR>
+nnoremap [t :BufferLineMovePrev<CR>
+nnoremap ]t :BufferLineMoveNext<CR>
+nnoremap [b :BufferLineCyclePrev<CR>
+nnoremap ]b :BufferLineCycleNext<CR>
 nnoremap [f <cmd> call <SID>last_edit_file()<cr>
+nnoremap ]f <cmd> call <SID>last_edit_file()<cr>
 command! BD call <SID>BDelete()
+nnoremap <F1> :call <SID>BDelete()<CR>
+nnoremap <F2> :BufferLineCyclePrev<CR>
+nnoremap <F3> :BufferLineCycleNext<CR>
 
 " window navigation
 nnoremap <leader>j <c-w>h

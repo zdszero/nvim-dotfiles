@@ -10,6 +10,7 @@ set shortmess+=c
 
 let g:coc_global_extensions = [
       \ 'coc-pairs',
+      \ 'coc-clangd',
       \ 'coc-snippets',
       \ 'coc-explorer',
       \ 'coc-highlight',
@@ -104,6 +105,7 @@ xmap ic <Plug>(coc-classobj-i)
 omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
+nmap <leader>f :call CocAction('format')<CR>
 
 " navigate chunks of current buffer
 " nmap [h <Plug>(coc-git-prevchunk)
