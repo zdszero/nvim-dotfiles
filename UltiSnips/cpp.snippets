@@ -2,10 +2,10 @@ priority -50
 
 extends c
 
-snippet class "class with inline constructor" b
+snippet cl "class with inline constructor" b
 class ${1:MyClass} {
  public:
-	explicit $1() = default;
+	$1() = default;
 	~$1() = default;
 
 	$1 &operator=(const $1 &) = default;
@@ -159,10 +159,17 @@ snippet amup "make unique_ptr -> auto" b
 auto ${1} = std::make_unique<${2:T}>(${3});
 endsnippet
 
+snippet default_random_engine "Description" b
+std::random_device rd;
+std::default_random_engine rng(rd());
+std::uniform_int_distribution<std::mt19937::result_type> dist(${1:range});
+// dist(rng)
+endsnippet
+
 snippet mt19937 "mt19937 random number generator" b
 std::random_device rd;
 std::mt19937 rng(rd());
-std::uniform_int_distribution<int> dist($1);
+std::uniform_int_distribution<std::mt19937::result_type> dist(${1:range});
 // dist(rng)
 endsnippet
 

@@ -10,6 +10,7 @@ set shortmess+=c
 
 let g:coc_global_extensions = [
       \ 'coc-pairs',
+      \ 'coc-git',
       \ 'coc-clangd',
       \ 'coc-snippets',
       \ 'coc-explorer',

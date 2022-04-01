@@ -18,7 +18,7 @@ endfunction
 
 augroup RunFile
   autocmd!
-  autocmd FileType python nmap <leader>rr :!python %<CR>
+  autocmd FileType python nmap <leader>rr :!python3 %<CR>
   autocmd FileType cpp    nmap <leader>rr :call <SID>CompileAndRun('clang++')<CR>
   autocmd FileType c      nmap <leader>rr :call <SID>CompileAndRun('gcc')<CR>
 augroup END
