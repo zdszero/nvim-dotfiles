@@ -109,6 +109,9 @@ omap ac <Plug>(coc-classobj-a)
 nmap <leader>f :call CocAction('format')<CR>
 
 " navigate chunks of current buffer
-" nmap [h <Plug>(coc-git-prevchunk)
-" nmap ]h <Plug>(coc-git-nextchunk)
-" nmap <leader>st :CocCommand git.chunkStage<cr>
+nmap [h <Plug>(coc-git-prevchunk)
+nmap ]h <Plug>(coc-git-nextchunk)
+nmap [c <Plug>(coc-git-prevconflict)
+nmap ]c <Plug>(coc-git-nextconflict)
+nmap gs :CocCommand git.chunkStage<CR>
+nmap gS :CocCommand git.chunkUnstage<CR>

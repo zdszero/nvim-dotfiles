@@ -1,6 +1,8 @@
 let mapleader=" "
 
-" abbrevations
+"
+" ABBREVATIONS
+"
 iabbrev rt return
 iabbrev ,a &&
 iabbrev ,o \|\|
@@ -9,39 +11,10 @@ iabbrev ,n !=
 iabbrev ,g >=
 iabbrev ,l <=
 
-function! s:open_in_browser()
-  let l:url = expand('<cWORD>')
-  silent! execute '!google-chrome-stable -app ' . l:url
-endfunction
+"
+" POWER CTRL KEY
+"
 
-nnoremap <silent> <leader>o <cmd>call <SID>open_in_browser()<cr>
-inoremap <c-s-cr> <cr><up>
-
-function! s:one_paragraph() range
-  let l:endline = a:lastline - 1
-  execute a:firstline . ',' . l:endline . 's/\n/ /g'
-  silent! execute a:firstline . 's/- //g'
-endfunction
-
-xmap <silent> gp :<c-u>call <SID>one_paragraph()<cr>
-
-function! s:visualStarSearch(cmdtype, ...)
-  let temp = @"
-  normal! gvy
-  if !a:0 || a:1 != 'raw'
-    let @" = escape(@", a:cmdtype.'\*')
-  endif
-  let @/ = substitute(@", '\n', '\\n', 'g')
-  let @/ = substitute(@/, '\[', '\\[', 'g')
-  let @/ = substitute(@/, '\~', '\\~', 'g')
-  let @/ = substitute(@/, '\.', '\\.', 'g')
-  let @" = temp
-endfunction
-
-xnoremap * :<C-u>call <SID>visualStarSearch('/')<CR>/<C-R>=@/<CR><CR>
-xnoremap # :<C-u>call <SID>visualStarSearch('?')<CR>?<C-R>=@/<CR><CR>
-
-" use control to replace shift
 " normal and visual
 noremap <c-h> g0
 noremap <c-l> g$
@@ -74,7 +47,6 @@ nnoremap <c-m> <c-o>
 nnoremap <c-n> <c-i>
 " insert
 inoremap <c-l> <esc>
-" emacs like key bindings
 inoremap <c-j> <Right>
 inoremap <c-k> <Left>
 inoremap <c-a> <c-c>I
@@ -99,7 +71,68 @@ nnoremap <down> :res -5<CR>
 nnoremap <left> :vertical resize-5<CR>
 nnoremap <right> :vertical resize+5<CR>
 
-" file navigation
+"
+" WINDOW NAVIGATION
+"
+nnoremap <leader>j <c-w>h
+nnoremap <leader>k <c-w>j
+nnoremap <leader>l <c-w>k
+nnoremap <leader>; <c-w>l
+nnoremap <leader>h <c-w>J
+nnoremap <leader>v <c-w>H
+
+"
+" TERMINAL
+"
+tnoremap <c-[> <C-\><C-N>
+tnoremap <esc> <C-\><C-N>
+tnoremap <silent> <c-t> <C-\><C-N>:FloatermToggle<cr>
+nnoremap <silent> <c-t> :FloatermToggle<cr>
+
+"
+" SOME CUSTOM KEYMAPS
+"
+
+function! s:convert_vscode_snippet() range
+  let l:before_lastline = a:lastline - 1
+  silent! exe a:firstline . ',' . a:lastline . 's/^\s*//g'
+  silent! exe a:firstline . ',' . l:before_lastline . 's/\v"(.*)",/\1/g'
+  silent! exe a:lastline . 's/\v"(.*)"/\1/g'
+  silent! exe a:firstline . ',' . a:lastline . 's/\\t/	/g'
+  silent! exe a:firstline . ',' . a:lastline . 's/\\"/"/g'
+endfunction
+
+vnoremap <leader>cs :call <SID>convert_vscode_snippet()<CR>
+
+function! s:visual_star_search(cmdtype, ...)
+  let temp = @"
+  normal! gvy
+  if !a:0 || a:1 != 'raw'
+    let @" = escape(@", a:cmdtype.'\*')
+  endif
+  let @/ = substitute(@", '\n', '\\n', 'g')
+  let @/ = substitute(@/, '\[', '\\[', 'g')
+  let @/ = substitute(@/, '\~', '\\~', 'g')
+  let @/ = substitute(@/, '\.', '\\.', 'g')
+  let @" = temp
+endfunction
+
+xnoremap * :<C-u>call <SID>visual_star_search('/')<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>visual_star_search('?')<CR>?<C-R>=@/<CR><CR>
+
+function! s:change_in_visual()
+  normal! n
+  normal! N
+  exe 's//'
+  startinsert
+endfunction
+
+function! <SID>buffer_delete()
+  let l:bufnum = bufnr()
+  BufferLineCyclePrev
+  exe 'bdelete ' . l:bufnum
+endfunction
+
 function! s:last_edit_file()
   let v:errmsg = ''
   silent! normal 
@@ -109,51 +142,13 @@ function! s:last_edit_file()
   bprevious
 endfunction
 
-function! s:BDelete()
-  let l:bufnum = bufnr()
-  BufferLineCyclePrev
-  exe 'bdelete ' . l:bufnum
-endfunction
-
-" file navigation
 nnoremap [t :BufferLineMovePrev<CR>
 nnoremap ]t :BufferLineMoveNext<CR>
 nnoremap [b :BufferLineCyclePrev<CR>
 nnoremap ]b :BufferLineCycleNext<CR>
 nnoremap [f <cmd> call <SID>last_edit_file()<cr>
 nnoremap ]f <cmd> call <SID>last_edit_file()<cr>
-command! BD call <SID>BDelete()
-nnoremap <F1> :call <SID>BDelete()<CR>
+command! BD call <SID>buffer_delete()
+nnoremap <F1> :call <SID>buffer_delete()<CR>
 nnoremap <F2> :BufferLineCyclePrev<CR>
 nnoremap <F3> :BufferLineCycleNext<CR>
-
-" window navigation
-nnoremap <leader>j <c-w>h
-nnoremap <leader>k <c-w>j
-nnoremap <leader>l <c-w>k
-nnoremap <leader>; <c-w>l
-nnoremap <leader>h <c-w>J
-nnoremap <leader>v <c-w>H
-
-" terminal
-tnoremap <c-[> <C-\><C-N>
-tnoremap <esc> <C-\><C-N>
-tnoremap <silent> <c-t> <C-\><C-N>:FloatermToggle<cr>
-nnoremap <silent> <c-t> :FloatermToggle<cr>
-
-function! s:Retab() range
-  exe a:firstline . ',' . a:lastline . 's/    /  /g'
-endfunction
-
-vnoremap <leader>rt :call <SID>Retab()<CR>
-
-function! s:ConvertVSCodeSnippet() range
-  let l:before_lastline = a:lastline - 1
-  silent! exe a:firstline . ',' . a:lastline . 's/^\s*//g'
-  silent! exe a:firstline . ',' . l:before_lastline . 's/\v"(.*)",/\1/g'
-  silent! exe a:lastline . 's/\v"(.*)"/\1/g'
-  silent! exe a:firstline . ',' . a:lastline . 's/\\t/	/g'
-  silent! exe a:firstline . ',' . a:lastline . 's/\\"/"/g'
-endfunction
-
-vnoremap <leader>cs :call <SID>ConvertVSCodeSnippet()<CR>

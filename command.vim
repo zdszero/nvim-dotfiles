@@ -23,6 +23,12 @@ augroup RunFile
   autocmd FileType c      nmap <leader>rr :call <SID>CompileAndRun('gcc')<CR>
 augroup END
 
+augroup CommentStyle
+  autocmd!
+  autocmd FileType cpp    setlocal commentstring=//\ %s
+  autocmd FileType c      setlocal commentstring=//\ %s
+augroup END
+
 if executable('fcitx5-remote')
   let g:fcitx_remote_command = 'fcitx5-remote'
 elseif executable('fcitx-remote')

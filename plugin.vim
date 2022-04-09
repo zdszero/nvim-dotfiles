@@ -44,12 +44,3 @@ Plug 'akinsho/bufferline.nvim'
 
 call plug#end()
 
-let s:plug_config_files = ['color.vim', 'coc.vim', 'util.vim']
-
-function! s:load_plug_config()
-  for l:filename in s:plug_config_files
-    exe 'source ' . g:config_dir . l:filename
-  endfor
-endfunction
-
-call s:load_plug_config()

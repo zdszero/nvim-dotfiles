@@ -1,12 +1,15 @@
 let &packpath = &runtimepath
 
 let g:config_dir = expand("<sfile>:p:h") . '/'
-let s:config_files = [ 'option.vim', 'mapping.vim', 'plugin.vim', 'command.vim']
 
-function s:load_config()
-  for l:filename in s:config_files
-    exe 'source ' . g:config_dir . l:filename
-  endfor
+function g:LoadConfig(filename)
+  exe 'source ' . g:config_dir . a:filename
 endfunction
 
-call s:load_config()
+call g:LoadConfig('option.vim')
+call g:LoadConfig('mapping.vim')
+call g:LoadConfig('command.vim')
+call g:LoadConfig('plugin.vim')
+call g:LoadConfig('color.vim')
+call g:LoadConfig('coc.vim')
+call g:LoadConfig('util.vim')
