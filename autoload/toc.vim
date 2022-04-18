@@ -24,7 +24,7 @@ function! s:MakeLink(line)
   endfor
   let l:raw_title = s:LinkTitle(a:line, 1)
   let l:link_title = s:LinkTitle(a:line, 0)
-  let l:link =  '+ ' . '[' . l:raw_title . ']' . '(#' . l:link_title . ')'
+  let l:link =  '+ ' . '[' . l:raw_title . ']' . '(#' . tolower(l:link_title) . ')'
   call append(0, l:link)
   if l:rank > 2
     execute '1s/\v^\s*/' . repeat('\t', l:rank - 2)

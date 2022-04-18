@@ -3,6 +3,8 @@ syntax on
 filetype plugin indent on
 set encoding=utf8
 
+set guifont=Ubuntu\ Mono\ 16
+
 " always open the signcolumn
 set signcolumn=yes
 
@@ -20,6 +22,10 @@ set noshowmode
 " mouse enable
 " set mouse-=a
 set mouse=n
+
+" cursor shape
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
 
 set number
 set relativenumber
@@ -44,6 +50,9 @@ set magic
 
 set autochdir
 set nobackup
+if has("vim")
+  set undodir=$HOME/.vim/undo
+endif
 set undofile
 set history=1000 
 set nolist

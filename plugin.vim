@@ -34,13 +34,14 @@ Plug 'tpope/vim-sleuth'
 Plug 'gcmt/wildfire.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'unblevable/quick-scope'
+Plug 'vimwiki/vimwiki'
 " theme
 Plug 'tomasiser/vim-code-dark'
 Plug 'rakr/vim-one'
+Plug 'sainnhe/gruvbox-material'
 Plug 'itchyny/lightline.vim'
 Plug 'frazrepo/vim-rainbow'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim'
 
 call plug#end()
-

@@ -9,22 +9,23 @@ set nowritebackup
 set shortmess+=c
 
 let g:coc_global_extensions = [
-      \ 'coc-pairs',
-      \ 'coc-git',
-      \ 'coc-clangd',
-      \ 'coc-snippets',
-      \ 'coc-explorer',
-      \ 'coc-highlight',
-      \ 'coc-cmake',
-      \ 'coc-sh',
-      \ 'coc-pyright',
-      \ 'coc-texlab',
-      \ 'coc-lua',
-      \ 'coc-html',
-      \ 'coc-css',
-      \ 'coc-tsserver',
-      \ 'coc-vimlsp',
-      \ 'coc-json']
+  \ 'coc-pairs',
+  \ 'coc-git',
+  \ 'coc-clangd',
+  \ 'coc-snippets',
+  \ 'coc-explorer',
+  \ 'coc-highlight',
+  \ 'coc-cmake',
+  \ 'coc-sh',
+  \ 'coc-pyright',
+  \ 'coc-texlab',
+  \ 'coc-lua',
+  \ 'coc-html',
+  \ 'coc-css',
+  \ 'coc-tsserver',
+  \ 'coc-vimlsp',
+  \ 'coc-json'
+  \]
 
 let g:coc_filetype_map = {
   \ 'h': 'c',
@@ -82,18 +83,23 @@ inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float
 vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
 vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
 " coc snippet mapping
+
+" SUPER TAB
 " inoremap <silent><expr> <TAB>
 "       \ pumvisible() ? coc#_select_confirm() :
-"       \ coc#expandable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand',''])\<cr>" :
-"       \ coc#jumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-jump',''])\<cr>" :
 "       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
 "       \ "\<TAB>"
+" let g:coc_snippet_next = '<tab>'
+" let g:coc_snippet_prev = '<s-tab>'
+
+let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_prev = '<c-k>'
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ "\<TAB>"
-let g:coc_snippet_next = '<tab>'
-let g:coc_snippet_prev = '<s-tab>'
+  \ pumvisible() ? coc#_select_confirm() :
+  \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
+
 inoremap <silent><expr> <cr> "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 xmap <tab> <Plug>(coc-snippets-select)
 xmap <leader>x <Plug>(coc-convert-snippet)

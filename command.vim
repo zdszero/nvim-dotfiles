@@ -9,6 +9,11 @@ command! Tab4 set softtabstop=4 | set tabstop=4 | set shiftwidth=4
 "   autocmd FileType asm,python,sql,go setlocal softtabstop=4 | setlocal tabstop=4 | setlocal shiftwidth=4
 " augroup END
 
+augroup Rainbow
+  autocmd!
+  autocmd FileType racket,scheme call rainbow#load()
+augroup END
+
 function! s:CompileAndRun(compiler)
   let l:filename = expand('%')
   let l:outfile = expand('%:t:r')

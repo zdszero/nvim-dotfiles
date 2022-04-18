@@ -47,8 +47,8 @@ nnoremap <c-m> <c-o>
 nnoremap <c-n> <c-i>
 " insert
 inoremap <c-l> <esc>
-inoremap <c-j> <Right>
-inoremap <c-k> <Left>
+inoremap <c-f> <Right>
+inoremap <c-b> <Left>
 inoremap <c-a> <c-c>I
 inoremap <c-e> <c-c>A
 inoremap <c-q> <c-c>gUawea
@@ -86,8 +86,8 @@ nnoremap <leader>v <c-w>H
 "
 tnoremap <c-[> <C-\><C-N>
 tnoremap <esc> <C-\><C-N>
-tnoremap <silent> <c-t> <C-\><C-N>:FloatermToggle<cr>
-nnoremap <silent> <c-t> :FloatermToggle<cr>
+" tnoremap <silent> <c-t> <C-\><C-N>:FloatermToggle<cr>
+" nnoremap <silent> <c-t> :FloatermToggle<cr>
 
 "
 " SOME CUSTOM KEYMAPS
@@ -127,12 +127,6 @@ function! s:change_in_visual()
   startinsert
 endfunction
 
-function! <SID>buffer_delete()
-  let l:bufnum = bufnr()
-  BufferLineCyclePrev
-  exe 'bdelete ' . l:bufnum
-endfunction
-
 function! s:last_edit_file()
   let v:errmsg = ''
   silent! normal 
@@ -142,13 +136,5 @@ function! s:last_edit_file()
   bprevious
 endfunction
 
-nnoremap [t :BufferLineMovePrev<CR>
-nnoremap ]t :BufferLineMoveNext<CR>
-nnoremap [b :BufferLineCyclePrev<CR>
-nnoremap ]b :BufferLineCycleNext<CR>
 nnoremap [f <cmd> call <SID>last_edit_file()<cr>
 nnoremap ]f <cmd> call <SID>last_edit_file()<cr>
-command! BD call <SID>buffer_delete()
-nnoremap <F1> :call <SID>buffer_delete()<CR>
-nnoremap <F2> :BufferLineCyclePrev<CR>
-nnoremap <F3> :BufferLineCycleNext<CR>

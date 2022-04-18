@@ -44,10 +44,6 @@ let g:vista_default_executive = 'coc'
 let g:vista_close_on_jump=0
 let g:vista#renderer#enable_icon = 1
 
-lua <<EOF
-require("bufferline").setup{}
-EOF
-
 "
 " HUGO
 "
@@ -70,3 +66,32 @@ let g:vimtex_indent_enabled = 1
 let g:vimtex_compiler_enabled = 0
 
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+"
+" VIM WIKI
+"
+let g:vimwiki_list = [{'path': '~/Develop/Wiki/sources',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{
+  \ 'auto_export': 1,
+  \ 'automatic_nested_syntaxes':1,
+  \ 'path_html': '~/Develop/Wiki/docs',
+  \ 'path': '~/Develop/Wiki/sources',
+  \ 'template_path': '~/Develop/Wiki/html',
+  \ 'template_default': 'easy_template',
+  \ 'syntax': 'markdown',
+  \ 'ext':'.md',
+  \ 'custom_wiki2html': '~/Develop/Wiki/wiki2html.sh',
+\}]
+let g:vimwiki_key_mappings = { 'all_maps': 0, }
+" let g:vimwiki_markdown_link_ext = 1
+
+nmap <leader>ww <Plug>VimwikiIndex
+nmap <leader>ws :exe 'Files ' . g:vimwiki_list[0].path<CR>
+nmap <leader>whh <Plug>Vimwiki2HTML
+nmap <leader>whb <Plug>Vimwiki2HTMLBrowse
+nmap <leader>wha <Plug>VimwikiAll2HTML
+nmap <leader>wn <Plug>VimwikiFollowLink
+nmap <leader>wp <Plug>VimwikiGoBackLink
+nmap <leader>wr <Plug>VimwikiRenameFile
+nmap <leader>wd <Plug>VimwikiDeleteFile

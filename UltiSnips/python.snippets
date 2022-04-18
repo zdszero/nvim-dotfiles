@@ -1,4 +1,23 @@
+# vim:ft=snippets:
 priority -50
+
+snippet setter "setter decorator" b
+@${1:attribute}.setter
+def ${1}(self, val):
+	self._$1 = val
+endsnippet
+
+snippet property "getter decorator" b
+@property
+def ${1:attribute}(self):
+	return self._${1}
+endsnippet
+
+snippet deleter "deleter decorator" b
+@${1:attribute}.setter
+def ${1}(self, val):
+	del self._$1
+endsnippet
 
 ###########################################################################
 #                            TEXTMATE SNIPPETS                            #
@@ -575,31 +594,3 @@ class Test${1:Class}(${2:unittest.TestCase}):
 	def test_${6:name}(self):
 		${7:pass}
 endsnippet
-
-# vim:ft=snippets:
-
-# A valid snippet should starts with:
-#
-#		snippet trigger_word [ "description" [ options ] ]
-#
-# and end with:
-#
-#		endsnippet
-#
-# Snippet options:
-#
-#		b - Beginning of line.
-#		i - In-word expansion.
-#		w - Word boundary.
-#		r - Regular expression
-#		e - Custom context snippet
-#		A - Snippet will be triggered automatically, when condition matches.
-#
-# Basic example:
-#
-#		snippet emitter "emitter properties" b
-#		private readonly ${1} = new Emitter<$2>()
-#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
-#		endsnippet
-#
-# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
