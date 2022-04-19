@@ -85,6 +85,7 @@ let g:vimwiki_list = [{
 \}]
 let g:vimwiki_key_mappings = { 'all_maps': 0, }
 " let g:vimwiki_markdown_link_ext = 1
+let g:vimwiki_global_ext = 0
 
 nmap <leader>ww <Plug>VimwikiIndex
 nmap <leader>ws :exe 'Files ' . g:vimwiki_list[0].path<CR>
