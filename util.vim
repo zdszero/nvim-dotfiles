@@ -85,6 +85,8 @@ let g:vimwiki_list = [{
 \}]
 let g:vimwiki_key_mappings = { 'all_maps': 0, }
 " let g:vimwiki_markdown_link_ext = 1
+
+" only set ft=vimwiki in wiki directory
 let g:vimwiki_global_ext = 0
 
 nmap <leader>ww <Plug>VimwikiIndex
