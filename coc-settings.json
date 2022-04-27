@@ -29,9 +29,14 @@
       "obj",
       "pyc"
     ],
-    "filenames": [],
+    "filenames": [
+      "__pycache__",
+      "img",
+      "image"
+    ],
     "patternMatches": [
-      "(^\\.|index.md|img)"
+      "(^\\.)",
+      ".*egg-info"
     ]
   },
   "highlight.colorNames.enable": false,
@@ -57,9 +62,11 @@
     "`"
   ],
   "cmake.lsp.enable": true,
-  "pyright.completion.snippetSupport": true,
+  "pyright.completion.snippetSupport": false,
+  "python.pythonPath": "/usr/bin/python3.10",
   "python.formatting.provider": "autopep8",
   "python.formatting.autopep8Path": "/home/zds/.local/bin/autopep8",
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd",
   "clangd.disableSnippetCompletion": true,
   "languageserver": {
     "golang": {
@@ -77,6 +84,5 @@
         "usePlaceholders": true
       }
     }
-  },
-  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd"
+  }
 }

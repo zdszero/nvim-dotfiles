@@ -14,7 +14,8 @@ call g:LoadConfig('color.vim')
 call g:LoadConfig('coc.vim')
 call g:LoadConfig('util.vim')
 
-if has("nvim")
+if has("nvim-0.7")
+  lua require('treesitter')
   lua require('indent_line')
   lua require('buffer_line')
 endif

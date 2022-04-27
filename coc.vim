@@ -24,7 +24,7 @@ let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-tsserver',
   \ 'coc-vimlsp',
-  \ 'coc-json'
+  \ 'coc-json',
   \]
 
 let g:coc_filetype_map = {
@@ -97,8 +97,7 @@ let g:coc_snippet_prev = '<c-k>'
 inoremap <silent><expr> <TAB>
   \ pumvisible() ? coc#_select_confirm() :
   \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ coc#refresh()
+  \ "\<TAB>"
 
 inoremap <silent><expr> <cr> "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 xmap <tab> <Plug>(coc-snippets-select)

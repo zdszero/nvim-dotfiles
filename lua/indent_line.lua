@@ -8,12 +8,16 @@
 
 vim.opt.list = true
 -- vim.opt.listchars:append("space:⋅")
-vim.opt.listchars:append("eol:↴")
+-- vim.opt.listchars:append("eol:↴")
 
 -- vim.g.indent_blankline_char = '•'
 vim.g.indent_blankline_space_char_blankline = ' '
 -- vim.g.indent_blankline_filetype = {'python', 'go'}
-vim.g.indent_blankline_filetype_exclude = {'startify', 'coc-explorer', 'cmake', 'c', 'cpp'}
+vim.g.indent_blankline_filetype_exclude = {'startify', 'coc-explorer', 'cmake', 'c', 'cpp', 'markdown', 'vista'}
 vim.g.indent_blankline_buftype_exclude = {'terminal', 'help'}
 
-require("indent_blankline").setup {}
+require("indent_blankline").setup {
+  space_char_blankline = " ",
+  show_current_context = true,
+  show_current_context_start = false,
+}

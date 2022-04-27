@@ -17,6 +17,8 @@ function! s:is_in_git_directory()
   return 0
 endfunction
 
+let $BAT_THEME='Monokai Extended Light'
+
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> <leader>sd :<C-u>CocFzfList diagnostics --current-buf<CR>
 nmap <silent> <leader>so :<C-u>CocFzfList outline<CR>
@@ -98,3 +100,9 @@ nmap <leader>wn <Plug>VimwikiFollowLink
 nmap <leader>wp <Plug>VimwikiGoBackLink
 nmap <leader>wr <Plug>VimwikiRenameFile
 nmap <leader>wd <Plug>VimwikiDeleteFile
+nmap <leader>w<leader>w <Plug>VimwikiDiaryIndex
+vmap <leader>wn <Plug>VimwikiNormalizeLinkVisual
+
+if has("nvim")
+  let g:slime_target = "neovim"
+endif

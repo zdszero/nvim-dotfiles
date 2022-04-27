@@ -4,8 +4,8 @@ require("bufferline").setup{}
 M = {}
 
 local options = { noremap = true, silent = true }
-vim.api.nvim_set_keymap('n', ']t', '<cmd>BufferLineMovePrev<CR>', options)
-vim.api.nvim_set_keymap('n', '[t', '<cmd>BufferLineMoveNext<CR>', options)
+vim.api.nvim_set_keymap('n', ']t', '<cmd>BufferLineMoveNext<CR>', options)
+vim.api.nvim_set_keymap('n', '[t', '<cmd>BufferLineMovePrev<CR>', options)
 vim.api.nvim_set_keymap('n', ']b', '<cmd>BufferLineCycleNext<CR>', options)
 vim.api.nvim_set_keymap('n', '[b', '<cmd>BufferLineCyclePrev<CR>', options)
 

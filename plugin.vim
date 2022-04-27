@@ -11,11 +11,11 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'zdszero/nvim-hugo'
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 Plug 'bfrg/vim-cpp-modern'
 Plug 'wlangstroth/vim-racket'
 Plug 'lervag/vimtex'
 Plug 'rhysd/vim-clang-format'
+Plug 'Vimjas/vim-python-pep8-indent'
 " Plug 'fatih/vim-go'
 " utilities
 Plug 'voldikss/vim-floaterm'
@@ -24,6 +24,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'antoinemadec/coc-fzf'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'jpalardy/vim-slime'
 " coding
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
@@ -35,6 +36,7 @@ Plug 'gcmt/wildfire.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'unblevable/quick-scope'
 Plug 'vimwiki/vimwiki'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " theme
 Plug 'tomasiser/vim-code-dark'
 Plug 'rakr/vim-one'

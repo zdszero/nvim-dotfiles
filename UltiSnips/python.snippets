@@ -508,33 +508,33 @@ endsnippet
 ##########################
 snippet try "Try / Except" b
 try:
-	${1:pass}
-except ${2:Exception}, ${3:e}:
+	${VISUAL}${1:pass}
+except ${2:Exception} as ${3:e}:
 	${4:raise $3}
 endsnippet
 
-snippet try "Try / Except / Else" b
+snippet trye "Try / Except / Else" b
 try:
-	${1:pass}
-except ${2:Exception}, ${3:e}:
+	${VISUAL}${1:pass}
+except ${2:Exception} as ${3:e}:
 	${4:raise $3}
 else:
 	${5:pass}
 endsnippet
 
-snippet try "Try / Except / Finally" b
+snippet tryf "Try / Except / Finally" b
 try:
-	${1:pass}
-except ${2:Exception}, ${3:e}:
+	${VISUAL}${1:pass}
+except ${2:Exception} as ${3:e}:
 	${4:raise $3}
 finally:
 	${5:pass}
 endsnippet
 
-snippet try "Try / Except / Else / Finally" b
+snippet tryef "Try / Except / Else / Finally" b
 try:
-	${1:pass}
-except${2: ${3:Exception}, ${4:e}}:
+	${VISUAL}${1:pass}
+except${2: ${3:Exception} as ${4:e}}:
 	${5:raise}
 else:
 	${6:pass}
@@ -579,7 +579,6 @@ snippet ar "Assert raises" b
 self.assertRaises(${1:exception}, ${2:func}${3/.+/, /}${3:arguments})
 endsnippet
 
-
 snippet testcase "pyunit testcase" b
 class Test${1:Class}(${2:unittest.TestCase}):
 
@@ -593,4 +592,15 @@ class Test${1:Class}(${2:unittest.TestCase}):
 
 	def test_${6:name}(self):
 		${7:pass}
+endsnippet
+
+snippet time_count "perf time count" b
+t0 = time.perf_counter()
+# process
+elapsed = time.perf_counter() - t0
+print(f'elapsed time: {elapsed:.2f}s')
+endsnippet
+
+snippet printf "print fstring" b
+print(f'$1')$0
 endsnippet

@@ -3,8 +3,6 @@ syntax on
 filetype plugin indent on
 set encoding=utf8
 
-set guifont=Ubuntu\ Mono\ 16
-
 " always open the signcolumn
 set signcolumn=yes
 
@@ -60,3 +58,4 @@ set nolist
 set termguicolors
 
 let g:sql_type_default = 'mysql'
+let g:python_host_prog = '/usr/bin/python3.10'

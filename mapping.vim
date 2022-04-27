@@ -31,7 +31,7 @@ nnoremap <c-s> :w<cr>
 nnoremap <c-q> <c-v>
 " simulate uppercase command
 nnoremap <c-a> A
-noremap <c-i> I
+noremap <tab> I
 noremap <c-o> O
 nnoremap <c-p> P
 nnoremap <c-v> V
@@ -43,7 +43,7 @@ vnoremap <c-,> <
 vnoremap <c-.> >
 nnoremap <c-/> /\v
 " use <c-m> <c-n> to jump forward and backwoard
-nnoremap <c-m> <c-o>
+nnoremap <cr> <c-o>
 nnoremap <c-n> <c-i>
 " insert
 inoremap <c-l> <esc>
@@ -70,16 +70,6 @@ nnoremap <up> :res +5<CR>
 nnoremap <down> :res -5<CR>
 nnoremap <left> :vertical resize-5<CR>
 nnoremap <right> :vertical resize+5<CR>
-
-"
-" WINDOW NAVIGATION
-"
-nnoremap <leader>j <c-w>h
-nnoremap <leader>k <c-w>j
-nnoremap <leader>l <c-w>k
-nnoremap <leader>; <c-w>l
-nnoremap <leader>h <c-w>J
-nnoremap <leader>v <c-w>H
 
 "
 " TERMINAL
@@ -120,13 +110,6 @@ endfunction
 xnoremap * :<C-u>call <SID>visual_star_search('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>visual_star_search('?')<CR>?<C-R>=@/<CR><CR>
 
-function! s:change_in_visual()
-  normal! n
-  normal! N
-  exe 's//'
-  startinsert
-endfunction
-
 function! s:last_edit_file()
   let v:errmsg = ''
   silent! normal 
@@ -138,3 +121,17 @@ endfunction
 
 nnoremap [f <cmd> call <SID>last_edit_file()<cr>
 nnoremap ]f <cmd> call <SID>last_edit_file()<cr>
+
+nnoremap ]b :bnext<CR>
+nnoremap [b :bnext<CR>
+nnoremap ]t :tabnext<CR>
+nnoremap [t :tabNext<CR>
+
+function! s:open_terminal()
+  vsp
+  normal! l
+  exe 'terminal'
+  exe 'vertical resize-10'
+endfunction
+
+nmap <leader>t :call <SID>open_terminal()<CR>
