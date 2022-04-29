@@ -103,6 +103,10 @@ nmap <leader>wd <Plug>VimwikiDeleteFile
 nmap <leader>w<leader>w <Plug>VimwikiDiaryIndex
 vmap <leader>wn <Plug>VimwikiNormalizeLinkVisual
 
-if has("nvim")
-  let g:slime_target = "neovim"
-endif
+"
+" Git
+"
+nmap <leader>gs :Git status<CR>
+nmap <leader>ga :Git add -A
+nmap <leader>gc :Git commit -m ""<Left>
+nmap <leader>gp :Git push<CR>

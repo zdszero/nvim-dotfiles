@@ -83,17 +83,6 @@ tnoremap <esc> <C-\><C-N>
 " SOME CUSTOM KEYMAPS
 "
 
-function! s:convert_vscode_snippet() range
-  let l:before_lastline = a:lastline - 1
-  silent! exe a:firstline . ',' . a:lastline . 's/^\s*//g'
-  silent! exe a:firstline . ',' . l:before_lastline . 's/\v"(.*)",/\1/g'
-  silent! exe a:lastline . 's/\v"(.*)"/\1/g'
-  silent! exe a:firstline . ',' . a:lastline . 's/\\t/	/g'
-  silent! exe a:firstline . ',' . a:lastline . 's/\\"/"/g'
-endfunction
-
-vnoremap <leader>cs :call <SID>convert_vscode_snippet()<CR>
-
 function! s:visual_star_search(cmdtype, ...)
   let temp = @"
   normal! gvy
@@ -127,11 +116,48 @@ nnoremap [b :bnext<CR>
 nnoremap ]t :tabnext<CR>
 nnoremap [t :tabNext<CR>
 
-function! s:open_terminal()
+let s:terminal_bufnr = -1
+
+function! s:open_terminal(...)
   vsp
   normal! l
-  exe 'terminal'
+  if a:0 == 1
+    exe 'terminal' . ' ' . a:1
+  else
+    exe 'terminal'
+  endif
   exe 'vertical resize-10'
+  let s:terminal_bufnr = bufnr()
 endfunction
 
-nmap <leader>t :call <SID>open_terminal()<CR>
+function! s:copy_and_send()
+  let temp = @"
+  normal! yy
+  let @" = @" .. "\n"
+  normal! l
+  normal! p
+  normal! h
+  let @" = temp
+endfunction
+
+function! s:visual_copy_and_send() range
+  let line_start = a:firstline
+  let line_end = a:lastline
+  let lines = getline(line_start, line_end)
+  if len(lines) == 0
+    return ''
+  endif
+  let content = join(lines, "\n") .. "\n"
+  let temp = @"
+  let @" = content
+  normal! l
+  normal! p
+  normal! h
+  let @" = temp
+endfunction
+
+nmap <leader>tt :call <SID>open_terminal()<CR>
+nmap <leader>tp :call <SID>open_terminal(g:python_host_prog)<CR>
+nmap <leader>ti :call <SID>open_terminal('ipython3')<CR>
+vmap <c-c> :call <SID>visual_copy_and_send()<CR>
+nmap <c-c> :call <SID>copy_and_send()<CR>

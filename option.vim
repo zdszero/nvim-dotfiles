@@ -14,7 +14,11 @@ set tabstop=2
 set shiftwidth=2
 
 set autoindent smartindent
-set laststatus=2
+if has("nvim-0.7")
+  set laststatus=3
+else
+  set laststatus=2
+endif
 set noshowmode
 
 " mouse enable

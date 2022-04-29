@@ -604,3 +604,11 @@ endsnippet
 snippet printf "print fstring" b
 print(f'$1')$0
 endsnippet
+
+snippet __enter__ "context manager" b
+def __enter__(self):
+	pass
+
+def __exit__(self, exc_type, exc_value, traceback):
+	pass
+endsnippet
