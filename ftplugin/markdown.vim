@@ -2,6 +2,8 @@ set conceallevel=2
 set textwidth=0
 
 let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal = 1
+let g:vim_markdown_math = 1
 
 function! s:MakeMathBlock () range
   '<,'> s/[\x00-\xff]\+/$\0$/g
@@ -24,7 +26,7 @@ inoremap ;p ![](<++>)<Esc>F]i
 inoremap ;c ```<Enter><++><Enter>```<Esc>kkA
 inoremap ;v `` <++><Esc>F`i
 inoremap ;m $$ <++><Esc>F$i
-inoremap ;; $$$$ <++><Esc>F$;i
+inoremap ;M $$<CR><CR>$$<CR><++><Esc>2kI
 inoremap ;1 #<Space><Enter><Enter><++><Esc>2kA
 inoremap ;2 ##<Space><Enter><Enter><++><Esc>2kA
 inoremap ;3 ###<Space><Enter><Enter><++><Esc>2kA

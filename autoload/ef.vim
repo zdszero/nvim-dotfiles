@@ -15,7 +15,7 @@ function ef#Commander(...)
   if l:arg == 'o'
     call s:EditFile('option.vim')
   elseif l:arg == 'm'
-    call s:EditFile('mapping.vim')
+    call s:EditFile('keymap.vim')
   elseif l:arg == 'p'
     call s:EditFile('plugin.vim')
   elseif l:arg == 'c'

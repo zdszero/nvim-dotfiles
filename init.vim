@@ -2,20 +2,21 @@ let &packpath = &runtimepath
 
 let g:config_dir = expand("<sfile>:p:h") . '/'
 
-function g:LoadConfig(filename)
+function LoadConfig(filename)
   exe 'source ' . g:config_dir . a:filename
 endfunction
 
-call g:LoadConfig('option.vim')
-call g:LoadConfig('mapping.vim')
-call g:LoadConfig('command.vim')
-call g:LoadConfig('plugin.vim')
-call g:LoadConfig('color.vim')
-call g:LoadConfig('coc.vim')
-call g:LoadConfig('util.vim')
+call LoadConfig('option.vim')
+call LoadConfig('keymap.vim')
+call LoadConfig('command.vim')
+call LoadConfig('plugin.vim')
+call LoadConfig('color.vim')
+call LoadConfig('coc.vim')
+call LoadConfig('util.vim')
 
 if has("nvim-0.7")
-  lua require('treesitter')
-  lua require('indent_line')
-  lua require('buffer_line')
+  lua require('config/treesitter')
+  lua require('config/indentline')
+  lua require('config/bufferline')
+  lua require('config/telescope')
 endif

@@ -70,3 +70,35 @@ if !exists("g:${1:Value}")
 	let g:$1 = $2
 endif
 endsnippet
+
+snippet jobcb "jobstart callback in one function" b
+function! s:on_event(job_id, data, event) dict
+	if a:event == 'stdout'
+		$1
+	elseif a:event == 'stderr'
+		$2
+	else
+		" exit
+		$3
+	endif
+	$0
+endfunction
+let s:callbacks = {
+\ 'on_stdout': function('s:on_event'),
+\ 'on_stderr': function('s:on_event'),
+\ 'on_exit': function('s:on_event')
+\ }
+endsnippet
+
+snippet jobcb_dict "jobcallback in several functions" b
+let s:callbacks = {}
+function s:callbacks.on_stdout(job_id, data, event)
+	$0
+endfunction
+
+function s:callbacks.on_stderr(job_id, data, event)
+endfunction
+
+function s:callbacks.on_exit(job_id, data, event)
+endfunction
+endsnippet

@@ -17,7 +17,7 @@ end
 
 vim.api.nvim_set_keymap('n', '<F1>', '<cmd>lua require"buffer_line".delete_buffer()<CR>', { noremap = true })
 vim.cmd[[
-  command! BD :lua require"buffer_line".delete_buffer()
+  command! BD :lua require"config/bufferline".delete_buffer()
 ]]
 
 return M

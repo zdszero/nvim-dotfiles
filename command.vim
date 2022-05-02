@@ -23,7 +23,7 @@ endfunction
 
 augroup RunFile
   autocmd!
-  autocmd FileType python nmap <leader>rr :!python3 %<CR>
+  autocmd FileType python nmap <leader>rr :!python3.10 %<CR>
   autocmd FileType cpp    nmap <leader>rr :call <SID>CompileAndRun('clang++')<CR>
   autocmd FileType c      nmap <leader>rr :call <SID>CompileAndRun('gcc')<CR>
 augroup END
@@ -61,10 +61,21 @@ endfunction
 
 " set timeoutlen=150
 
-
 if g:fcitx_remote_command !=# ''
   " set input method to en when leaving insert mode
   autocmd InsertLeave * call Fcitx2en()
   " reset original input method when entering insert mode
   autocmd InsertEnter * call Fcitx2zh()
 endif
+
+function! s:playground(ext)
+  let ft = &ft
+  let playground_home = '/tmp/nvim_playground'
+  if !isdirectory(playground_home)
+    call mkdir(playground_home)
+  endif
+  let filepath = playground_home .. '/' .. 'play.' .. a:ext
+  exe 'edit ' .. filepath
+endfunction
+
+command! -nargs=1 PlayGround call <SID>playground(<f-args>)

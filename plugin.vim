@@ -2,48 +2,54 @@ let s:plug_dir = g:config_dir . 'plugged'
 
 call plug#begin(s:plug_dir)
 
-" vim enhanced
-Plug 'mhinz/vim-startify'
+""""""""""""""""""""""
+"    ENHANCE VIM     "
+""""""""""""""""""""""
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'kshenoy/vim-signature'
+Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/vim-easy-align'
+Plug 'gcmt/wildfire.vim'
+Plug 'unblevable/quick-scope'
+""""""""""""""""""""""
+"      BUTTER UI     "
+""""""""""""""""""""""
+Plug 'mhinz/vim-startify'
 Plug 'lukas-reineke/indent-blankline.nvim'
-" language specific
+Plug 'voldikss/vim-floaterm'
+Plug 'liuchengxu/vista.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'akinsho/bufferline.nvim'
+""""""""""""""""""""""
+"   CUSTOM THEME     "
+""""""""""""""""""""""
+Plug 'rakr/vim-one'
+Plug 'sainnhe/gruvbox-material'
+""""""""""""""""""""""
+"  COMPLETE SEARCH   "
+""""""""""""""""""""""
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'fannheyward/telescope-coc.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+""""""""""""""""""""""
+"  FILETYPE PLUGINS  "
+""""""""""""""""""""""
 Plug 'zdszero/nvim-hugo'
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'bfrg/vim-cpp-modern'
+Plug 'rhysd/vim-clang-format'
 Plug 'wlangstroth/vim-racket'
 Plug 'lervag/vimtex'
-Plug 'rhysd/vim-clang-format'
 Plug 'Vimjas/vim-python-pep8-indent'
-" Plug 'fatih/vim-go'
-" utilities
-Plug 'voldikss/vim-floaterm'
-Plug 'liuchengxu/vista.vim', {'on': 'Vista'}
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'antoinemadec/coc-fzf'
-Plug 'skywind3000/asyncrun.vim'
-" coding
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tpope/vim-commentary'
-Plug 'justinmk/vim-sneak'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-sleuth'
-Plug 'gcmt/wildfire.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'unblevable/quick-scope'
-Plug 'vimwiki/vimwiki'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" theme
-Plug 'tomasiser/vim-code-dark'
-Plug 'rakr/vim-one'
-Plug 'sainnhe/gruvbox-material'
-Plug 'itchyny/lightline.vim'
 Plug 'frazrepo/vim-rainbow'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'akinsho/bufferline.nvim'
-Plug 'tpope/vim-fugitive'
 
 call plug#end()

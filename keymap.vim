@@ -111,10 +111,12 @@ endfunction
 nnoremap [f <cmd> call <SID>last_edit_file()<cr>
 nnoremap ]f <cmd> call <SID>last_edit_file()<cr>
 
-nnoremap ]b :bnext<CR>
-nnoremap [b :bnext<CR>
-nnoremap ]t :tabnext<CR>
-nnoremap [t :tabNext<CR>
+if !has("nvim")
+  nnoremap ]b :bnext<CR>
+  nnoremap [b :bnext<CR>
+  nnoremap ]t :tabnext<CR>
+  nnoremap [t :tabNext<CR>
+endif
 
 let s:terminal_bufnr = -1
 

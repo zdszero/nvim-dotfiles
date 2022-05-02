@@ -10,11 +10,11 @@ function! s:SafeMakeDir()
   if !exists('g:mdip_imgdir_absolute')
     if s:os == "Windows"
       let outdir = expand('%:p:h') . '\' . g:mdip_imgdir
-  else
+    else
       let outdir = expand('%:p:h') . '/' . g:mdip_imgdir
     endif
   else
-	let outdir = g:mdip_imgdir
+    let outdir = g:mdip_imgdir
   endif
   if !isdirectory(outdir)
     call mkdir(outdir)

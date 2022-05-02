@@ -30,7 +30,8 @@ let g:coc_global_extensions = [
 let g:coc_filetype_map = {
   \ 'h': 'c',
   \ 'hpp': 'cpp',
-  \ 'zsh': 'sh'
+  \ 'zsh': 'sh',
+  \ 'vimwiki': 'markdown'
   \ }
 
 let g:coc_explorer_global_presets = {
@@ -118,5 +119,5 @@ nmap [h <Plug>(coc-git-prevchunk)
 nmap ]h <Plug>(coc-git-nextchunk)
 nmap [c <Plug>(coc-git-prevconflict)
 nmap ]c <Plug>(coc-git-nextconflict)
-nmap gs :CocCommand git.chunkStage<CR>
-nmap gS :CocCommand git.chunkUnstage<CR>
+nmap <leader>g< :CocCommand git.chunkStage<CR>
+nmap <leader>g> :CocCommand git.chunkUnstage<CR>

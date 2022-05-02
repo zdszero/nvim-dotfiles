@@ -7,7 +7,7 @@ function g:LoadConfig(filename)
 endfunction
 
 call g:LoadConfig('option.vim')
-call g:LoadConfig('mapping.vim')
+call g:LoadConfig('keymap.vim')
 call g:LoadConfig('command.vim')
 
 let s:plug_dir = g:config_dir . 'plugged'
