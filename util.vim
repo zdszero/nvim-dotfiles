@@ -188,7 +188,7 @@ vim.keymap.set("n", "<leader>ws", function()
 end)
 EOF
 
-command! -bang WikiAll2HTML call <SID>wiki_all2html(!v:false)
+command! -bang WikiAll2HTML call <SID>wiki_all2html(<bang>v:false)
 
 "
 " Git
