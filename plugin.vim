@@ -1,4 +1,4 @@
-let s:plug_dir = g:config_dir . 'plugged'
+let s:plug_dir = g:config_dir..'/plugged'
 
 call plug#begin(s:plug_dir)
 

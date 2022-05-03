@@ -30,9 +30,7 @@
       "pyc"
     ],
     "filenames": [
-      "__pycache__",
-      "img",
-      "image"
+      "__pycache__"
     ],
     "patternMatches": [
       "(^\\.)",
@@ -62,7 +60,9 @@
     "`"
   ],
   "cmake.lsp.enable": true,
+  "Lua.runtime.version": "LuaJIT",
   "Lua.diagnostics.globals": ["vim"],
+  "sumneko-lua.enableNvimLuaDev": true,
   "pyright.completion.snippetSupport": false,
   "python.pythonPath": "/usr/bin/python3.10",
   "python.formatting.provider": "autopep8",
@@ -85,5 +85,6 @@
         "usePlaceholders": true
       }
     }
-  }
+  },
+  "Lua.telemetry.enable": true
 }

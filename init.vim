@@ -1,9 +1,9 @@
 let &packpath = &runtimepath
 
-let g:config_dir = expand("<sfile>:p:h") . '/'
+let g:config_dir = expand("<sfile>:p:h")
 
 function LoadConfig(filename)
-  exe 'source ' . g:config_dir . a:filename
+  exe 'so ' . g:config_dir..'/'..a:filename
 endfunction
 
 call LoadConfig('option.vim')

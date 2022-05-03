@@ -163,3 +163,51 @@ nmap <leader>tp :call <SID>open_terminal(g:python_host_prog)<CR>
 nmap <leader>ti :call <SID>open_terminal('ipython3')<CR>
 vmap <c-c> :call <SID>visual_copy_and_send()<CR>
 nmap <c-c> :call <SID>copy_and_send()<CR>
+
+function! s:complie_run(compiler)
+  let l:filename = expand('%')
+  let l:outfile = expand('%:t:r')
+  silent exe '!' . a:compiler . ' ' . l:filename . ' -o ' . l:outfile
+  exe '!./' . l:outfile
+endfunction
+
+function! s:run_file()
+  if &ft == 'c'
+    call s:complie_run('gcc')
+  elseif &ft == 'cpp'
+    call s:complie_run('clang++')
+  elseif &ft == 'python'
+    exe '!'..g:python_host_prog .. ' %'
+  elseif &ft == 'sh'
+    !bash %
+  elseif &ft == 'vim'
+    so %
+  else
+    echoerr "the filetype run command hasn't been set!"
+  endif
+endfunction
+
+nmap <leader>rr :call <SID>run_file()<CR>
+
+let g:playground_home = '/home/zds/Documents/nvim_playground'
+
+function! s:start_play(is_new)
+  let ext = input('Play FileType: ')
+  if !isdirectory(g:playground_home)
+    call mkdir(g:playground_home, 'p')
+  endif
+  let playfiles = split(glob(g:playground_home..'/*.'..ext), "\n")
+  if empty(playfiles)
+    exe 'edit '..g:playground_home..'/'..'play1.'..ext
+  else
+    if a:is_new
+      let next_idx = matchstr(playfiles[-1], '\v\zs\d+\ze\.'..ext) + 1
+      exe 'edit '..g:playground_home..'/'..'play'..next_idx..'.'..ext
+    else
+      exe 'edit '..playfiles[-1]
+    endif
+  endif
+endfunction
+
+nmap <leader>pp :call <SID>start_play(v:false)<CR>
+nmap <leader>pn :call <SID>start_play(v:true)<CR>

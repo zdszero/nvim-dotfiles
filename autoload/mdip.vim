@@ -122,7 +122,7 @@ function! s:SaveNewFile(imgdir, tmpfile)
   while filereadable(filename)
     call system('diff ' . a:tmpfile . ' ' . filename)
     if !v:shell_error
-       call delete(a:tmpfile)
+      call delete(a:tmpfile)
       return relpath
     endif
     let cnt += 1
@@ -169,6 +169,7 @@ function! mdip#MarkdownClipboardImage()
 
   let tmpfile = s:SaveFileTMP(workdir, g:mdip_tmpname)
   if tmpfile == 1
+    echo "hahahah"
     return
   else
     " let relpath = s:SaveNewFile(g:mdip_imgdir, tmpfile)

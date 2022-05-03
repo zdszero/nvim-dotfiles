@@ -19,12 +19,13 @@ let g:coc_global_extensions = [
   \ 'coc-sh',
   \ 'coc-pyright',
   \ 'coc-texlab',
-  \ 'coc-lua',
+  \ 'coc-sumneko-lua',
   \ 'coc-html',
   \ 'coc-css',
   \ 'coc-tsserver',
   \ 'coc-vimlsp',
   \ 'coc-json',
+  \ 'coc-yaml'
   \]
 
 let g:coc_filetype_map = {
