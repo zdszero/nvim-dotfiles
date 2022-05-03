@@ -1,24 +1,28 @@
-command! -nargs=? EF call ef#Commander(<f-args>)
-command! Go silent exe '!google-chrome-stable %'
-command! Q exe 'q!'
-command! Tab2 set softtabstop=2 | set tabstop=2 | set shiftwidth=2
-command! Tab4 set softtabstop=4 | set tabstop=4 | set shiftwidth=4
+com! -nargs=? EF call ef#Commander(<f-args>)
 
-" augroup TabOptions
-"   autocmd!
-"   autocmd FileType asm,python,sql,go setlocal softtabstop=4 | setlocal tabstop=4 | setlocal shiftwidth=4
-" augroup END
+let g:autotab_bin = g:config_dir..'/bin/autotab'
+if !filereadable(g:autotab_bin)
+  let autotab_src = g:autotab_bin..'.c'
+  call system(join(['gcc', g:autotab_src, '-o', g:autotab_bin, '-O3'], ' '))
+endif
 
-augroup Rainbow
-  autocmd!
-  autocmd FileType racket,scheme call rainbow#load()
-augroup END
+aug SmartIndent
+  au!
+  " http://www.kylheku.com/cgit/c-snippets/tree/autotab.c
+  au BufRead * execute 'set' system(g:autotab_bin .. " < " .. bufname("%"))
+"   au FileType asm,python,sql,go setlocal softtabstop=4 | setlocal tabstop=4 | setlocal shiftwidth=4
+aug END
 
-augroup CommentStyle
-  autocmd!
-  autocmd FileType cpp    setlocal commentstring=//\ %s
-  autocmd FileType c      setlocal commentstring=//\ %s
-augroup END
+aug Rainbow
+  au!
+  au FileType racket,scheme call rainbow#load()
+aug END
+
+aug CommentStyle
+  au!
+  au FileType cpp    setlocal commentstring=//\ %s
+  au FileType c      setlocal commentstring=//\ %s
+aug END
 
 if executable('fcitx5-remote')
   let g:fcitx_remote_command = 'fcitx5-remote'
@@ -49,7 +53,7 @@ endfunction
 
 if g:fcitx_remote_command !=# ''
   " set input method to en when leaving insert mode
-  autocmd InsertLeave * call Fcitx2en()
+  au InsertLeave * call Fcitx2en()
   " reset original input method when entering insert mode
-  autocmd InsertEnter * call Fcitx2zh()
+  au InsertEnter * call Fcitx2zh()
 endif
