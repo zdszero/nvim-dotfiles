@@ -1,20 +1,20 @@
 setlocal noexpandtab
 iabbrev ,s :=
 
-function! s:RunCurrentFile()
+fun! s:RunCurrentFile()
   let l:filename = expand('%')
   if l:filename =~# '_test\.go'
     exe '!go test -v'
   else
     exe '!go run %'
   endif
-endfunction
+endfun
 
-function! s:TestCurrentFunction()
+fun! s:TestCurrentFunction()
   ?Test
   let l:fun_name = matchstr(getline('.'), '\vTest\w*')
   exe '!go test -run=' . l:fun_name . ' -v'
-endfunction
+endfun
 
 nmap <F4> :GoAlternate<CR>
 nmap <leader>rr :call <SID>RunCurrentFile()<CR>

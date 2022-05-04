@@ -1,4 +1,4 @@
-function! s:SourceOrHeaderFile() abort
+fun! s:SourceOrHeaderFile() abort
   let filename = expand('%')
   let suffix = expand('%:e')
   let source_ext = ['cpp', 'cc', 'c']
@@ -18,9 +18,9 @@ function! s:SourceOrHeaderFile() abort
       endif
     endfor
   endif
-endfunction
+endfun
 
-function! s:CommentArea() range
+fun! s:CommentArea() range
   if match(getline(a:firstline), '\v\C/\*') != -1
     exe a:lastline . 'd'
     exe a:firstline . 'd'
@@ -32,7 +32,7 @@ function! s:CommentArea() range
     call append(a:firstline - 1, '/*')
     call append(a:lastline + 1, ' */')
   endif
-endfunction
+endfun
 
 vmap gC :call <SID>CommentArea()<cr>
 nmap gC <c-v>gC

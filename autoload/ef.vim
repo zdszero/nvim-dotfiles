@@ -1,8 +1,8 @@
-function! s:EditFile(filename)
+fun! s:EditFile(filename)
   exe 'edit '..g:config_dir..'/'..a:filename
-endfunction
+endfun
 
-function ef#Commander(...)
+fun ef#Commander(...)
   " if no parameters, edit vimrc
   if a:0 == 0
     edit $MYVIMRC
@@ -28,4 +28,4 @@ function ef#Commander(...)
     echoerr 'Option not defined!'
   endif
 
-endfunction
+endfun

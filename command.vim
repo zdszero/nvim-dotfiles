@@ -33,21 +33,21 @@ else
 endif
 
 let g:input_toggle = 0
-function! Fcitx2en()
+fun! Fcitx2en()
   let s:input_status = system(g:fcitx_remote_command)
   if s:input_status == 2
     let g:input_toggle = 1
     let l:a = system(g:fcitx_remote_command . ' -c')
   endif
-endfunction
+endfun
 
-function! Fcitx2zh()
+fun! Fcitx2zh()
   let s:input_status = system(g:fcitx_remote_command)
   if s:input_status != 2 && g:input_toggle == 1
     let l:a = system(g:fcitx_remote_command . ' -o')
     let g:input_toggle = 0
   endif
-endfunction
+endfun
 
 " set timeoutlen=150
 

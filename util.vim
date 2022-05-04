@@ -45,23 +45,23 @@ let g:wiki_config = {
   \ 'script_path': 'wiki2html.sh'
   \}
 
-function! s:wiki_html_dir_path()
+fun! s:wiki_html_dir_path()
   return g:wiki_config['home']..'/'..g:wiki_config['html_dir']
-endfunction
+endfun
 
-function! s:wiki_html_path(html_name)
+fun! s:wiki_html_path(html_name)
   return s:wiki_html_dir_path()..'/'..a:html_name
-endfunction
+endfun
 
-function! s:wiki_markdown_dir_path()
+fun! s:wiki_markdown_dir_path()
   return g:wiki_config['home']..'/'..g:wiki_config['markdown_dir']
-endfunction
+endfun
 
-function! s:wiki_markdown_path(md_name)
+fun! s:wiki_markdown_path(md_name)
   return s:wiki_markdown_dir_path()..'/'..a:md_name
-endfunction
+endfun
 
-function! s:wiki_create_follow_link()
+fun! s:wiki_create_follow_link()
   let line = getline('.')
   if line =~# '\v\[.*\]\(.*\)'
     let title = matchstr(line, '\[\zs.*\ze\]')
@@ -80,16 +80,16 @@ function! s:wiki_create_follow_link()
     call setline(line('.'), md_link)
     w
   endif
-endfunction
+endfun
 
-function! s:try_rename(from, to)
+fun! s:try_rename(from, to)
   let res = rename(a:from, a:to)
   if res != 0
     echoerr 'fail to rename '..a:from..' to '..a:to
   endif
-endfunction
+endfun
 
-function! s:wiki_rename()
+fun! s:wiki_rename()
   let line = getline('.')
   let mdpath = matchstr(line, '\v\[.*\]\(\zs.*\ze\)')
   if !empty(mdpath)
@@ -107,9 +107,9 @@ function! s:wiki_rename()
     let new_htmlpath = s:wiki_html_path(substitute(new_name, '.md', '.html', ''))
     call s:try_rename(htmlpath, new_htmlpath)
   endif
-endfunction
+endfun
 
-function! s:wiki_delete()
+fun! s:wiki_delete()
   let line = getline('.')
   let mdpath = matchstr(line, '\v\[.*\]\(\zs.*\ze\)')
   if !empty(mdpath)
@@ -121,20 +121,20 @@ function! s:wiki_delete()
     normal! dd
     echomsg name..' and '..htmlname..' have been deleted'
   endif
-endfunction
+endfun
 
-function! s:wiki_add_meta_data(title)
+fun! s:wiki_add_meta_data(title)
   call setline(1, '% ' .. a:title)
   call setline(2, '% zdszero')
   call setline(3, '% ' .. strftime('%Y-%m-%d'))
-endfunction
+endfun
 
-function! s:wiki_paste_image()
+fun! s:wiki_paste_image()
   let g:mdip_imgdir = "../docs/images"
   call mdip#MarkdownClipboardImage()
-endfunction
+endfun
 
-function! s:wiki_index()
+fun! s:wiki_index()
   let wiki_home = g:wiki_config['home']
   if !isdirectory(wiki_home)
     call mkdir(wiki_home, 'p')
@@ -143,9 +143,9 @@ function! s:wiki_index()
   endif
   let index_path = s:wiki_markdown_path('index.md')
   silent exe 'edit ' .. index_path
-endfunction
+endfun
 
-function! s:wiki2html(browse)
+fun! s:wiki2html(browse)
   let bufpath = expand('%:p:h')
   if bufpath !~# '^' .. g:wiki_config['home']
     echoerr 'the current file is not in wiki home directory and cannot be converted to html'
@@ -162,9 +162,9 @@ function! s:wiki2html(browse)
     silent exe '!google-chrome ' .. html_path
     redraw
   endif
-endfunction
+endfun
 
-function! s:wiki_all2html(convert_all)
+fun! s:wiki_all2html(convert_all)
   if a:convert_all
     py3 from md2html import convert_all_sources
     py3 convert_all_sources()
@@ -172,7 +172,7 @@ function! s:wiki_all2html(convert_all)
     py3 from md2html import convert_changed_sources
     py3 convert_changed_sources()
   endif
-endfunction
+endfun
 
 nmap <silent> <leader>ww :call <SID>wiki_index()<CR>
 nmap <silent> <leader>wp :call <SID>wiki_paste_image()<CR>

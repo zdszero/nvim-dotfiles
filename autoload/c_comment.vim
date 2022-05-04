@@ -1,4 +1,4 @@
-function! c_comment#CommentArea() range
+fun! c_comment#CommentArea() range
   if match(getline(a:firstline), '\v\C/\*') != -1
     exe a:lastline . 'd'
     exe a:firstline . 'd'
@@ -10,4 +10,4 @@ function! c_comment#CommentArea() range
     call append(a:firstline - 1, '/*')
     call append(a:lastline + 1, ' */')
   endif
-endfunction
+endfun

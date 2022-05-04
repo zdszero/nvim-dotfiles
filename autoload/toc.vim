@@ -1,21 +1,21 @@
-function! s:Gsub(expr, pat, sub)
+fun! s:Gsub(expr, pat, sub)
   return substitute(a:expr, '\v\C' . a:pat, a:sub, 'g')
-endfunction
+endfun
   
-function! s:IsMatch(expr, pat)
+fun! s:IsMatch(expr, pat)
   return match(a:expr, '\v\C' . a:pat) != -1
-endfunction
+endfun
 
-function! s:LinkTitle(line, israw)
+fun! s:LinkTitle(line, israw)
   let l:title = s:Gsub(a:line, '(^\s*#+\s+|\s*$)', '')
   if !a:israw
     let l:title = s:Gsub(l:title, '\.', '')
     let l:title = s:Gsub(l:title, '\s+', '-')
   endif
   return l:title
-endfunction
+endfun
 
-function! s:MakeLink(line)
+fun! s:MakeLink(line)
   let l:rank = 0
   for l:idx in range(len(a:line))
     if a:line[l:idx] ==# '#'
@@ -29,9 +29,9 @@ function! s:MakeLink(line)
   if l:rank > 2
     execute '1s/\v^\s*/' . repeat('\t', l:rank - 2)
   endif
-endfunction
+endfun
 
-function! toc#GenerateToc()
+fun! toc#GenerateToc()
   let l:lines = []
   for l:lnum in range(line('$'), 1, -1)
     let l:line = getline(l:lnum)
@@ -43,4 +43,4 @@ function! toc#GenerateToc()
   for l:line in l:lines
     call s:MakeLink(l:line)
   endfor
-endfunction
+endfun

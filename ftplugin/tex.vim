@@ -2,20 +2,20 @@ iabbrev <= \leq
 iabbrev >= \geq
 iabbrev != \neq
 
-function! s:MakeMathBlock () range
+fun! s:MakeMathBlock () range
   '<,'> s/ //g
   '<,'> s/[\x00-\xff]\+/$\0$/g
-endfunction
+endfun
 
-function! s:OpenPdfFile()
+fun! s:OpenPdfFile()
   let l:dir = expand('%:p:h')
   let l:filename = expand('%:p:t')
   let l:prefix = matchstr(l:filename, '\v\ze^.*\ze\.')
   let l:pdf_file = l:prefix . '.pdf'
   call jobstart('zathura ' . l:pdf_file, {'cwd': l:dir})
-endfunction
+endfun
 
-function! s:HasCJK()
+fun! s:HasCJK()
   let l:linenum = 1
   while l:linenum <= line('$')
     let l:line = getline(l:linenum)
@@ -33,15 +33,15 @@ function! s:HasCJK()
     endif
   endwhile
   return 0
-endfunction
+endfun
 
-function! s:CompileTex()
+fun! s:CompileTex()
   if s:HasCJK()
     AsyncRun xelatex %
   else
     AsyncRun pdflatex %
   endif
-endfunction
+endfun
 
 command! OpenPdf call s:OpenPdfFile()
 

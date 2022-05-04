@@ -26,9 +26,9 @@
 priority -50
 
 snippet fn "Function" b
-function! ${1:function_name}(${2})$3
+fun! ${1:function_name}(${2})$3
 	$0
-endfunction
+endfun
 endsnippet
 
 snippet if "if" b
@@ -37,12 +37,20 @@ if ${1:condition}
 endif
 endsnippet
 
+snippet ife "if else" b
+if ${1:condition}
+	${2}
+else
+	${3}
+endif
+endsnippet
+
 snippet eli "elseif" b
 elseif ${1:condition}
 	${2}
 endsnippet
 
-snippet else "else" b
+snippet el "else" b
 else
 	${1}
 endsnippet

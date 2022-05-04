@@ -1,12 +1,12 @@
-function! h2cpp#Execute()
+fun! h2cpp#Execute()
   call s:ParseHeader()
-endfunction
+endfun
 
-function! s:Gsub(expr, pat, sub)
+fun! s:Gsub(expr, pat, sub)
   return substitute(a:expr, '\v\C' . a:pat, a:sub, 'g')
-endfunction
+endfun
 
-function! s:ParseHeader() abort
+fun! s:ParseHeader() abort
   let l:header_file = expand('%')
   let l:header_file = substitute(l:header_file, '\v\C\.\zs.*\ze$', 'h', '')
   let l:source_file = substitute(l:header_file, '\v\C\.\zs.*\ze$', 'cpp', '')
@@ -79,9 +79,9 @@ function! s:ParseHeader() abort
   endwhile
   call writefile(l:str_list, l:source_file, "aS")
   exe 'edit ' l:source_file
-endfunction
+endfun
 
-function! s:ParseSource(source_file)
+fun! s:ParseSource(source_file)
   let l:regex = '\v' .
         \ '(' .
         \ '[a-zA-Z_][a-zA-Z0-9_]*' .
@@ -102,4 +102,4 @@ function! s:ParseSource(source_file)
   let l:lst = []
   call substitute(join(readfile(a:source_file), "\n"), l:regex, '\=add(l:lst, submatch(0))', 'g')
   return l:lst
-endfunction
+endfun

@@ -1,10 +1,10 @@
 let s:path_dict = {}
 
-function! s:IsMatch(expr, pat)
+fun! s:IsMatch(expr, pat)
   return match(a:expr, '\v' . a:pat) != -1
-endfunction
+endfun
 
-function! s:TargetDirPath(dirpath, pat)
+fun! s:TargetDirPath(dirpath, pat)
   if a:dirpath == ''
     return ''
   endif
@@ -15,9 +15,9 @@ function! s:TargetDirPath(dirpath, pat)
   else
     return l:res
   endif
-endfunction
+endfun
 
-function! c_switch#EditCorespondingFile()
+fun! c_switch#EditCorespondingFile()
   let l:file_name = expand('%:t')
   if has_key(s:path_dict, l:file_name)
     exe 'e ' . s:path_dict[l:file_name]
@@ -54,4 +54,4 @@ function! c_switch#EditCorespondingFile()
     let s:path_dict[l:target_name] = expand("%:p")
     exe 'e ' . l:target_path
   endif
-endfunction
+endfun

@@ -1,12 +1,12 @@
-function! s:IsWSL()
+fun! s:IsWSL()
   let lines = readfile("/proc/version")
   if lines[0] =~ "Microsoft"
     return 1
   endif
   return 0
-endfunction
+endfun
 
-function! s:SafeMakeDir()
+fun! s:SafeMakeDir()
   if !exists('g:mdip_imgdir_absolute')
     if s:os == "Windows"
       let outdir = expand('%:p:h') . '\' . g:mdip_imgdir
@@ -24,9 +24,9 @@ function! s:SafeMakeDir()
   else
     return fnameescape(outdir)
   endif
-endfunction
+endfun
 
-function! s:SaveFileTMPWSL(imgdir, tmpname) abort
+fun! s:SaveFileTMPWSL(imgdir, tmpname) abort
   let tmpfile = a:imgdir . '/' . a:tmpname . '.png'
 
   let clip_command = "Add-Type -AssemblyName System.Windows.Forms;"
@@ -41,9 +41,9 @@ function! s:SaveFileTMPWSL(imgdir, tmpname) abort
   else
     return tmpfile
   endif
-endfunction
+endfun
 
-function! s:SaveFileTMPLinux(imgdir, tmpname) abort
+fun! s:SaveFileTMPLinux(imgdir, tmpname) abort
   let targets = filter(
         \ systemlist('xclip -selection clipboard -t TARGETS -o'),
         \ 'v:val =~# ''image/''')
@@ -63,9 +63,9 @@ function! s:SaveFileTMPLinux(imgdir, tmpname) abort
   call system(printf('xclip -selection clipboard -t %s -o > %s',
         \ mimetype, tmpfile))
   return tmpfile
-endfunction
+endfun
 
-function! s:SaveFileTMPWin32(imgdir, tmpname) abort
+fun! s:SaveFileTMPWin32(imgdir, tmpname) abort
   let tmpfile = a:imgdir . '\' . a:tmpname . '.png'
   let tmpfile = substitute(tmpfile, '\\ ', ' ', 'g')
 
@@ -81,9 +81,9 @@ function! s:SaveFileTMPWin32(imgdir, tmpname) abort
   else
     return tmpfile
   endif
-endfunction
+endfun
 
-function! s:SaveFileTMPMacOS(imgdir, tmpname) abort
+fun! s:SaveFileTMPMacOS(imgdir, tmpname) abort
   let tmpfile = a:imgdir . '/' . a:tmpname . '.png'
   let clip_command = 'osascript'
   let clip_command .= ' -e "set png_data to the clipboard as «class PNGf»"'
@@ -97,9 +97,9 @@ function! s:SaveFileTMPMacOS(imgdir, tmpname) abort
   else
     return tmpfile
   endif
-endfunction
+endfun
 
-function! s:SaveFileTMP(imgdir, tmpname)
+fun! s:SaveFileTMP(imgdir, tmpname)
   if s:os == "Linux"
     " Linux could also mean Windowns Subsystem for Linux
     if s:IsWSL()
@@ -111,9 +111,9 @@ function! s:SaveFileTMP(imgdir, tmpname)
   elseif s:os == "Windows"
     return s:SaveFileTMPWin32(a:imgdir, a:tmpname)
   endif
-endfunction
+endfun
 
-function! s:SaveNewFile(imgdir, tmpfile)
+fun! s:SaveNewFile(imgdir, tmpfile)
   let extension = split(a:tmpfile, '\.')[-1]
   let reldir = g:mdip_imgdir
   let cnt = 0
@@ -133,9 +133,9 @@ function! s:SaveNewFile(imgdir, tmpfile)
     call rename(a:tmpfile, filename)
   endif
   return relpath
-endfunction
+endfun
 
-function! s:RandomName()
+fun! s:RandomName()
   " help feature-list
   if has('win16') || has('win32') || has('win64') || has('win95')
     let l:new_random = strftime("%Y-%m-%d-%H-%M-%S")
@@ -145,16 +145,16 @@ function! s:RandomName()
     let l:new_random = strftime("%Y-%m-%d-%H-%M-%S")
   endif
   return l:new_random
-endfunction
+endfun
 
-function! s:InputName()
+fun! s:InputName()
   call inputsave()
   let name = input('Image name: ')
   call inputrestore()
   return name
-endfunction
+endfun
 
-function! mdip#MarkdownClipboardImage()
+fun! mdip#MarkdownClipboardImage()
   let s:os = "Windows"
   if !(has("win64") || has("win32") || has("win16"))
     let s:os = substitute(system('uname'), '\n', '', '')
@@ -185,9 +185,9 @@ function! mdip#MarkdownClipboardImage()
     call setpos('.', ipos)
     execute "normal! ve\<C-g>"
   endif
-endfunction
+endfun
 
-function! mdip#DeleteMarkdownPicture () abort
+fun! mdip#DeleteMarkdownPicture () abort
   let l:path = matchstr(getline('.'), '\v\(\zs.*\ze\)')
   if l:path ==# ''
     return
@@ -197,9 +197,9 @@ function! mdip#DeleteMarkdownPicture () abort
     silent execute '!rm ' . './' . l:path
     silent execute 'normal dd'
   endif
-endfunction
+endfun
 
-function! mdip#TexClipboardImage()
+fun! mdip#TexClipboardImage()
   " detect os: https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
   let s:os = "Windows"
   if !(has("win64") || has("win32") || has("win16"))
@@ -226,9 +226,9 @@ function! mdip#TexClipboardImage()
     let relpath = g:mdip_imgdir_intext . '/' . g:mdip_tmpname . '.' . extension
     call setline('.', '\includegraphics{' . relpath . '}')
   endif
-endfunction
+endfun
 
-function! mdip#DeleteTexPicture () abort
+fun! mdip#DeleteTexPicture () abort
   let l:path = matchstr(getline('.'), '\v\{\zs.*\ze\}')
   if l:path ==# ''
     return
@@ -238,7 +238,7 @@ function! mdip#DeleteTexPicture () abort
     silent execute '!rm ' . './' . l:path
     silent execute 'normal dd'
   endif
-endfunction
+endfun
 
 if !exists('g:mdip_imgdir') && !exists('g:mdip_imgdir_absolute')
   let g:mdip_imgdir = 'img'

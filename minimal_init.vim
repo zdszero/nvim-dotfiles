@@ -2,9 +2,9 @@ let &packpath = &runtimepath
 
 let g:config_dir = expand("<sfile>:p:h") . '/'
 
-function g:LoadConfig(filename)
+fun g:LoadConfig(filename)
   exe 'source ' . g:config_dir . a:filename
-endfunction
+endfun
 
 call g:LoadConfig('option.vim')
 call g:LoadConfig('keymap.vim')

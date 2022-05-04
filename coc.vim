@@ -46,12 +46,12 @@ let g:coc_explorer_global_presets = {
 \   }
 \ } 
 
-function! s:check_back_space() abort
+fun! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+endfun
 
-function! s:show_documentation()
+fun! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   elseif (coc#rpc#ready())
@@ -59,7 +59,7 @@ function! s:show_documentation()
   else
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
-endfunction
+endfun
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')

@@ -5,13 +5,13 @@ let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 1
 let g:vim_markdown_math = 1
 
-function! s:MakeMathBlock () range
+fun! s:MakeMathBlock () range
   '<,'> s/[\x00-\xff]\+/$\0$/g
-endfunction
+endfun
 
-function! s:VisualWordCount () range
+fun! s:VisualWordCount () range
   execute '!sed -n ' . a:firstline . ',' . a:lastline . 'p % | wc -w'
-endfunction
+endfun
 
 inoremap <c-;> <Esc>/<++><CR>:nohlsearch<CR>d4li
 inoremap ;f <Esc>/<++><CR>:nohlsearch<CR>d4li
