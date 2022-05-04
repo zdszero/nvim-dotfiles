@@ -296,3 +296,15 @@ if ( optind < argc )
 	}
 }
 endsnippet
+
+snippet nonblock "nonblocking file descriptor" b
+flags =  fcntl(fd, F_GETFL);
+flags |= O_NONBLOCK;
+fcntl(fd, F_SETFL, flags);
+endsnippet
+
+snippet block "blocking file descriptor" b
+flags = fcntl(fd, F_GETFL)
+flags &= ~O_NONBLOCK;
+fcntl(fd, F_SETFL, flags);
+endsnippet

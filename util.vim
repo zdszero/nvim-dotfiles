@@ -78,6 +78,7 @@ function! s:wiki_create_follow_link()
     let goto_file = substitute(line, ' ', '_',  'g') .. '.md'
     let md_link = '[' .. line .. ']' .. '(' .. goto_file .. ')'
     call setline(line('.'), md_link)
+    w
   endif
 endfunction
 

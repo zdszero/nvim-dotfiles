@@ -32,7 +32,7 @@ extends plaintex
 # Text formatting #
 ###################
 
-snippet '(?<!\\)([0-9])([0-9])tb' "new table" r
+snippet '^([0-9])([0-9])tb' "new table" r
 $1`!p 
 rows = match.group(1)
 cols = match.group(2)

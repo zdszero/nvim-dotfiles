@@ -102,3 +102,10 @@ endfunction
 function s:callbacks.on_exit(job_id, data, event)
 endfunction
 endsnippet
+
+snippet aug "augroup" b
+aug ${1:GROUP_NAME}
+	au!
+	$0
+aug END
+endsnippet

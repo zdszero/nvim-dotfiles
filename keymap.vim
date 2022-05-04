@@ -61,7 +61,7 @@ xnoremap C "+y
 " alphabet
 nnoremap U gUiw
 nnoremap R :source $MYVIMRC<CR>
-nnoremap Q :q<CR>	
+nnoremap Q :q<CR>
 nnoremap <leader>q :q!<CR>
 nnoremap <leader><CR> :nohlsearch<CR>
 
@@ -83,7 +83,7 @@ tnoremap <esc> <C-\><C-N>
 " SOME CUSTOM KEYMAPS
 "
 
-function! s:visual_star_search(cmdtype, ...)
+fun! s:visual_star_search(cmdtype, ...)
   let temp = @"
   normal! gvy
   if !a:0 || a:1 != 'raw'
@@ -94,19 +94,19 @@ function! s:visual_star_search(cmdtype, ...)
   let @/ = substitute(@/, '\~', '\\~', 'g')
   let @/ = substitute(@/, '\.', '\\.', 'g')
   let @" = temp
-endfunction
+endfun
 
 xnoremap * :<C-u>call <SID>visual_star_search('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>visual_star_search('?')<CR>?<C-R>=@/<CR><CR>
 
-function! s:last_edit_file()
+fun! s:last_edit_file()
   let v:errmsg = ''
   silent! normal 
   if v:errmsg == ''
     return
   endif
   bprevious
-endfunction
+endfun
 
 nnoremap [f <cmd> call <SID>last_edit_file()<cr>
 nnoremap ]f <cmd> call <SID>last_edit_file()<cr>
@@ -120,7 +120,7 @@ endif
 
 let s:terminal_bufnr = -1
 
-function! s:open_terminal(...)
+fun! s:open_terminal(...)
   vsp
   normal! l
   if a:0 == 1
@@ -130,9 +130,9 @@ function! s:open_terminal(...)
   endif
   exe 'vertical resize-10'
   let s:terminal_bufnr = bufnr()
-endfunction
+endfun
 
-function! s:copy_and_send()
+fun! s:copy_and_send()
   let temp = @"
   normal! yy
   let @" = @" .. "\n"
@@ -140,9 +140,9 @@ function! s:copy_and_send()
   normal! p
   normal! h
   let @" = temp
-endfunction
+endfun
 
-function! s:visual_copy_and_send() range
+fun! s:visual_copy_and_send() range
   let line_start = a:firstline
   let line_end = a:lastline
   let lines = getline(line_start, line_end)
@@ -156,7 +156,7 @@ function! s:visual_copy_and_send() range
   normal! p
   normal! h
   let @" = temp
-endfunction
+endfun
 
 nmap <leader>tt :call <SID>open_terminal()<CR>
 nmap <leader>tp :call <SID>open_terminal(g:python_host_prog)<CR>
@@ -164,14 +164,14 @@ nmap <leader>ti :call <SID>open_terminal('ipython3')<CR>
 vmap <c-c> :call <SID>visual_copy_and_send()<CR>
 nmap <c-c> :call <SID>copy_and_send()<CR>
 
-function! s:complie_run(compiler)
+fun! s:complie_run(compiler)
   let l:filename = expand('%')
   let l:outfile = expand('%:t:r')
   silent exe '!' . a:compiler . ' ' . l:filename . ' -o ' . l:outfile
   exe '!./' . l:outfile
-endfunction
+endfun
 
-function! s:run_file()
+fun! s:run_file()
   if &ft == 'c'
     call s:complie_run('gcc')
   elseif &ft == 'cpp'
@@ -185,13 +185,13 @@ function! s:run_file()
   else
     echoerr "the filetype run command hasn't been set!"
   endif
-endfunction
+endfun
 
 nmap <leader>rr :call <SID>run_file()<CR>
 
 let g:playground_home = '/home/zds/Documents/nvim_playground'
 
-function! s:start_play(is_new)
+fun! s:start_play(is_new)
   let ext = input('Play FileType: ')
   if !isdirectory(g:playground_home)
     call mkdir(g:playground_home, 'p')
@@ -207,7 +207,7 @@ function! s:start_play(is_new)
       exe 'edit '..playfiles[-1]
     endif
   endif
-endfunction
+endfun
 
 nmap <leader>pp :call <SID>start_play(v:false)<CR>
 nmap <leader>pn :call <SID>start_play(v:true)<CR>
