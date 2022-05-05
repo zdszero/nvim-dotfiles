@@ -72,7 +72,7 @@ fun! s:wiki_create_follow_link()
     endif
     exe 'edit ' .. goto_file
     if file_exist == 0
-      call <SID>wiki_add_meta_data(title)
+      call s:wiki_add_meta_data(title)
     endif
   else
     let goto_file = substitute(line, ' ', '_',  'g') .. '.md'

@@ -30,6 +30,7 @@ def _changed_sources():
     for md in mds:
         if md.stem not in html_stem_dict:
             yield md
+            continue
         html = html_stem_dict[md.stem]
         md_mtime = md.stat().st_mtime
         html_mtime = html.stat().st_mtime
@@ -54,6 +55,6 @@ def convert_all_sources():
 
 
 if __name__ == '__main__':
-    convert_all_sources()
-    # print(list(changed_sources()))
+    # convert_all_sources()
+    print(list(_changed_sources()))
     # convert_current_buffer()
