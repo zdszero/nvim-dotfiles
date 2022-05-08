@@ -45,6 +45,8 @@ let g:wiki_config = {
   \ 'script_path': 'wiki2html.sh'
   \}
 
+let g:wiki_preview_browser = 'firefox'
+
 fun! s:wiki_html_dir_path()
   return g:wiki_config['home']..'/'..g:wiki_config['html_dir']
 endfun
@@ -145,6 +147,35 @@ fun! s:wiki_index()
   silent exe 'edit ' .. index_path
 endfun
 
+fun! s:wiki_open_html()
+  let l:curfile = expand('%')
+  let bufpath = expand('%:p:h')
+  if bufpath !~# '^' .. g:wiki_config['home']
+    echoerr 'the current file is not in wiki home directory!'
+    return
+  endif
+  if &ft != 'markdown'
+    echoerr &ft .. ' is not markdown'
+    return
+  endif
+  let html_file = substitute(expand('%'), '\.md$', '.html', '')
+  let html_path = join([g:wiki_config['home'], g:wiki_config['html_dir'], html_file], '/')
+  echo html_path
+  if exists('g:wiki_preview_browser')
+    silent! exe '!'..g:wiki_preview_browser..' '..html_path
+  else
+    let browsers = ['firefox', 'google-chrome', 'chromium']
+    for browser in browsers
+      let v:errmsg = ''
+      silent! exe '!'..browser..' '..html_path
+      if v:errmsg == ''
+        break
+      endif
+    endfor
+  endif
+  redraw
+endfun
+
 fun! s:wiki2html(browse)
   let bufpath = expand('%:p:h')
   if bufpath !~# '^' .. g:wiki_config['home']
@@ -159,7 +190,18 @@ fun! s:wiki2html(browse)
   py3 convert_current_buffer()
   if a:browse == 1
     let html_path = s:wiki_html_path(substitute(expand('%:p:t'), '.md', '.html', 'g'))
-    silent exe '!google-chrome ' .. html_path
+    if exists('g:wiki_preview_browser')
+      silent! exe '!'..g:wiki_preview_browser..' '..html_path
+    else
+      let browsers = ['firefox', 'google-chrome', 'chromium']
+      for browser in browsers
+        let v:errmsg = ''
+        silent! exe '!'..browser..' '..html_path
+        if v:errmsg == ''
+          break
+        endif
+      endfor
+    endif
     redraw
   endif
 endfun
@@ -181,6 +223,7 @@ nmap <silent> <leader>whb :call <SID>wiki2html(v:true)<CR>
 nmap <silent> <leader>wn :call <SID>wiki_create_follow_link()<CR>
 nmap <silent> <leader>wr :call <SID>wiki_rename()<CR>
 nmap <silent> <leader>wd :call <SID>wiki_delete()<CR>
+nmap <silent> <leader>wo :call <SID>wiki_open_html()<CR>
 lua << EOF
 vim.keymap.set("n", "<leader>ws", function()
   require('telescope.builtin').find_files({

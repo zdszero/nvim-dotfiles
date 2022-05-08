@@ -1,4 +1,5 @@
 from pathlib import Path
+from concurrent import futures
 import vim  # type: ignore
 import subprocess
 
@@ -50,8 +51,8 @@ def convert_changed_sources():
 
 
 def convert_all_sources():
-    for md in md_dir_path.glob('*.md'):
-        _md2html(md)
+    with futures.ProcessPoolExecutor() as executor:
+        executor.map(_md2html, md_dir_path.glob('*.md'))
 
 
 if __name__ == '__main__':
