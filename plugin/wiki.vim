@@ -33,11 +33,11 @@ nnoremap <silent><script> <Plug>WikiPasteImage
 nnoremap <silent><script> <Plug>WikiAll2HTML
       \ :<c-u>call wiki#api#wiki_all2html(v:false)<CR>
 
-command! WikiIndex :<c-u> call wiki#api#open_index()<CR>
-command! WikiDelete :<c-u> call wiki#api#delete_link()<CR>
-command! WikiRename :<c-u> call wiki#api#rename_link()<CR>
-command! WikiCreateLink :<c-u> call wiki#api#create_follow_link()<CR>
-command! WikiFollowLink :<c-u> call wiki#api#create_follow_link()<CR>
-command! WikiPasteImage :<c-u> call wiki#api#paste_image()<CR>
-command! Wiki2HTML :<c-u> call wiki#api#wiki2html()<CR>
+command! WikiIndex call wiki#api#open_index()
+command! WikiDelete call wiki#api#delete_link()
+command! WikiRename call wiki#api#rename_link()
+command! WikiCreateLink call wiki#api#create_follow_link()
+command! WikiFollowLink call wiki#api#create_follow_link()
+command! WikiPasteImage call wiki#api#paste_image()
+command! Wiki2HTML call wiki#api#wiki2html()
 command! -bang WikiAll2HTML call wiki#api#wiki_all2html(<bang>v:false)
