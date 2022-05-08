@@ -1,7 +1,6 @@
 set t_Co=256
 
 colorscheme gruvbox-material
-
 set background=light
 let g:lightline = {
       \ 'colorscheme': 'gruvbox_material',

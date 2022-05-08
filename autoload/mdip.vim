@@ -169,7 +169,7 @@ fun! mdip#MarkdownClipboardImage()
 
   let tmpfile = s:SaveFileTMP(workdir, g:mdip_tmpname)
   if tmpfile == 1
-    echo "hahahah"
+    echomsg 'current content in clipboard cannot be pasted as image'
     return
   else
     " let relpath = s:SaveNewFile(g:mdip_imgdir, tmpfile)

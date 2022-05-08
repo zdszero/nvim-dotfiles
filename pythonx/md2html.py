@@ -16,10 +16,13 @@ script_path = Path(
 
 
 def _md2html(md: Path):
-    html = (html_dir_path / (md.stem + '.html'))
-    # cmd = f'{script_path} {md} {html} {template_path}'
-    # print(cmd)
-    subprocess.run([script_path, md, html, template_path])
+    assert str(md).endswith('.md')
+    rel = md.relative_to(md_dir_path)
+    html = (html_dir_path / str(rel).replace('.md', '.html'))
+    html.parent.mkdir(parents=True, exist_ok=True)
+    depth = str(rel).count('/')
+    print(depth)
+    subprocess.run([script_path, md, html, template_path, str(depth)])
     print(f'{md} has been converted to html!')
 
 
@@ -57,5 +60,7 @@ def convert_all_sources():
 
 if __name__ == '__main__':
     # convert_all_sources()
-    print(list(_changed_sources()))
+    # print(list(_changed_sources()))
+    _md2html(Path('/home/zds/Develop/Wiki/sources/haha/test/md/nice.md'))
+    _md2html(Path('/home/zds/Develop/Wiki/sources/diary/diary.md'))
     # convert_current_buffer()

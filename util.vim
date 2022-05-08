@@ -51,16 +51,16 @@ fun! s:wiki_html_dir_path()
   return g:wiki_config['home']..'/'..g:wiki_config['html_dir']
 endfun
 
-fun! s:wiki_html_path(html_name)
-  return s:wiki_html_dir_path()..'/'..a:html_name
+fun! s:wiki_html_path(html_rel)
+  return s:wiki_html_dir_path()..'/'..a:html_rel
 endfun
 
 fun! s:wiki_markdown_dir_path()
   return g:wiki_config['home']..'/'..g:wiki_config['markdown_dir']
 endfun
 
-fun! s:wiki_markdown_path(md_name)
-  return s:wiki_markdown_dir_path()..'/'..a:md_name
+fun! s:wiki_markdown_path(md_rel)
+  return s:wiki_markdown_dir_path()..'/'..a:md_rel
 endfun
 
 fun! s:wiki_create_follow_link()
@@ -72,12 +72,24 @@ fun! s:wiki_create_follow_link()
     if !filereadable(goto_file)
       let file_exist = 0
     endif
+    let file_dir = fnamemodify(goto_file, ':h')
+    if !isdirectory(file_dir)
+      let choice = input(printf('Create directory %s ? (y/n): ', file_dir))
+      if empty(choice) || choice == 'y'
+        call mkdir(file_dir, 'p')
+      else
+        return
+      endif
+    endif
     exe 'edit ' .. goto_file
     if file_exist == 0
       call s:wiki_add_meta_data(title)
     endif
   else
-    let goto_file = substitute(line, ' ', '_',  'g') .. '.md'
+    let goto_file = substitute(line, ' ', '_',  'g')
+    if goto_file !~# '\.md$'
+      let goto_file = goto_file..'.md'
+    endif
     let md_link = '[' .. line .. ']' .. '(' .. goto_file .. ')'
     call setline(line('.'), md_link)
     w
@@ -113,13 +125,13 @@ endfun
 
 fun! s:wiki_delete()
   let line = getline('.')
-  let mdpath = matchstr(line, '\v\[.*\]\(\zs.*\ze\)')
-  if !empty(mdpath)
-    let name = fnamemodify(mdpath, ':t')
+  let md_rel = matchstr(line, '\v\[.*\]\(\zs.*\ze\)')
+  if !empty(md_rel)
+    let name = fnamemodify(md_rel, ':t')
     let htmlname = substitute(name, '.md', '.html', '')
-    let htmlpath = s:wiki_html_path(htmlname)
-    call delete(mdpath)
-    call delete(htmlpath)
+    let html_path = s:wiki_html_path(substitute(md_rel, '.md', '.html', ''))
+    call delete(md_rel)
+    call delete(html_path)
     normal! dd
     echomsg name..' and '..htmlname..' have been deleted'
   endif
@@ -131,8 +143,29 @@ fun! s:wiki_add_meta_data(title)
   call setline(3, '% ' .. strftime('%Y-%m-%d'))
 endfun
 
+fun! s:relative_path_to(from, to)
+  let from_dirs = split(expand(a:from), '/')
+  let to_dirs = split(expand(a:to), '/')
+  let from_idx = 0
+  let to_idx = 0
+  while from_idx < len(from_dirs) && to_idx < len(to_dirs)
+    if from_dirs[from_idx] != to_dirs[to_idx]
+      break
+    endif
+    let from_idx += 1
+    let to_idx += 1
+  endwhile
+  let relpath = repeat('../', len(from_dirs) - from_idx - 1)
+  let relpath = relpath..join(to_dirs[to_idx:], '/')
+  if from_idx == len(from_dirs) -1 && to_idx == len(to_dirs) - 1
+    let relpath = './'..relpath
+  endif
+  return relpath
+endfun
+
 fun! s:wiki_paste_image()
-  let g:mdip_imgdir = "../docs/images"
+  let image_dir = s:wiki_html_dir_path() .. '/images'
+  let g:mdip_imgdir = s:relative_path_to(expand('%:p'), image_dir)
   call mdip#MarkdownClipboardImage()
 endfun
 
@@ -158,9 +191,9 @@ fun! s:wiki_open_html()
     echoerr &ft .. ' is not markdown'
     return
   endif
-  let html_file = substitute(expand('%'), '\.md$', '.html', '')
-  let html_path = join([g:wiki_config['home'], g:wiki_config['html_dir'], html_file], '/')
-  echo html_path
+  let md_rel = substitute(expand('%:p'), s:wiki_markdown_dir_path(), '', '')
+  let html_rel = substitute(md_rel, '\.md$', '.html', '')
+  let html_path = join([g:wiki_config['home'], g:wiki_config['html_dir'], html_rel], '/')
   if exists('g:wiki_preview_browser')
     silent! exe '!'..g:wiki_preview_browser..' '..html_path
   else
@@ -188,22 +221,7 @@ fun! s:wiki2html(browse)
   endif
   py3 from md2html import convert_current_buffer
   py3 convert_current_buffer()
-  if a:browse == 1
-    let html_path = s:wiki_html_path(substitute(expand('%:p:t'), '.md', '.html', 'g'))
-    if exists('g:wiki_preview_browser')
-      silent! exe '!'..g:wiki_preview_browser..' '..html_path
-    else
-      let browsers = ['firefox', 'google-chrome', 'chromium']
-      for browser in browsers
-        let v:errmsg = ''
-        silent! exe '!'..browser..' '..html_path
-        if v:errmsg == ''
-          break
-        endif
-      endfor
-    endif
-    redraw
-  endif
+  call s:wiki_open_html()
 endfun
 
 fun! s:wiki_all2html(convert_all)
