@@ -1,4 +1,4 @@
-fun! s:IsWSL()
+fun! s:is_wsl()
   let lines = readfile("/proc/version")
   if lines[0] =~ "Microsoft"
     return 1
@@ -6,7 +6,7 @@ fun! s:IsWSL()
   return 0
 endfun
 
-fun! s:SafeMakeDir()
+fun! s:safe_mkdir()
   if !exists('g:mdip_imgdir_absolute')
     if s:os == "Windows"
       let outdir = expand('%:p:h') . '\' . g:mdip_imgdir
@@ -26,7 +26,7 @@ fun! s:SafeMakeDir()
   endif
 endfun
 
-fun! s:SaveFileTMPWSL(imgdir, tmpname) abort
+fun! s:save_file_tmp_wsl(imgdir, tmpname) abort
   let tmpfile = a:imgdir . '/' . a:tmpname . '.png'
 
   let clip_command = "Add-Type -AssemblyName System.Windows.Forms;"
@@ -43,7 +43,7 @@ fun! s:SaveFileTMPWSL(imgdir, tmpname) abort
   endif
 endfun
 
-fun! s:SaveFileTMPLinux(imgdir, tmpname) abort
+fun! s:save_file_tmp_linux(imgdir, tmpname) abort
   let targets = filter(
         \ systemlist('xclip -selection clipboard -t TARGETS -o'),
         \ 'v:val =~# ''image/''')
@@ -65,7 +65,7 @@ fun! s:SaveFileTMPLinux(imgdir, tmpname) abort
   return tmpfile
 endfun
 
-fun! s:SaveFileTMPWin32(imgdir, tmpname) abort
+fun! s:save_file_tmp_win32(imgdir, tmpname) abort
   let tmpfile = a:imgdir . '\' . a:tmpname . '.png'
   let tmpfile = substitute(tmpfile, '\\ ', ' ', 'g')
 
@@ -83,7 +83,7 @@ fun! s:SaveFileTMPWin32(imgdir, tmpname) abort
   endif
 endfun
 
-fun! s:SaveFileTMPMacOS(imgdir, tmpname) abort
+fun! s:save_file_tmp_osx(imgdir, tmpname) abort
   let tmpfile = a:imgdir . '/' . a:tmpname . '.png'
   let clip_command = 'osascript'
   let clip_command .= ' -e "set png_data to the clipboard as «class PNGf»"'
@@ -99,21 +99,21 @@ fun! s:SaveFileTMPMacOS(imgdir, tmpname) abort
   endif
 endfun
 
-fun! s:SaveFileTMP(imgdir, tmpname)
+fun! s:save_file_tmp(imgdir, tmpname)
   if s:os == "Linux"
     " Linux could also mean Windowns Subsystem for Linux
-    if s:IsWSL()
-      return s:SaveFileTMPWSL(a:imgdir, a:tmpname)
+    if s:is_wsl()
+      return s:save_file_tmp_wsl(a:imgdir, a:tmpname)
     endif
-    return s:SaveFileTMPLinux(a:imgdir, a:tmpname)
+    return s:save_file_tmp_linux(a:imgdir, a:tmpname)
   elseif s:os == "Darwin"
-    return s:SaveFileTMPMacOS(a:imgdir, a:tmpname)
+    return s:save_file_tmp_osx(a:imgdir, a:tmpname)
   elseif s:os == "Windows"
-    return s:SaveFileTMPWin32(a:imgdir, a:tmpname)
+    return s:save_file_tmp_win32(a:imgdir, a:tmpname)
   endif
 endfun
 
-fun! s:SaveNewFile(imgdir, tmpfile)
+fun! s:save_new_file(imgdir, tmpfile)
   let extension = split(a:tmpfile, '\.')[-1]
   let reldir = g:mdip_imgdir
   let cnt = 0
@@ -135,7 +135,7 @@ fun! s:SaveNewFile(imgdir, tmpfile)
   return relpath
 endfun
 
-fun! s:RandomName()
+fun! s:random_name()
   " help feature-list
   if has('win16') || has('win32') || has('win64') || has('win95')
     let l:new_random = strftime("%Y-%m-%d-%H-%M-%S")
@@ -147,27 +147,27 @@ fun! s:RandomName()
   return l:new_random
 endfun
 
-fun! s:InputName()
+fun! s:input_name()
   call inputsave()
   let name = input('Image name: ')
   call inputrestore()
   return name
 endfun
 
-fun! mdip#MarkdownClipboardImage()
+fun! wiki#image#markdown_clipboard_image()
   let s:os = "Windows"
   if !(has("win64") || has("win32") || has("win16"))
     let s:os = substitute(system('uname'), '\n', '', '')
   endif
 
-  let workdir = s:SafeMakeDir()
+  let workdir = s:safe_mkdir()
   " change temp-file-name and image-name
-  let g:mdip_tmpname = s:InputName()
+  let g:mdip_tmpname = s:input_name()
   if empty(g:mdip_tmpname)
-    let g:mdip_tmpname = g:mdip_imgname . '_' . s:RandomName()
+    let g:mdip_tmpname = g:mdip_imgname . '_' . s:random_name()
   endif
 
-  let tmpfile = s:SaveFileTMP(workdir, g:mdip_tmpname)
+  let tmpfile = s:save_file_tmp(workdir, g:mdip_tmpname)
   if tmpfile == 1
     echomsg 'current content in clipboard cannot be pasted as image'
     return
@@ -187,33 +187,21 @@ fun! mdip#MarkdownClipboardImage()
   endif
 endfun
 
-fun! mdip#DeleteMarkdownPicture () abort
-  let l:path = matchstr(getline('.'), '\v\(\zs.*\ze\)')
-  if l:path ==# ''
-    return
-  endif
-  let l:opt = confirm('Are you sure you want to delete this picture?', "&Yes\n&No")
-  if l:opt == 1
-    silent execute '!rm ' . './' . l:path
-    silent execute 'normal dd'
-  endif
-endfun
-
-fun! mdip#TexClipboardImage()
+fun! wiki#image#tex_clipboard_image()
   " detect os: https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
   let s:os = "Windows"
   if !(has("win64") || has("win32") || has("win16"))
     let s:os = substitute(system('uname'), '\n', '', '')
   endif
 
-  let workdir = s:SafeMakeDir()
+  let workdir = s:safe_mkdir()
   " change temp-file-name and image-name
-  let g:mdip_tmpname = s:InputName()
+  let g:mdip_tmpname = s:input_name()
   if empty(g:mdip_tmpname)
-    let g:mdip_tmpname = g:mdip_imgname . '_' . s:RandomName()
+    let g:mdip_tmpname = g:mdip_imgname . '_' . s:random_name()
   endif
 
-  let tmpfile = s:SaveFileTMP(workdir, g:mdip_tmpname)
+  let tmpfile = s:save_file_tmp(workdir, g:mdip_tmpname)
   if tmpfile == 1
     return
   else
@@ -225,18 +213,6 @@ fun! mdip#TexClipboardImage()
     endif
     let relpath = g:mdip_imgdir_intext . '/' . g:mdip_tmpname . '.' . extension
     call setline('.', '\includegraphics{' . relpath . '}')
-  endif
-endfun
-
-fun! mdip#DeleteTexPicture () abort
-  let l:path = matchstr(getline('.'), '\v\{\zs.*\ze\}')
-  if l:path ==# ''
-    return
-  endif
-  let l:opt = confirm('Are you sure you want to delete this picture?', "&Yes\n&No")
-  if l:opt == 1
-    silent execute '!rm ' . './' . l:path
-    silent execute 'normal dd'
   endif
 endfun
 

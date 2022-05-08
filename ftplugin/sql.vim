@@ -1,26 +1,4 @@
-fun! s:SourceOrHeaderFile() abort
-  let filename = expand('%')
-  let suffix = expand('%:e')
-  let source_ext = ['cpp', 'cc', 'c']
-  let header_ext = ['hpp', 'h']
-  if index(source_ext, suffix) != -1
-    for tmp in header_ext
-      let target = substitute(filename, suffix, tmp, '')
-      if file_readable(target)
-        return target
-      endif
-    endfor
-  elseif index(header_ext, suffix) != -1
-    for tmp in source_ext
-      let target = substitute(filename, suffix, tmp, '')
-      if file_readable(target)
-        return target
-      endif
-    endfor
-  endif
-endfun
-
-fun! s:CommentArea() range
+fun! s:comment_area() range
   if match(getline(a:firstline), '\v\C/\*') != -1
     exe a:lastline . 'd'
     exe a:firstline . 'd'
@@ -34,6 +12,5 @@ fun! s:CommentArea() range
   endif
 endfun
 
-vmap gC :call <SID>CommentArea()<cr>
+vmap gC :call s:comment_area()<cr>
 nmap gC <c-v>gC
-

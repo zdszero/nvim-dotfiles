@@ -2,12 +2,7 @@ iabbrev <= \leq
 iabbrev >= \geq
 iabbrev != \neq
 
-fun! s:MakeMathBlock () range
-  '<,'> s/ //g
-  '<,'> s/[\x00-\xff]\+/$\0$/g
-endfun
-
-fun! s:OpenPdfFile()
+fun! s:open_pdf()
   let l:dir = expand('%:p:h')
   let l:filename = expand('%:p:t')
   let l:prefix = matchstr(l:filename, '\v\ze^.*\ze\.')
@@ -15,7 +10,7 @@ fun! s:OpenPdfFile()
   call jobstart('zathura ' . l:pdf_file, {'cwd': l:dir})
 endfun
 
-fun! s:HasCJK()
+fun! s:has_cjk()
   let l:linenum = 1
   while l:linenum <= line('$')
     let l:line = getline(l:linenum)
@@ -35,15 +30,25 @@ fun! s:HasCJK()
   return 0
 endfun
 
-fun! s:CompileTex()
-  if s:HasCJK()
+fun! s:compile_tex()
+  if s:has_cjk()
     AsyncRun xelatex %
   else
     AsyncRun pdflatex %
   endif
 endfun
 
-command! OpenPdf call s:OpenPdfFile()
+fun! s:delete_image () abort
+  let l:path = matchstr(getline('.'), '\v\{\zs.*\ze\}')
+  if l:path ==# ''
+    return
+  endif
+  let l:opt = confirm('Are you sure you want to delete this picture?', "&Yes\n&No")
+  if l:opt == 1
+    silent execute '!rm ' . './' . l:path
+    silent execute 'normal dd'
+  endif
+endfun
 
 inoremap ;m $$<left>
 inoremap ;M \[\]<left><left>
@@ -54,7 +59,8 @@ inoremap ;i \textit{} <++><Esc>F}i
 inoremap ;1 \section{} <++><Esc>F}i
 inoremap ;2 \subsection{} <++><Esc>F}i
 inoremap ;3 \subsubsection{} <++><Esc>F}i
-nmap <leader>p :call mdip#TexClipboardImage()<cr>
-nmap <leader>rr :call <SID>CompileTex()<cr>
-nmap <silent> <leader>d :call mdip#DeleteTexPicture()<CR>
-vnoremap <silent> <c-f> :call <SID>MakeMathBlock()<CR>
+nmap <leader>rr :call s:compile_tex()<cr>
+
+command! OpenPdf call s:open_pdf()
+command! PasteImage call wiki#image#tex_clipboard_image()
+command! DelteteImage call s:delete_image()

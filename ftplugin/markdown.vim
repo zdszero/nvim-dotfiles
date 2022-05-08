@@ -9,8 +9,20 @@ let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 1
 let g:vim_markdown_math = 1
 
-fun! s:VisualWordCount () range
+fun! <SID>visual_word_count () range
   execute '!sed -n ' . a:firstline . ',' . a:lastline . 'p % | wc -w'
+endfun
+
+fun! s:delete_image () abort
+  let l:path = matchstr(getline('.'), '\v\{\zs.*\ze\}')
+  if l:path ==# ''
+    return
+  endif
+  let l:opt = confirm('Are you sure you want to delete this picture?', "&Yes\n&No")
+  if l:opt == 1
+    silent execute '!rm ' . './' . l:path
+    silent execute 'normal dd'
+  endif
 endfun
 
 inoremap <c-;> <Esc>/<++><CR>:nohlsearch<CR>d4li
@@ -34,10 +46,8 @@ inoremap ;4 ####<Space><Enter><Enter><++><Esc>2kA
 inoremap ;5 #####<Space><Enter><Enter><++><Esc>2kA
 inoremap ;6 ######<Space><Enter><Enter><++><Esc>2kA
 inoremap ;{ \text{\{\}} <++><Esc>F\i
-nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
-vnoremap <silent> <c-c> :call <SID>VisualWordCount()<CR>
-nmap <silent> <leader>d :call mdip#DeleteMarkdownPicture()<CR>
-vmap <silent> <Leader><Bslash> :EasyAlign*<Bar><CR>
-map gp <Plug>Markdown_MoveToParentHeader
+xnoremap <silent> <c-w> :call <SID>visual_word_count()<CR>
 
-command! TOC call toc#GenerateToc()
+command! PasteImage call wiki#image#markdown_clipboard_image()<CR>
+command! DeleteImage call <SID>delete_image()<CR>
+command! TOC call util#markdown#generate_toc()<CR>
