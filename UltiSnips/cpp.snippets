@@ -176,21 +176,21 @@ endsnippet
 snippet copy_move_macro "COPY MOVE MACRO" b
 // Macros to disable copying and moving
 #define DISALLOW_COPY(cname)                             \
-  cname(const cname &) = delete;            /* NOLINT */ \
-  cname &operator=(const cname &) = delete; /* NOLINT */
+	cname(const cname &) = delete;            /* NOLINT */ \
+	cname &operator=(const cname &) = delete; /* NOLINT */
 
 #define DISALLOW_MOVE(cname)                        \
-  cname(cname &&) = delete;            /* NOLINT */ \
-  cname &operator=(cname &&) = delete; /* NOLINT */
+	cname(cname &&) = delete;            /* NOLINT */ \
+	cname &operator=(cname &&) = delete; /* NOLINT */
 
 #define DISALLOW_COPY_AND_MOVE(cname) \
-  DISALLOW_COPY(cname);               \
-  DISALLOW_MOVE(cname);
+	DISALLOW_COPY(cname);               \
+	DISALLOW_MOVE(cname);
 endsnippet
 
 snippet lambda "lambda function" w
 [$1]($2) {
-  $0
+	$0
 };
 endsnippet
 
@@ -201,5 +201,27 @@ endsnippet
 snippet Test "Google Test" b
 TEST(${1:SomethingTest}, ${2:SampleTest}) {
 	$0
+}
+endsnippet
+
+snippet sort "sort" b
+std::sort(${1:v}.begin(), $1.end());
+endsnippet
+
+snippet sortf "sort with comparator" b
+std::sort(${1:v}.begin(), $1.end(), []($3 l, $3 r) {
+	$4
+});
+endsnippet
+
+snippet fit "for iterator" b
+for (auto ${1:it} = ${2:container}.begin(); $1 != $2.end(); $1++) {
+	$3
+}
+endsnippet
+
+snippet fin "for in " b
+for ($1 : $2) {
+	$3
 }
 endsnippet

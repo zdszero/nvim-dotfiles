@@ -184,7 +184,9 @@ fun! wiki#api#wiki2html(browse)
   endif
   py3 from md2html import convert_current_buffer
   py3 convert_current_buffer()
-  call wiki#api#open_html()
+  if a:browse
+    call wiki#api#open_html()
+  endif
 endfun
 
 fun! wiki#api#wiki_all2html(convert_all)

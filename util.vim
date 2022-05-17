@@ -71,3 +71,5 @@ nmap <leader>gs :Git status<CR>
 nmap <leader>ga :Git add -A
 nmap <leader>gc :Git commit -m ""<Left>
 nmap <leader>gp :Git push<CR>
+nmap <leader>gr :Git restore %
+nmap <leader>gd :Git diff<CR>

@@ -21,7 +21,6 @@ def _md2html(md: Path):
     html = (html_dir_path / str(rel).replace('.md', '.html'))
     html.parent.mkdir(parents=True, exist_ok=True)
     depth = str(rel).count('/')
-    print(depth)
     subprocess.run([script_path, md, html, template_path, str(depth)])
     print(f'{md} has been converted to html!')
 

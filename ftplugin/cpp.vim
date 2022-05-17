@@ -1,1 +1,1 @@
-source ./c.vim
+source ~/.config/nvim/ftplugin/c.vim

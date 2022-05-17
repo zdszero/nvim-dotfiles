@@ -117,6 +117,8 @@ if !has("nvim")
   nnoremap ]t :tabnext<CR>
   nnoremap [t :tabNext<CR>
 endif
+nnoremap [T :tabprevious<CR>
+nnoremap ]T :tabnext<CR>
 
 let s:terminal_bufnr = -1
 
