@@ -13,10 +13,3 @@ call LoadConfig('plugin.vim')
 call LoadConfig('color.vim')
 call LoadConfig('coc.vim')
 call LoadConfig('util.vim')
-
-if has("nvim-0.7")
-  lua require('config/treesitter')
-  lua require('config/indentline')
-  lua require('config/bufferline')
-  lua require('config/telescope')
-endif

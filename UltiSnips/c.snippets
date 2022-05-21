@@ -123,14 +123,8 @@ endsnippet
 ######################
 
 snippet for "for loop" b
-for (${1:int }${2:i} = ${3:0}; $2 < ${4:count}; $2++) {
-	${VISUAL}${0}
-}
-endsnippet
-
-snippet forr "reverse for"
-for (${1:int }${2:upper} = ${3:0}; $2 >= ${4:lower}; $2--) {
-	${VISUAL}${0}
+for ($1; $2; $3) {
+	${VISUAL}$4
 }
 endsnippet
 

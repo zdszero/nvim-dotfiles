@@ -26,9 +26,9 @@ def _md2html(md: Path):
 
 
 def _changed_sources():
-    mds: list[Path] = [p for p in md_dir_path.glob('*.md')]
+    mds: list[Path] = [p for p in md_dir_path.rglob('*.md')]
     html_stem_dict: dict[str, Path] = {
-        p.stem: p for p in html_dir_path.glob('*.html')}
+        p.stem: p for p in html_dir_path.rglob('*.html')}
 
     for md in mds:
         if md.stem not in html_stem_dict:
@@ -59,7 +59,7 @@ def convert_all_sources():
 
 if __name__ == '__main__':
     # convert_all_sources()
-    # print(list(_changed_sources()))
-    _md2html(Path('/home/zds/Develop/Wiki/sources/haha/test/md/nice.md'))
-    _md2html(Path('/home/zds/Develop/Wiki/sources/diary/diary.md'))
+    print(list(_changed_sources()))
+    # _md2html(Path('/home/zds/Develop/Wiki/sources/haha/test/md/nice.md'))
+    # _md2html(Path('/home/zds/Develop/Wiki/sources/diary/diary.md'))
     # convert_current_buffer()

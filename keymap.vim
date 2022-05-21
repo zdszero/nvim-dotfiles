@@ -195,6 +195,9 @@ let g:playground_home = '/home/zds/Documents/nvim_playground'
 
 fun! s:start_play(is_new)
   let ext = input('Play FileType: ')
+  if ext == ''
+    return
+  endif
   if !isdirectory(g:playground_home)
     call mkdir(g:playground_home, 'p')
   endif
