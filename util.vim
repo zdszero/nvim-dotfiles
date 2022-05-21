@@ -42,7 +42,6 @@ let g:wiki_config = {
   \ 'markdown_dir': 'sources',
   \ 'html_dir': 'docs',
   \ 'template_path': 'templates/easy_template.html',
-  \ 'script_path': 'wiki2html.sh'
   \}
 
 let g:wiki_preview_browser = 'firefox'

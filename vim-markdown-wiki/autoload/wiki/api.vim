@@ -173,17 +173,7 @@ fun! wiki#api#open_html()
 endfun
 
 fun! wiki#api#wiki2html(browse)
-  let bufpath = expand('%:p:h')
-  if bufpath !~# '^' .. g:wiki_config['home']
-    echoerr 'the current file is not in wiki home directory and cannot be converted to html'
-    return
-  endif
-  if &ft != 'markdown'
-    echoerr &ft .. ' cannot be converted to html'
-    return
-  endif
-  py3 from md2html import convert_current_buffer
-  py3 convert_current_buffer()
+  call wiki#converter#convert_current()
   if a:browse
     call wiki#api#open_html()
   endif
@@ -191,10 +181,8 @@ endfun
 
 fun! wiki#api#wiki_all2html(convert_all)
   if a:convert_all
-    py3 from md2html import convert_all_sources
-    py3 convert_all_sources()
+    call wiki#converter#convert_all()
   else
-    py3 from md2html import convert_changed_sources
-    py3 convert_changed_sources()
+    call wiki#converter#convert_changed()
   endif
 endfun

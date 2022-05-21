@@ -1,1 +1,1 @@
-source ~/.config/nvim/ftplugin/c.vim
+exe 'so ' .. substitute(expand('<sfile>'), 'cpp', 'c', '')
