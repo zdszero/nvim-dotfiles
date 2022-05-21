@@ -64,7 +64,7 @@ fun! wiki#converter#convert_all()
 endfun
 
 fun! wiki#converter#convert_current()
-  let md = expand('%:p:h')
+  let md = expand('%:p')
   if md !~# '^'..s:markdown_dir_path
     echoerr 'the current file is not in wiki home directory and cannot be converted to html'
     return
