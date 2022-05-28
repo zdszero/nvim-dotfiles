@@ -73,7 +73,6 @@ nmap <silent> gD <Plug>(coc-declaration)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> <leader>rn <Plug>(coc-rename)
 " diagnostics
 nmap [e <plug>(coc-diagnostic-prev)
 nmap ]e <plug>(coc-diagnostic-next)
@@ -122,3 +121,8 @@ nmap [c <Plug>(coc-git-prevconflict)
 nmap ]c <Plug>(coc-git-nextconflict)
 nmap <leader>g< :CocCommand git.chunkStage<CR>
 nmap <leader>g> :CocCommand git.chunkUnstage<CR>
+
+nmap <leader>o :CocOutline<CR>
+
+nmap <silent> <leader>rn <Plug>(coc-rename)
+nmap <leader>rf <plug>(coc-refactor)
