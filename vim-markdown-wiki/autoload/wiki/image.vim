@@ -175,7 +175,8 @@ fun! wiki#image#markdown_clipboard_image()
     " let relpath = s:SaveNewFile(g:mdip_imgdir, tmpfile)
     let extension = split(tmpfile, '\.')[-1]
     if extension == 'bmp'
-      call system('cd img; mogrify -format png *.bmp; rm *.bmp')
+      let imgdir = fnamemodify(tmpfile, ":h")
+      call system(printf('cd %s; mogrify -format png %s; rm %s', imgdir, tmpfile, tmpfile))
       let extension = 'png'
     endif
     let relpath = g:mdip_imgdir_intext . '/' . g:mdip_tmpname . '.' . extension
