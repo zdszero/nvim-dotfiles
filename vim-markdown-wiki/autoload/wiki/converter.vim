@@ -19,6 +19,10 @@ let s:script_path = s:join_path(g:markdown_wiki_plug_dir, 'bin', 'wiki2html.sh')
 fun! s:md2html(stem)
   let depth = count(a:stem, '/')
   let html = s:join_path(s:html_dir_path, a:stem..'.html')
+  let html_dir = fnamemodify(html, ':h')
+  if !isdirectory(html_dir)
+    call mkdir(html_dir, 'p')
+  endif
   let md = s:join_path(s:markdown_dir_path, a:stem..'.md')
   call system([s:script_path, md, html, s:template_path, depth])
   if !v:shell_error
