@@ -15,7 +15,12 @@ fun! s:wiki_markdown_path(md_rel)
 endfun
 
 fun! wiki#api#goto_parent_link()
-  let parent_link = expand('%:p:h:h') .. '/' .. 'index.md'
+  let filename = expand('%')
+  if filename ==# 'index.md'
+    let parent_link = expand('%:p:h:h') .. '/' .. 'index.md'
+  else
+    let parent_link = expand('%:p:h') .. '/' .. 'index.md'
+  endif
   if filereadable(parent_link)
     exe 'e ' .. parent_link
   else
