@@ -44,17 +44,19 @@ let g:wiki_config = {
   \ 'template_path': 'templates/easy_template.html',
   \}
 
-let g:wiki_preview_browser = 'firefox'
+let g:wiki_preview_browser = 'google-chrome-stable'
 
 nnoremap <leader>ww <Plug>WikiIndex
 nnoremap <leader>wo <Plug>WikiOpenHTML
 nnoremap <leader>wn <Plug>WikiCreateFollowLink
+nnoremap <leader>wp <Plug>WikiGotoParent
 nnoremap <leader>wd <Plug>WikiDeleteLink
 nnoremap <leader>wr <Plug>WikiRenameLink
+nnoremap <leader>wm <Plug>WikiMoveLink
 nnoremap <leader>whh <Plug>Wiki2HTML
 nnoremap <leader>wha <Plug>WikiAll2HTML
 nnoremap <leader>whb <Plug>Wiki2HTMLBrowse
-nnoremap <leader>wp <Plug>WikiPasteImage
+nnoremap <leader>wi <Plug>WikiPasteImage
 lua << EOF
 vim.keymap.set("n", "<leader>ws", function()
   require('telescope.builtin').find_files({

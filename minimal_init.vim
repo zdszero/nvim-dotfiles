@@ -18,7 +18,6 @@ Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-sleuth'
 Plug 'gcmt/wildfire.vim'
 Plug 'junegunn/vim-easy-align'
 
