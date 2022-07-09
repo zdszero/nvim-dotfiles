@@ -57,13 +57,6 @@ nnoremap <leader>whh <Plug>Wiki2HTML
 nnoremap <leader>wha <Plug>WikiAll2HTML
 nnoremap <leader>whb <Plug>Wiki2HTMLBrowse
 nnoremap <leader>wi <Plug>WikiPasteImage
-lua << EOF
-vim.keymap.set("n", "<leader>ws", function()
-  require('telescope.builtin').find_files({
-    search_dirs={vim.g.wiki_config['home'] .. '/' .. vim.g.wiki_config['markdown_dir']}
-  })
-end)
-EOF
 
 "
 " Git

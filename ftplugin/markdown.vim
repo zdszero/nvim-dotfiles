@@ -27,9 +27,9 @@ endfun
 
 inoremap <c-;> <Esc>/<++><CR>:nohlsearch<CR>d4li
 inoremap ;f <Esc>/<++><CR>:nohlsearch<CR>d4li
-inoremap ;i ** <++><Esc>F*i
-inoremap ;b **** <++><Esc>F*;i
-inoremap ;n ****** <++><Esc>F*;;i
+inoremap ;i __ <++><Esc>F_i
+inoremap ;b ____ <++><Esc>F_;i
+inoremap ;n ______ <++><Esc>F_;;i
 inoremap ;s ~~~~ <++><Esc>F~;i
 inoremap ;t - [ ] 
 inoremap ;h ------<Enter><Enter>

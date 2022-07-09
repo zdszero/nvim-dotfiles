@@ -13,5 +13,10 @@ call LoadConfig('command.vim')
 call LoadConfig('plugin.vim')
 call LoadConfig('color.vim')
 call LoadConfig('coc.vim')
+call LoadConfig('fzf.vim')
 call LoadConfig('util.vim')
 
+if has("nvim")
+  " lua require('telescope_cfg')
+  lua require('treesitter_cfg')
+endif

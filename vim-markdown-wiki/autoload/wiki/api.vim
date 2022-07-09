@@ -88,6 +88,9 @@ fun! wiki#api#rename_link()
     let parent_absdir = expand('%:p:h') .. '/' .. parent_dir
     let reldir = s:relative_path_to(s:wiki_markdown_dir_path(), parent_absdir)
     let htmlpath = s:wiki_html_path(reldir .. '/' .. substitute(name, '.md', '.html', ''))
+    if !filereadable(htmlpath)
+      return
+    endif
     let new_htmlpath = s:wiki_html_path(reldir .. '/' .. substitute(new_name, '.md', '.html', ''))
     call s:try_rename(htmlpath, new_htmlpath)
   endif
@@ -132,6 +135,9 @@ fun! wiki#api#move_link()
     let parent_absdir = expand('%:p:h') .. '/' .. parent_dir
     let reldir = s:relative_path_to(s:wiki_markdown_dir_path(), parent_absdir)
     let htmlpath = s:wiki_html_path(reldir .. '/' .. substitute(name, '.md', '.html', ''))
+    if !filereadable(htmlpath)
+      return
+    endif
     let target_dir = s:wiki_html_path(reldir .. '/' .. move_dir)
     if !isdirectory(target_dir)
       call mkdir(target_dir, 'p')

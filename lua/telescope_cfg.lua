@@ -31,3 +31,9 @@ vim.keymap.set("n", "<leader>so", "<cmd>Telescope coc document_symbols theme=get
 vim.keymap.set("n", "<leader>sc", "<cmd>Telescope coc commands theme=get_dropdown<CR>")
 vim.keymap.set("n", "<leader>sd", "<cmd>Telescope coc diagnostics theme=get_dropdown<CR>")
 vim.keymap.set("n", "gr", "<cmd>Telescope coc references theme=get_dropdown<CR>")
+
+vim.keymap.set("n", "<leader>ws", function()
+  require('telescope.builtin').find_files({
+    search_dirs={vim.g.wiki_config['home'] .. '/' .. vim.g.wiki_config['markdown_dir']}
+  })
+end)
