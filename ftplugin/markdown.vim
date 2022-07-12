@@ -14,7 +14,7 @@ fun! <SID>visual_word_count () range
 endfun
 
 fun! s:delete_image () abort
-  let l:path = matchstr(getline('.'), '\v\{\zs.*\ze\}')
+  let l:path = matchstr(getline('.'), '\v\(\zs.*\ze\)')
   if l:path ==# ''
     return
   endif
@@ -48,6 +48,37 @@ inoremap ;6 ######<Space><Enter><Enter><++><Esc>2kA
 inoremap ;{ \text{\{\}} <++><Esc>F\i
 xnoremap <silent> <c-w> :call <SID>visual_word_count()<CR>
 
-command! PasteImage call wiki#image#markdown_clipboard_image()<CR>
-command! DeleteImage call <SID>delete_image()<CR>
-command! TOC call util#markdown#generate_toc()<CR>
+fun! s:get_image_info()
+  if !executable('identify')
+    echoerr 'install ImageMagick to use this function'
+    return
+  endif
+  let image_path = matchstr(getline('.'), '\v\(\zs.*\ze\)')
+  if image_path ==# ''
+    return
+  endif
+  let output = system('du -h '..image_path)
+  let pos = match(output, '\t')
+  let image_size = output[:pos-1]
+  let output = system('identify '..image_path)
+  let size = matchstr(output, '\v \zs\d+x\d+\ze ')
+  echo "picture size:"
+  echo image_size..'  '..size
+endfun
+
+fun! s:resize_image()
+  let image_path = matchstr(getline('.'), '\v\(\zs.*\ze\)')
+  if image_path ==# ''
+    return
+  endif
+  let factor = input('scale factor: ')
+  let factor = float2nr(str2float(factor) * 100)
+  let cmd = printf("convert %s -resize %d%% %s", image_path, factor, image_path)
+  call system(cmd)
+endfun
+
+command! ImageInfo call <SID>get_image_info()
+command! ImagePaste call wiki#image#markdown_clipboard_image()
+command! ImageDelete call <SID>delete_image()
+command! ImageResize call <SID>resize_image()
+command! TOC call util#markdown#generate_toc()

@@ -52,6 +52,24 @@ if $1 {
 }
 endsnippet
 
+snippet if; "if assign and error check" b
+if err := $1; err != nil {
+	$0
+}
+endsnippet
+
+snippet if;2 "if assign2 and error check" b
+if ${1:_}, err := $2; err != nil {
+	$0
+}
+endsnippet
+
+snippet ifer "if err != nil" b
+if ${1:err} != nil {
+	$0
+}
+endsnippet
+
 snippet eli "else if" b
 else if ($1) {
 	$0
@@ -84,12 +102,6 @@ snippet vars "Variables declaration" b
 var (
 	${1:name}${2/(.+)/ /}${2:type}${3: = ${0:value} }
 )
-endsnippet
-
-snippet ifer "error handling" b
-if err != nil {
-	${VISUAL}$0
-}
 endsnippet
 
 snippet pl "fmt.Println()" b
@@ -247,11 +259,11 @@ func (a $1) Less(i, j int) bool { ${3:return a[i] < a[j]} }
 endsnippet
 
 snippet mkdir "os.Mkdir" b
-dirname := $1
-if _, err := os.Stat(dirname); os.IsNotExist(err) {
-	err = os.Mkdir(dirname, os.ModePerm)
+${1:dirname} := $2
+if _, err := os.Stat($1); os.IsNotExist(err) {
+	err = os.Mkdir($1, os.ModePerm)
 	if err != nil {
-		log.Fatalf("create directory %v failed\n", dirname)
+		log.Fatalf("create directory %v failed\n", $1)$0
 	}
 }
 endsnippet
