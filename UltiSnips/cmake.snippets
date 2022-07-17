@@ -1,13 +1,30 @@
-snippet template
-	cmake_minimum_required(VERSION 3.10)
-	set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-	set(CMAKE_CXX_STANDARD 17)
-	set(CMAKE_CXX_STANDARD_REQUIRED ON)
+snippet template "cmake template"
+cmake_minimum_required(VERSION 3.8)
 
-	# project
-	# subdirectory
-	# package
-	# targets
+# project
+# subdirectory
+# package
+# targets
+endsnippet
+
+snippet standard_cxx "cxx standard" b
+# C++ standard can be overridden when this is used as a sub-project.
+if(NOT CMAKE_CXX_STANDARD)
+	# This project requires C++11.
+	set(CMAKE_CXX_STANDARD 11)
+	set(CMAKE_CXX_STANDARD_REQUIRED ON)
+	set(CMAKE_CXX_EXTENSIONS OFF)
+endif(NOT CMAKE_CXX_STANDARD)
+endsnippet
+
+snippet standard_c "c standard" b
+# C standard can be overridden when this is used as a sub-project.
+if(NOT CMAKE_C_STANDARD)
+	# This project can use C11, but will gracefully decay down to C89.
+	set(CMAKE_C_STANDARD 11)
+	set(CMAKE_C_STANDARD_REQUIRED OFF)
+	set(CMAKE_C_EXTENSIONS OFF)
+endif(NOT CMAKE_C_STANDARD)
 endsnippet
 
 snippet project "Project" b
@@ -37,173 +54,30 @@ else()
 endif()
 endsnippet
 
-snippet incdir
-	include_directories(${${0:include_dir}})
+snippet build_type "build type: Debug or Release" b
+if( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wno-unused-variable")
+else( CMAKE_BUILD_TYPE STREQUAL "Release" )
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fopenmp")
+endif( CMAKE_BUILD_TYPE STREQUAL "Debug" )
 endsnippet
 
-snippet glob
-	file(glob ${1:srcs} *.${0:cpp})
-endsnippet
-
-snippet addsub
-	add_subdirectory(${0:src})
-endsnippet
-
-snippet addlib
-	add_library(${1:lib} ${${0:srcs}})
-endsnippet
-
-snippet addexe
-	add_executable(${1:bin})
-endsnippet
-
-snippet adddep
-	add_dependencies(${1:target}
-		${0:dep}
-	)
-endsnippet
-
-snippet tarlinklib "target_link_libraries"
-	target_link_libraries(${1:bin} ${0:somelib})
-endsnippet
-
-snippet compile_flags "Set Compile Flags" b
+snippet flag_compile "Set Compile Flags" b
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -Wall -Wextra -Werror -march=native")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-parameter -Wno-attributes") #TODO: remove
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -ggdb -fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls")
 endsnippet
 
-snippet link_flags "Set Linker Flags" b
+snippet flag_link "Set Linker Flags" b
 set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -fPIC")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fPIC")
 set(CMAKE_STATIC_LINKER_FLAGS "${CMAKE_STATIC_LINKER_FLAGS} -fPIC")
 set(GCC_COVERAGE_LINK_FLAGS    "-fPIC")
 endsnippet
 
-snippet message_flags "Message Flags" b
+snippet flag_message "Message Flags" b
 message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 message(STATUS "CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
 message(STATUS "CMAKE_EXE_LINKER_FLAGS: ${CMAKE_EXE_LINKER_FLAGS}")
 message(STATUS "CMAKE_SHARED_LINKER_FLAGS: ${CMAKE_SHARED_LINKER_FLAGS}")
-endsnippet
-
-snippet generate_test "generate test executable" b
-file(GLOB TEST_SOURCES "${PROJECT_SOURCE_DIR}/test/*.cpp") # test files
-
-add_custom_target(build-tests COMMAND ${CMAKE_CTEST_COMMAND} --show-only)
-add_custom_target(check-tests COMMAND ${CMAKE_CTEST_COMMAND} --verbose)
-
-foreach(test_source ${T})
-	get_filename_component(test_filename ${test_source} NAME)
-	string(REPLACE ".cpp" "" test_name ${test_filename})
-
-	# Add the test target separately and as part of "make check-tests".
-	add_executable(${test_name} EXCLUDE_FROM_ALL ${test_source})
-	add_dependencies(build-tests ${test_name})
-	add_dependencies(check-tests ${test-name})
-
-	target_link_libraries(${test_name} gtest gmock_main)
-
-	set_target_properties(
-		${test_name}
-		PROPERTIES
-		RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/test"
-		COMMAND ${test_name}
-	)
-
-	# Add the test under CTest
-	add_test(
-		${test_name}
-		--gtest_color=yes
-		# --gtest_output=xml:${CMAKE_BINARY_DIR}/test/${test_name}.xml # generate test report
-	)
-endforeach(test_source $\{$1\})
-endsnippet
-
-snippet valgrind "Valgrind" b
-find_program(VALGRIND_BIN valgrind)
-if ("${VALGRIND_BIN}" STREQUAL "VALGRIND_BIN-NOTFOUND")
-	message(WARNING "BusTub/test couldn't find valgrind.")
-else()
-	message(STATUS "BusTub/test found valgrind at ${VALGRIND_BIN}")
-endif()
-
-find_program(VALGRIND_BIN valgrind)
-if ("${VALGRIND_BIN}" STREQUAL "VALGRIND_BIN-NOTFOUND")
-	message(WARNING "CMake couldn't find valgrind.")
-else()
-	message(STATUS "CMake found valgrind at ${VALGRIND_BIN}")
-endif()
-
-set(
-	VALGRIND_OPTIONS
-	--error-exitcode=1                      # if leaks are detected, return nonzero value
-	# --gen-suppressions=all  # uncomment for leak suppression syntax
-	--leak-check=full                       # detailed leak information
-	--soname-synonyms=somalloc=*jemalloc*   # also intercept jemalloc
-	--trace-children=yes                    # trace child processes
-	--track-origins=yes                     # track origin of uninitialized values
-)
-
-# set(VALGRIND_SUPPRESSIONS_FILE "${PROJECT_SOURCE_DIR}/build_support/valgrind.supp")
-
-# use valgrind to check test case
-add_test(
-	${test_name}
-	${VALGRIND_BIN} ${VALGRIND_OPTIONS}
-	# --suppression=${VALGRIND_SUPPRESSIONS_FILE}
-	${CMAKE_BINARY_DIR}/test/${test_name}   # test case path
-	--gtest_color=yes
-	# --gtest_output=xml:${CMAKE_BINARY_DIR}/test/unit_${test_name}.xml
-)
-endsnippet
-
-snippet clang-format "clang foramt" b
-##########################################
-# "make format"
-# "make check-format"
-##########################################
-find_program(CLANG_FORMAT_BIN clang-format)
-if ("${CLANG_FORMAT_BIN}" STREQUAL "CLANG_FORMAT_BIN-NOTFOUND")
-	message(WARNING "CMake couldn't find clang-format")
-else()
-	message(STATUS "CMake found clang-format at ${CLANG_FORMAT_BIN}")
-endif()
-
-file(
-	GLOB_RECURSE FORMAT_FILES
-	${PROJECT_SOURCE_DIR}/src/*.cpp
-	${PROJECT_SOURCE_DIR}/src/*.h
-	${PROJECT_SOURCE_DIR}/test/*.cpp
-	${PROJECT_SOURCE_DIR}/test/*.h
-)
-
-add_custom_target(
-	format
-	echo "${FORMAT_FILES}" | xargs -n12 -P8
-	${CLANG_FORMAT_BIN}
-	-i
-)
-
-# use scirpt to run clang-format
-string(
-	CONCAT
-	FORMAT_DIRS
-	"${PROJECT_SOURCE_DIR}/src "
-	"${PROJECT_SOURCE_DIR}/test"
-)
-
-string(
-	CONAT
-	FORMAT_EXCLUDE_DIRS
-	"${PROJECT_SOURCE_DIR}/src/third_party"
-)
-
-add_custom_target(
-	format
-	${BUILD_SUPPORT_DIR}/run-clang-format.py
-	-r
-	--exclude ${FORMAT_EXCLUDE_DIRS}
-	${FORMAT_DIRS}
-)
 endsnippet

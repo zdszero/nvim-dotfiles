@@ -173,6 +173,16 @@ std::uniform_int_distribution<std::mt19937::result_type> dist(${1:range});
 // dist(rng)
 endsnippet
 
+snippet delete_copy "delete copy constructor" b
+${1:name}(const $1&) = delete;
+$1& operator=(const $1&) = delete;
+endsnippet
+
+snippet delete_move "delete move constructor" b
+${1:name}($1&&) = delete;
+$1& operator=($1&&) = delete;
+endsnippet
+
 snippet copy_move_macro "COPY MOVE MACRO" b
 // Macros to disable copying and moving
 #define DISALLOW_COPY(cname)                             \

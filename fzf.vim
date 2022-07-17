@@ -22,7 +22,7 @@ nmap <silent> <leader>sc :<C-u>CocFzfList commands<CR>
 
 nmap <silent> <expr> <leader>sf <SID>is_in_git_directory() ?
       \':GFiles<CR>' : ':Files<CR>'
-nmap <silent> <leader>sn :exe 'GFiles ' . g:config_dir<cr>
+nmap <silent> <leader>sn :exe 'Files ' . g:config_dir<cr>
 nmap <silent> <leader>sb :Buffers<CR>
 nmap <silent> <leader>st :Colors<CR>
 nmap <silent> <leader>sl :Lines<CR>

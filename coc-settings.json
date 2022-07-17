@@ -59,7 +59,7 @@
     "\"",
     "`"
   ],
-  "cmake.lsp.enable": true,
+  "cmake.lsp.enable": false,
   "Lua.runtime.version": "LuaJIT",
   "Lua.diagnostics.globals": ["vim"],
   "sumneko-lua.enableNvimLuaDev": true,

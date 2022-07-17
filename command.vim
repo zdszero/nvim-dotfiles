@@ -1,5 +1,9 @@
 com! -nargs=? EF call ef#Commander(<f-args>)
 
+com! Tab2 setlocal softtabstop=2 | setlocal tabstop=2 | setlocal shiftwidth=2
+com! Tab4 setlocal softtabstop=4 | setlocal tabstop=4 | setlocal shiftwidth=4
+com! Tab8 setlocal softtabstop=8 | setlocal tabstop=8 | setlocal shiftwidth=8
+
 let g:autotab_bin = g:config_dir..'/bin/autotab'
 if !filereadable(g:autotab_bin)
   let autotab_src = g:autotab_bin..'.c'
