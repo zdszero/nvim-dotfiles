@@ -16,6 +16,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/vim-easy-align'
 Plug 'gcmt/wildfire.vim'
 Plug 'unblevable/quick-scope'
+Plug 'chrisbra/unicode.vim'
 """"""""""""""""""""""
 "      BUTTER UI     "
 """"""""""""""""""""""

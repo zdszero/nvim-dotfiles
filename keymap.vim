@@ -216,3 +216,22 @@ endfun
 
 nmap <leader>pp :call <SID>start_play(v:false)<CR>
 nmap <leader>pn :call <SID>start_play(v:true)<CR>
+
+fun! s:format_to_oneline() range
+  let merge_line = ''
+  for lnum in range(a:firstline, a:lastline)
+    let curline = getline(lnum)
+    if curline =~# '-$'
+      let curline = curline[:-2]
+    endif
+    if lnum > a:firstline
+      let merge_line = merge_line .. ' '
+    endif
+    let merge_line = merge_line .. curline
+  endfor
+  let exerange = a:firstline .. ',' .. a:lastline
+  exe exerange .. 'd'
+  call append(a:firstline-1 > 0 ? a:firstline-1 : 0, merge_line)
+endfun
+
+xmap <silent> gQ :call <SID>format_to_oneline()<CR>
