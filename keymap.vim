@@ -27,7 +27,6 @@ noremap <c-g> G
 onoremap <c-h> 0
 onoremap <c-l> $
 " normal
-nnoremap <c-s> :w<cr>
 nnoremap <c-q> <c-v>
 " simulate uppercase command
 nnoremap <c-a> A

@@ -103,6 +103,15 @@ if ${2:[[ ${1:condition} ]]}; then
 fi$0
 endsnippet
 
+snippet ife "if else" b
+
+if ${2:[[ ${1:condition} ]]}; then
+	${3:#statements}
+else
+	${4:#statements}
+fi$0
+endsnippet
+
 snippet eli "elif .. (elif)"
 elif ${2:[[ ${1:condition} ]]}; then
 	${3:#statements}$0

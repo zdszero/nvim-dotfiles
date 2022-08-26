@@ -52,18 +52,6 @@ if $1 {
 }
 endsnippet
 
-snippet if; "if assign and error check" b
-if err := $1; err != nil {
-	$0
-}
-endsnippet
-
-snippet if;2 "if assign2 and error check" b
-if ${1:_}, err := $2; err != nil {
-	$0
-}
-endsnippet
-
 snippet ifer "if err != nil" b
 if ${1:err} != nil {
 	$0
@@ -146,8 +134,8 @@ snippet remove "remove intermidiate" b
 $1 = append($1[:${2:idx}], $1[$2+1:]...)
 endsnippet
 
-snippet last "slice last element" b
-$1 := $2[len($2) - 1]
+snippet last "slice last element" w
+$1[len($1) - 1]
 endsnippet
 
 snippet sw "switch" b

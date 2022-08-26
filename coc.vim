@@ -14,7 +14,6 @@ let g:coc_global_extensions = [
   \ 'coc-clangd',
   \ 'coc-snippets',
   \ 'coc-explorer',
-  \ 'coc-highlight',
   \ 'coc-cmake',
   \ 'coc-sh',
   \ 'coc-pyright',
@@ -71,12 +70,15 @@ nmap <silent> <leader>e :CocCommand explorer --sources file+ --preset left<cr>
 " coc general mapping
 nmap <silent> gD <Plug>(coc-declaration)
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-type-defination)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " diagnostics
 nmap [e <plug>(coc-diagnostic-prev)
 nmap ]e <plug>(coc-diagnostic-next)
-nmap <silent> <leader>ca <plug>(coc-codeaction)
+nmap <leader>ca <plug>(coc-codeaction)
+nmap <leader>cl  <Plug>(coc-codelens-action)
+nmap <leader>cf  <Plug>(coc-fix-current)
 nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
 nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
 inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<c-d>"
@@ -85,18 +87,10 @@ vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(
 vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
 " coc snippet mapping
 
-" SUPER TAB
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? coc#_select_confirm() :
-"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-"       \ "\<TAB>"
-" let g:coc_snippet_next = '<tab>'
-" let g:coc_snippet_prev = '<s-tab>'
-
 let g:coc_snippet_next = '<c-j>'
 let g:coc_snippet_prev = '<c-k>'
 inoremap <silent><expr> <TAB>
-  \ pumvisible() ? coc#_select_confirm() :
+  \ coc#pum#visible() ? coc#_select_confirm() :
   \ coc#expandable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand',''])\<CR>" :
   \ "\<TAB>"
 
@@ -113,6 +107,7 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 nmap <leader>f :call CocAction('format')<CR>
+xmap <leader>f  <Plug>(coc-format-selected)
 
 " navigate chunks of current buffer
 nmap [h <Plug>(coc-git-prevchunk)
