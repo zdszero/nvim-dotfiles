@@ -71,7 +71,7 @@ fun! s:resize_image()
   if image_path ==# ''
     return
   endif
-  let factor = input('scale factor: ')
+  let factor = input('scale factor (0 ~ 1): ')
   let factor = float2nr(str2float(factor) * 100)
   let cmd = printf("convert %s -resize %d%% %s", image_path, factor, image_path)
   call system(cmd)

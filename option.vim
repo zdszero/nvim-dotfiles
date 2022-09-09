@@ -60,6 +60,7 @@ set history=1000
 set nolist
 " true color support
 set termguicolors
+set guifont=JetBrains\ Mono\ Medium:h15
 
 let g:sql_type_default = 'mysql'
 let g:python_host_prog = '/usr/bin/python3.10'

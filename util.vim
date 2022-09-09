@@ -53,9 +53,9 @@ nnoremap <leader>wp <Plug>WikiGotoParent
 nnoremap <leader>wd <Plug>WikiDeleteLink
 nnoremap <leader>wr <Plug>WikiRenameLink
 nnoremap <leader>wm <Plug>WikiMoveLink
-nnoremap <leader>whh <Plug>Wiki2HTML
-nnoremap <leader>wha <Plug>WikiAll2HTML
-nnoremap <leader>whb <Plug>Wiki2HTMLBrowse
+nnoremap <leader>wh <Plug>Wiki2HTML
+nnoremap <leader>wH <Plug>WikiAll2HTML
+nnoremap <leader>wb <Plug>Wiki2HTMLBrowse
 nnoremap <leader>wi <Plug>WikiPasteImage
 
 "

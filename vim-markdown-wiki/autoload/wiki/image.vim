@@ -151,7 +151,7 @@ fun! s:input_name()
   call inputsave()
   let name = input('Image name: ')
   call inputrestore()
-  return name
+  return substitute(name, ' ', '_', 'g')
 endfun
 
 fun! wiki#image#markdown_clipboard_image()
