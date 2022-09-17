@@ -64,6 +64,19 @@ nnoremap <leader>wi <Plug>WikiPasteImage
 nmap <leader>gs :Git status<CR>
 nmap <leader>ga :Git add -A
 nmap <leader>gc :Git commit -m ""<Left>
-nmap <leader>gp :Git push<CR>
 nmap <leader>gr :Git restore %
-nmap <leader>gd :Git diff<CR>
+nmap <leader>gd :Git diff %<CR>
+nmap <leader>gi :CocCommand git.chunkInfo<CR>
+nmap <leader>gu :CocCommand git.chunkUndo<CR>
+nmap <leader>g> :CocCommand git.chunkStage<CR>
+nmap <leader>g< :CocCommand git.chunkUnstage<CR>
+nmap <leader>gf :CocCommand git.foldUnchanged<CR>
+nmap <leader>gkc :CocCommand git.keepCurrent<CR>
+nmap <leader>gki :CocCommand git.keepIncoming<CR>
+nmap <leader>gkb :CocCommand git.keepBoth<CR>
+
+" navigate chunks of current buffer
+nmap [h <Plug>(coc-git-prevchunk)
+nmap ]h <Plug>(coc-git-nextchunk)
+nmap [c <Plug>(coc-git-prevconflict)
+nmap ]c <Plug>(coc-git-nextconflict)
