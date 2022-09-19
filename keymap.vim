@@ -112,7 +112,7 @@ nnoremap ]f <cmd> call <SID>last_edit_file()<cr>
 
 if !has("nvim")
   nnoremap ]b :bnext<CR>
-  nnoremap [b :bnext<CR>
+  nnoremap [b :previous<CR>
   nnoremap ]t :tabnext<CR>
   nnoremap [t :tabNext<CR>
 endif
