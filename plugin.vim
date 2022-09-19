@@ -46,7 +46,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'zdszero/nvim-hugo'
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'bfrg/vim-cpp-modern'
 Plug 'rhysd/vim-clang-format'
 Plug 'wlangstroth/vim-racket'
 Plug 'lervag/vimtex'

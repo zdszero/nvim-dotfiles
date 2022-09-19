@@ -1,1 +1,1 @@
-exe 'so ' .. substitute(expand('<sfile>'), 'cpp', 'c', '')
+call LoadConfig("ftplugin/c.vim")
