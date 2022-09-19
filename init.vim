@@ -17,6 +17,6 @@ call LoadConfig('fzf.vim')
 call LoadConfig('util.vim')
 
 if has("nvim")
-  " lua require('telescope_cfg')
-  lua require('treesitter_cfg')
+  " lua require('plugins/telescope')
+  lua require('plugins/treesitter')
 endif
