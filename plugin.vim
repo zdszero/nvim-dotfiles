@@ -43,7 +43,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 """"""""""""""""""""""
 "  FILETYPE PLUGINS  "
 """"""""""""""""""""""
-Plug 'zdszero/nvim-hugo'
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'rhysd/vim-clang-format'

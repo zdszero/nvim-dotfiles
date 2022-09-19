@@ -1,0 +1,79 @@
+*nvim-hugo.txt*  Blogging in vim should be easy.
+
+==============================================================================
+INTRODUCTION                                    *hugo-intro*
+
+This plugin is intended to help you write hugo post quicky in vim.
+
+Feature:
+* add a new post in command line
+* search previous posts in command line
+* open and close hugo server in command line
+* build site in command line
+
+==============================================================================
+CONFIGURATION                                   *hugo-configuration*
+
+There are a few global variables that can be set to adjust the way vim handles
+hugo blogs. Default values for each are listed below unless noted.
+
+                                                *g:hugo_home_path*  >
+    let g:hugo_home_path = '~/Documents/Blog'
+The path to your hugo blog directory.
+
+                                                *g:hugo_post_suffix*  >
+    let g:hugo_post_suffix = 'md'
+The extension used when creating new posts.
+
+                                                *g:hugo_post_template*  >
+    let g:hugo_post_template: [
+          \ '---',
+          \ 'title: HUGO_TITLE',
+          \ 'date: HUGO_DATE',
+          \ 'draft: true',
+          \ '---',
+          \ '' ]
+A |List| containing lines to used as a template when creating new posts.
+HUGO_TITLE and HUGO_DATE will be replaced with their real values.
+
+                                                *g:hugo_server_port*  >
+    let g:hugo_server_port = 1313
+The port of the server which you use command |HugoServer| to start
+
+                                                *g:hugo_build_script_path*  >
+    let g:hugo_build_script_path = '~/Documents/Blog/build.sh'
+The path to your build script which you use command |HugoBuild| to execute.
+
+
+==============================================================================
+COMMANDS                                        *hugo-commands*
+
+                                                *HugoPost*  >
+:HugoPost<cr>       Create a new post. 
+
+                                                *HugoSearch*  >
+:HugoSearch<cr>     Search posts in content directory. Make sure vim-fzf
+                    or telescope is installed before using this command.
+
+                                                *HugoServer*  >
+:HugoServer<cr>     Start server in your hugo directory. You can use
+                    |g:hugo_server_port| to specify the port of the server.
+
+:HugoServer!<cr>    Stop hugo server.
+
+                                                *HugoBuild*  >
+:HugoBuild<cr>      Execute build script to build your site.
+
+==============================================================================
+ABOUT                                           *hugo-about*
+
+Grab the latest version or report a bug on Github:
+
+https://github.com/zdszero/nvim-hugo
+
+==============================================================================
+LICENSE                                         *hugo-license*
+
+MIT license.
+
+vim:tw=78:ts=2:sts=2:sw=2:ft=help:norl:

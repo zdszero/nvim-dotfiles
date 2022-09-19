@@ -1,6 +1,7 @@
 let g:config_dir = expand("<sfile>:p:h")
-let g:vim_markdown_vim_rtp = g:config_dir..'/'..'vim-markdown-wiki'
-let &rtp = &rtp..','..g:vim_markdown_vim_rtp
+let g:vim_markdown_wiki_rtp = g:config_dir..'/'..'vim-markdown-wiki'
+let g:vim_hugo_rtp = g:config_dir..'/'..'vim-hugo'
+let &rtp = join([&rtp, g:vim_markdown_wiki_rtp, g:vim_hugo_rtp], ',')
 let &packpath = &rtp
 
 fun LoadConfig(filename)
