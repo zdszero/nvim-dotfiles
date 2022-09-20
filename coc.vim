@@ -10,10 +10,12 @@ set shortmess+=c
 
 let g:coc_global_extensions = [
   \ 'coc-pairs',
-  \ 'coc-git',
-  \ 'coc-clangd',
   \ 'coc-snippets',
+  \ 'coc-git',
   \ 'coc-explorer',
+  \ 'coc-yank',
+  \ 'coc-lists',
+  \ 'coc-clangd',
   \ 'coc-cmake',
   \ 'coc-sh',
   \ 'coc-pyright',
@@ -109,7 +111,60 @@ omap ac <Plug>(coc-classobj-a)
 nmap <leader>f :call CocAction('format')<CR>
 xmap <leader>f  <Plug>(coc-format-selected)
 
-nmap <leader>o :CocOutline<CR>
+nnoremap <silent><nowait> <space>o  :call ToggleOutline()<CR>
+function! ToggleOutline() abort
+  let winid = coc#window#find('cocViewId', 'OUTLINE')
+  if winid == -1
+    call CocActionAsync('showOutline', 1)
+  else
+    call coc#window#close(winid)
+  endif
+endfunction
+
 
 nmap <silent> <leader>rn <Plug>(coc-rename)
 nmap <leader>rf <plug>(coc-refactor)
+nmap <leader>rw :CocCommand document.renameCurrentWord<CR>
+
+" coc-lists
+
+fun! s:is_in_git_directory()
+  silent !git rev-parse --is-inside-work-tree
+  if v:shell_error == 0
+    return 1
+  endif
+  return 0
+endfun
+
+fun! s:GrepFromSelected(type)
+  let saved_unnamed_register = @@
+  if a:type ==# 'v'
+    normal! `<v`>y
+  elseif a:type ==# 'char'
+    normal! `[v`]y
+  else
+    return
+  endif
+  let word = substitute(@@, '\n$', '', 'g')
+  let word = escape(word, '| ')
+  let @@ = saved_unnamed_register
+  execute 'CocList grep '.word
+endfun
+
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <leader>sd :CocList diagnostics --current-buf<CR>
+nmap <silent> <leader>so :CocList outline<CR>
+nmap <silent> <leader>sc :CocList commands<CR>
+nmap <silent> <leader>sC :CocList vimcommands<CR>
+nmap <silent> <expr> <leader>sf <SID>is_in_git_directory() ? ':CocList gfiles<CR>' : ':CocList files<CR>'
+nmap <silent> <leader>sn :exe 'CocList files ' .. g:config_dir<CR>
+nmap <silent> <leader>sb :CocList buffers<CR>
+nmap <silent> <leader>st :CocList colors<CR>
+nmap <silent> <leader>sl :CocList lines<CR>
+nmap <silent> <leader>sg :CocList grep<CR>
+nmap <silent> <leader>sh :CocList helptags<CR>
+nmap <silent> <leader>sm :CocList mru<CR>
+nmap <silent> <leader>ws :exe 'CocList files ' .. g:wiki_config['home'] .. '/' .. g:wiki_config['markdown_dir']<CR>
+vnoremap <leader>g :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
+
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>

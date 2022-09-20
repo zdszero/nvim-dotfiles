@@ -13,7 +13,7 @@ fun! s:run_file()
   endif
 endfun
 
-fun! s:test_function()
+fun! <SID>run_test()
   let lineno = line('.')
   while 1
     let func_name = matchstr(getline(lineno), '\v^func \zsTest\w+\ze')
@@ -28,4 +28,4 @@ fun! s:test_function()
 endfun
 
 nmap <leader>rr :call <SID>run_file()<CR>
-nmap <leader>rf :call <SID>test_function()<CR>
+nmap <leader>rt :call <SID>run_test()<CR>

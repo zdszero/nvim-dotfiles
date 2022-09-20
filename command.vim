@@ -15,6 +15,8 @@ fun! s:edit_config_file(...)
     call EditConfig('plugin.vim')
   elseif arg == 'c'
     call EditConfig('command.vim')
+  elseif arg == 'u'
+    call EditConfig('util.vim')
   elseif arg == 's'
     call EditConfig('UltiSnips/' . &ft . '.snippets')
   elseif arg == 't'

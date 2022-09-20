@@ -36,9 +36,6 @@ Plug 'sainnhe/gruvbox-material'
 """"""""""""""""""""""
 "  COMPLETE SEARCH   "
 """"""""""""""""""""""
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'antoinemadec/coc-fzf'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 """"""""""""""""""""""
 "  FILETYPE PLUGINS  "
@@ -46,7 +43,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'rhysd/vim-clang-format'
-Plug 'wlangstroth/vim-racket'
 Plug 'lervag/vimtex'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'frazrepo/vim-rainbow'

@@ -1,9 +1,6 @@
 {
   "diagnostic.enable": true,
   "coc.preferences.extensionUpdateCheck": "weekly",
-  "highlight.disableLanguages": [
-    "markdown"
-  ],
   "codeLens.enable": false,
   "codeLens.separator": "<>",
   "diagnostic.virtualText": false,
