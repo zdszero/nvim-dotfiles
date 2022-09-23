@@ -2,9 +2,6 @@ set t_Co=256
 
 colorscheme gruvbox-material
 set background=light
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox_material',
-      \ }
 
 let g:one_allow_italics = 1 " I love italic for comments
 

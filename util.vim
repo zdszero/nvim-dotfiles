@@ -84,6 +84,6 @@ nmap ]c <Plug>(coc-git-nextconflict)
 "
 " indent blank line
 "
-let g:indent_blankline_filetype_exclude = ['startify', 'coc-explorer', 'cmake', 'markdown', 'tex', 'vista']
+let g:indent_blankline_filetype_exclude = ['startify', 'coc-explorer', 'cmake', 'markdown', 'tex', 'vista', 'coctree']
 let g:indent_blankline_buftype_exclude = ['terminal', 'help']
 let g:indent_blankline_bufname_exclude = ['__vista__']

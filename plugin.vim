@@ -24,7 +24,6 @@ Plug 'mhinz/vim-startify'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'liuchengxu/vista.vim'
-Plug 'itchyny/lightline.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim'
