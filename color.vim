@@ -1,5 +1,6 @@
 set t_Co=256
 
+" let g:sonokai_transparent_background = 1
 colorscheme gruvbox-material
 set background=light
 

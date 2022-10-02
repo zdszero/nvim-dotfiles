@@ -60,7 +60,15 @@ set history=1000
 set nolist
 " true color support
 set termguicolors
-set guifont=JetBrains\ Mono\ Medium:h15
+set guifont=JetBrains\ Mono\ Medium:h14
 
 let g:sql_type_default = 'mysql'
 let g:python_host_prog = '/usr/bin/python3.10'
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set foldtext=getline(v:foldstart).'...'.trim(getline(v:foldend))
+set fillchars=fold:\ 
+set foldnestmax=3
+set foldminlines=1
+set nofoldenable

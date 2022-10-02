@@ -30,6 +30,10 @@ snippet usi "using name space" b
 using namespace ${1:std};$0
 endsnippet
 
+snippet new "new type" b
+${1:auto *}${2:var} = new ${3:type}($4)
+endsnippet
+
 snippet tp "template <typename ..> (template)"
 template <typename ${1:_InputIter}>${0}
 endsnippet
@@ -238,4 +242,41 @@ endsnippet
 
 snippet be "begin end iterator" w
 ${1:container}.begin(), ${1}.end()
+endsnippet
+
+#################
+#  GOOGLE TEST  #
+#################
+snippet test "google test body" b
+TEST(${1:test_suite_name}, ${2:test_name}) {
+	$0
+}
+endsnippet
+
+snippet eeq "EXPECT_EQ" b
+EXPECT_EQ($1, $2);
+endsnippet
+
+snippet ene "EXPECT_NE" b
+EXPECT_NE($1, $2);
+endsnippet
+
+snippet ege "EXPECT_GE" b
+EXPECT_GE($1, $2);
+endsnippet
+
+snippet egt "EXPECT_GT" b
+EXPECT_GT($1, $2);
+endsnippet
+
+snippet elt "EXPECT_LT" b
+EXPECT_LT($1, $2);
+endsnippet
+
+snippet ele "EXPECT_LE" b
+EXPECT_LE($1, $2);
+endsnippet
+
+snippet eth "EXPECT_THROW" b
+EXPECT_THROW($1, $2);
 endsnippet

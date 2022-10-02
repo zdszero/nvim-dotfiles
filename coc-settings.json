@@ -1,6 +1,8 @@
 {
   "diagnostic.enable": true,
   "coc.preferences.extensionUpdateCheck": "weekly",
+  "snippets.priority": 100,
+  "coc.source.file.priority": 10,
   "codeLens.enable": false,
   "codeLens.separator": "<>",
   "diagnostic.virtualText": false,
@@ -8,7 +10,9 @@
   "outline.expandLevel": 2,
   "tree.key.toggle": "o",
   "tree.key.collapseAll": "M",
+  "signature.enable": true,
   "signature.target": "float",
+  "signature.hideOnTextChange": true,
   "suggest.minTriggerInputLength": 2,
   "suggest.maxCompleteItemCount": 10,
   "suggest.removeDuplicateItems": true,
@@ -65,7 +69,6 @@
       ".*egg-info"
     ]
   },
-  "highlight.colorNames.enable": false,
   "snippets.ultisnips.directories": [
     "UltiSnips"
   ],
@@ -102,7 +105,7 @@
   "python.formatting.provider": "autopep8",
   "python.formatting.autopep8Path": "/home/zds/.local/bin/autopep8",
   "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/14.0.3/clangd_14.0.3/bin/clangd",
-  "clangd.disableSnippetCompletion": true,
+  "clangd.disableSnippetCompletion": false,
   "clangd.inlayHints.enable": false,
   "languageserver": {
     "golang": {

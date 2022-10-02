@@ -13,6 +13,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 " Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
 Plug 'junegunn/vim-easy-align'
 Plug 'gcmt/wildfire.vim'
 Plug 'unblevable/quick-scope'
@@ -30,7 +31,8 @@ Plug 'akinsho/bufferline.nvim'
 """"""""""""""""""""""
 "   CUSTOM THEME     "
 """"""""""""""""""""""
-Plug 'rakr/vim-one'
+Plug 'sainnhe/sonokai'
+Plug 'doums/darcula'
 Plug 'sainnhe/gruvbox-material'
 """"""""""""""""""""""
 "  COMPLETE SEARCH   "
