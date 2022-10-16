@@ -102,3 +102,18 @@ endfun
 
 nnoremap [f <cmd> call <SID>last_edit_file()<cr>
 nnoremap ]f <cmd> call <SID>last_edit_file()<cr>
+
+
+nnoremap ]t <cmd>BufferLineMoveNext<CR>
+nnoremap [t <cmd>BufferLineMovePrev<CR>
+nnoremap ]b <cmd>BufferLineCycleNext<CR>
+nnoremap [b <cmd>BufferLineCyclePrev<CR>
+
+fun! s:delete_buffer()
+  let bufnum = bufnr()
+  BufferLineCyclePrev
+  exe 'bdelete ' .. bufnum
+endfun
+
+command! BD call <SID>delete_buffer()
+nmap <F3> :call <SID>delete_buffer()<CR>

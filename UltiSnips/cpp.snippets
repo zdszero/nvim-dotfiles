@@ -54,6 +54,13 @@ try {
 }
 endsnippet
 
+snippet operator<< "operator<< overloading" b
+friend std::ostream& operator<<(ostream &&os, const $1) {
+	$0
+	return os;
+}
+endsnippet
+
 ######################
 #  STL COLLECTION    #
 ######################

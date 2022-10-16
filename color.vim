@@ -16,16 +16,3 @@ let g:cpp_attributes_highlight = 1
 let g:cpp_member_highlight = 1
 
 lua require('bufferline').setup{}
-
-nnoremap ]t <cmd>BufferLineMoveNext<CR>
-nnoremap [t <cmd>BufferLineMovePrev<CR>
-nnoremap ]b <cmd>BufferLineCycleNext<CR>
-nnoremap [b <cmd>BufferLineCyclePrev<CR>
-
-fun! s:delete_buffer()
-  let bufnum = bufnr()
-  BufferLineCyclePrev
-  exe 'bdelete ' .. bufnum
-endfun
-
-command! BD call <SID>delete_buffer()
