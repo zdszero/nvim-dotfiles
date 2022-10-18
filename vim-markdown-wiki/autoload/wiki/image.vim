@@ -44,8 +44,15 @@ fun! s:save_file_tmp_wsl(imgdir, tmpname) abort
 endfun
 
 fun! s:save_file_tmp_linux(imgdir, tmpname) abort
+  if $XDG_SESSION_TYPE == 'wayland'
+    let target_cmd = 'wl-paste --list-types'
+    let paste_cmd = 'wl-paste --type=%s > %s'
+  else
+    let target_cmd = 'xclip -selection clipboard -t TARGETS -o'
+    let paste_cmd = 'xclip -selection clipboard -t %s -o > %s'
+  endif
   let targets = filter(
-        \ systemlist('xclip -selection clipboard -t TARGETS -o'),
+        \ systemlist(target_cmd),
         \ 'v:val =~# ''image/''')
   if empty(targets) | return 1 | endif
 
@@ -60,8 +67,7 @@ fun! s:save_file_tmp_linux(imgdir, tmpname) abort
   endif
 
   let tmpfile = a:imgdir . '/' . a:tmpname . '.' . extension
-  call system(printf('xclip -selection clipboard -t %s -o > %s',
-        \ mimetype, tmpfile))
+  call system(printf(paste_cmd, mimetype, tmpfile))
   return tmpfile
 endfun
 

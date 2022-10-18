@@ -18,6 +18,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'gcmt/wildfire.vim'
 Plug 'unblevable/quick-scope'
 Plug 'chrisbra/unicode.vim'
+Plug 'hotoo/pangu.vim'
 """"""""""""""""""""""
 "      BUTTER UI     "
 """"""""""""""""""""""
@@ -26,7 +27,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'liuchengxu/vista.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim'
 """"""""""""""""""""""
 "   CUSTOM THEME     "

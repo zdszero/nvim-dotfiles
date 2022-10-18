@@ -45,11 +45,6 @@ aug SmartIndent
 "   au FileType asm,python,sql,go setlocal softtabstop=4 | setlocal tabstop=4 | setlocal shiftwidth=4
 aug END
 
-aug Rainbow
-  au!
-  au FileType racket,scheme call rainbow#load()
-aug END
-
 aug CommentStyle
   au!
   au FileType cpp    setlocal commentstring=//\ %s
