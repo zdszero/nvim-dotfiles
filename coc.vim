@@ -166,10 +166,10 @@ nmap <silent> <leader>sm :CocList mru<CR>
 nmap <silent> <leader>ws :exe 'CocList files ' .. g:wiki_config['home'] .. '/' .. g:wiki_config['markdown_dir']<CR>
 vnoremap <leader>g :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
 
-augroup CocGroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  " autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
+" augroup CocGroup
+"   autocmd!
+"   " Setup formatexpr specified filetype(s).
+"   " autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+"   " Update signature help on jump placeholder.
+"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+" augroup end
