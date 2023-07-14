@@ -42,6 +42,7 @@ let g:wiki_config = {
   \ 'markdown_dir': 'sources',
   \ 'html_dir': 'docs',
   \ 'template_path': 'templates/easy_template.html',
+  \ 'theme': 'solarized-light'
   \}
 
 let g:wiki_preview_browser = 'google-chrome-stable'
