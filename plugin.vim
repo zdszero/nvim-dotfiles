@@ -6,18 +6,15 @@ call plug#begin(s:plug_dir)
 "    ENHANCE VIM     "
 """"""""""""""""""""""
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
-Plug 'kshenoy/vim-signature'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-" Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'gcmt/wildfire.vim'
 Plug 'unblevable/quick-scope'
-Plug 'chrisbra/unicode.vim'
 Plug 'hotoo/pangu.vim'
 """"""""""""""""""""""
 "      BUTTER UI     "
@@ -39,6 +36,9 @@ Plug 'sainnhe/gruvbox-material'
 "  COMPLETE SEARCH   "
 """"""""""""""""""""""
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
+Plug 'junegunn/fzf.vim' " needed for previews
+Plug 'antoinemadec/coc-fzf'
 """"""""""""""""""""""
 "  FILETYPE PLUGINS  "
 """"""""""""""""""""""

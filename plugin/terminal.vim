@@ -51,7 +51,7 @@ fun! s:visual_copy_and_send() range
 endfun
 
 nmap <leader>tt :call <SID>open_terminal()<CR>
-nmap <leader>tp :call <SID>open_terminal(g:python_host_prog)<CR>
+nmap <leader>tp :call <SID>open_terminal('python3')<CR>
 nmap <leader>ti :call <SID>open_terminal('ipython3')<CR>
 vmap <c-c> :call <SID>visual_copy_and_send()<CR>
 nmap <c-c> :call <SID>copy_and_send()<CR>

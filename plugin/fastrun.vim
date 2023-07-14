@@ -11,7 +11,7 @@ fun! s:run_file()
   elseif &ft == 'cpp'
     call s:complie_run('clang++')
   elseif &ft == 'python'
-    exe '!'..g:python_host_prog .. ' %'
+    exe '!python3'..' %'
   elseif &ft == 'sh'
     !bash %
   elseif &ft == 'vim'

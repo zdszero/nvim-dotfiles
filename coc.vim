@@ -13,7 +13,6 @@ let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-git',
   \ 'coc-explorer',
-  \ 'coc-lists',
   \ 'coc-clangd',
   \ 'coc-cmake',
   \ 'coc-sh',
@@ -150,21 +149,21 @@ fun! s:GrepFromSelected(type)
   execute 'CocList grep '.word
 endfun
 
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> <leader>sd :CocList diagnostics --current-buf<CR>
-nmap <silent> <leader>so :CocList outline<CR>
-nmap <silent> <leader>sc :CocList commands<CR>
-nmap <silent> <leader>sC :CocList vimcommands<CR>
-nmap <silent> <expr> <leader>sf <SID>is_in_git_directory() ? ':CocList gfiles<CR>' : ':CocList files<CR>'
-nmap <silent> <leader>sn :exe 'CocList files ' .. g:config_dir<CR>
-nmap <silent> <leader>sb :CocList buffers<CR>
-nmap <silent> <leader>st :CocList colors<CR>
-nmap <silent> <leader>sl :CocList lines<CR>
-nmap <silent> <leader>sg :CocList grep<CR>
-nmap <silent> <leader>sh :CocList helptags<CR>
-nmap <silent> <leader>sm :CocList mru<CR>
-nmap <silent> <leader>ws :exe 'CocList files ' .. g:wiki_config['home'] .. '/' .. g:wiki_config['markdown_dir']<CR>
-vnoremap <leader>g :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
+" nmap <silent> gr <Plug>(coc-references)
+" nmap <silent> <leader>sd :CocList diagnostics --current-buf<CR>
+" nmap <silent> <leader>so :CocList outline<CR>
+" nmap <silent> <leader>sc :CocList commands<CR>
+" nmap <silent> <leader>sC :CocList vimcommands<CR>
+" nmap <silent> <expr> <leader>sf <SID>is_in_git_directory() ? ':CocList gfiles<CR>' : ':CocList files<CR>'
+" nmap <silent> <leader>sn :exe 'CocList files ' .. g:config_dir<CR>
+" nmap <silent> <leader>sb :CocList buffers<CR>
+" nmap <silent> <leader>st :CocList colors<CR>
+" nmap <silent> <leader>sl :CocList lines<CR>
+" nmap <silent> <leader>sg :CocList grep<CR>
+" nmap <silent> <leader>sh :CocList helptags<CR>
+" nmap <silent> <leader>sm :CocList mru<CR>
+" nmap <silent> <leader>ws :exe 'CocList files ' .. g:wiki_config['home'] .. '/' .. g:wiki_config['markdown_dir']<CR>
+" vnoremap <leader>g :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
 
 " augroup CocGroup
 "   autocmd!

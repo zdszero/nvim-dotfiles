@@ -63,7 +63,6 @@ set termguicolors
 set guifont=JetBrains\ Mono\ Medium:h14
 
 let g:sql_type_default = 'mysql'
-let g:python_host_prog = '/usr/bin/python3.10'
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()

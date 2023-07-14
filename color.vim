@@ -1,7 +1,7 @@
 set t_Co=256
 
 " let g:sonokai_transparent_background = 1
-colorscheme gruvbox-material
+colorscheme darcula
 set background=light
 
 let g:one_allow_italics = 1 " I love italic for comments
