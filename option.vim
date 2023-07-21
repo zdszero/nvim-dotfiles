@@ -71,3 +71,4 @@ set fillchars=fold:\
 set foldnestmax=3
 set foldminlines=1
 set nofoldenable
+set t_Co=256

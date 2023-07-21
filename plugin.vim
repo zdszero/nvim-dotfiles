@@ -43,10 +43,7 @@ Plug 'antoinemadec/coc-fzf'
 "  FILETYPE PLUGINS  "
 """"""""""""""""""""""
 Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'rhysd/vim-clang-format'
 Plug 'lervag/vimtex'
-Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'frazrepo/vim-rainbow'
 
 call plug#end()

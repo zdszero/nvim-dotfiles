@@ -110,6 +110,10 @@ nnoremap ]b <cmd>BufferLineCycleNext<CR>
 nnoremap [b <cmd>BufferLineCyclePrev<CR>
 
 fun! s:delete_buffer()
+  if &modified
+    bd!
+    return
+  endif
   let bufnum = bufnr()
   BufferLineCyclePrev
   exe 'bdelete ' .. bufnum
@@ -128,7 +132,7 @@ fun! s:format_to_oneline() range
       let curline = curline[:-2]
     endif
     if lnum > a:firstline
-      let merge_line = merge_line .. ' '
+      let merge_line = merge_line
     endif
     let merge_line = merge_line .. curline
   endfor

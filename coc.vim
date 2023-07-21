@@ -18,7 +18,6 @@ let g:coc_global_extensions = [
   \ 'coc-sh',
   \ 'coc-pyright',
   \ 'coc-texlab',
-  \ 'coc-sumneko-lua',
   \ 'coc-html',
   \ 'coc-css',
   \ 'coc-tsserver',

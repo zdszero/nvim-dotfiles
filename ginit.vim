@@ -5,6 +5,7 @@ set mouse=a
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
     GuiFont! Consolas\ Nerd\ Font:h15
+    " GuiFont! LXGW\ WenKai\ Mono:h15
 endif
 
 " Disable GUI Tabline

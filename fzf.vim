@@ -1,7 +1,4 @@
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf.vim'
-" Plug 'antoinemadec/coc-fzf'
-
+"
 " FZF
 "
 function! s:is_in_git_directory()
