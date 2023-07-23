@@ -103,9 +103,8 @@
   "sumneko-lua.enableNvimLuaDev": true,
   "pyright.completion.snippetSupport": false,
   "pyright.disableProgressNotifications": true,
-  "python.pythonPath": "/usr/bin/python3.10",
+  "pyright.testing.provider": "pytest",
   "python.formatting.provider": "autopep8",
-  "python.formatting.autopep8Path": "/home/zds/.local/bin/autopep8",
   "clangd.disableSnippetCompletion": false,
   "languageserver": {
     "golang": {
@@ -127,6 +126,5 @@
       }
     }
   },
-  "Lua.telemetry.enable": true,
   "snippets.ultisnips.pythonPrompt": false
 }

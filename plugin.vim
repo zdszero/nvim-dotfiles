@@ -45,5 +45,7 @@ Plug 'antoinemadec/coc-fzf'
 Plug 'plasticboy/vim-markdown'
 Plug 'rhysd/vim-clang-format'
 Plug 'lervag/vimtex'
+Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'vim-test/vim-test'
 
 call plug#end()

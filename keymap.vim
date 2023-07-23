@@ -42,7 +42,7 @@ vnoremap <c-,> <
 vnoremap <c-.> >
 nnoremap <c-/> /\v
 " use <c-m> <c-n> to jump forward and backwoard
-nnoremap <cr> <c-o>
+nnoremap <c-m> <c-o>
 nnoremap <c-n> <c-i>
 " insert
 inoremap <c-l> <esc>
@@ -142,3 +142,19 @@ fun! s:format_to_oneline() range
 endfun
 
 xmap <silent> gQ :call <SID>format_to_oneline()<CR>
+
+
+if !has("nvim")
+  nnoremap ]b :bnext<CR>
+  nnoremap [b :previous<CR>
+  nnoremap ]t :tabnext<CR>
+  nnoremap [t :tabNext<CR>
+endif
+tnoremap <c-[> <C-\><C-N>
+tnoremap <esc> <C-\><C-N>
+nnoremap [T :tabprevious<CR>
+nnoremap ]T :tabnext<CR>
+
+nmap <leader>ts :TestNearest<CR>
+nmap <leader>tf :TestFile<CR>
+nmap <leader>th :TestSuite<CR>
