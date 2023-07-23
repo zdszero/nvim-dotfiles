@@ -26,8 +26,8 @@ let g:cpp_member_highlight = 1
 "                                   easy-align                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-xmap ga <Plug>((EasyAlign))
-map ge <Plug>((wildfire-fuel))
+xmap ga <Plug>(EasyAlign)
+map ge <Plug>(wildfire-fuel)
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
@@ -104,7 +104,7 @@ nmap <leader>gki :CocCommand git.keepIncoming<CR>
 nmap <leader>gkb :CocCommand git.keepBoth<CR>
 
 " navigate chunks of current buffer
-nmap [h <Plug>((coc-git-prevchunk))
-nmap ]h <Plug>((coc-git-nextchunk))
-nmap [c <Plug>((coc-git-prevconflict))
-nmap ]c <Plug>((coc-git-nextconflict))
+nmap [h <Plug>(coc-git-prevchunk)
+nmap ]h <Plug>(coc-git-nextchunk)
+nmap [c <Plug>(coc-git-prevconflict)
+nmap ]c <Plug>(coc-git-nextconflict)

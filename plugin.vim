@@ -14,7 +14,6 @@ Plug 'tpope/vim-repeat'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'gcmt/wildfire.vim'
-Plug 'unblevable/quick-scope'
 Plug 'hotoo/pangu.vim'
 """"""""""""""""""""""
 "      BUTTER UI     "
