@@ -143,13 +143,6 @@ endfun
 
 xmap <silent> gQ :call <SID>format_to_oneline()<CR>
 
-
-if !has("nvim")
-  nnoremap ]b :bnext<CR>
-  nnoremap [b :previous<CR>
-  nnoremap ]t :tabnext<CR>
-  nnoremap [t :tabNext<CR>
-endif
 tnoremap <c-[> <C-\><C-N>
 tnoremap <esc> <C-\><C-N>
 nnoremap [T :tabprevious<CR>

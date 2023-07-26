@@ -9,6 +9,8 @@ function! s:is_in_git_directory()
   return 0
 endfunction
 
+let g:vim_initial_working_dir = getcwd()
+
 let $BAT_THEME='Monokai Extended Light'
 let $FZF_DEFAULT_OPTS='--layout=default'
 
@@ -18,7 +20,7 @@ nmap <silent> <leader>so :<C-u>CocFzfList outline<CR>
 nmap <silent> <leader>sc :<C-u>CocFzfList commands<CR>
 
 nmap <silent> <expr> <leader>sf <SID>is_in_git_directory() ?
-      \':GFiles<CR>' : ':Files<CR>'
+      \':GFiles<CR>' : printf(':Files %s<CR>', g:vim_initial_working_dir)
 nmap <silent> <leader>sn :exe 'Files ' . g:config_dir<cr>
 nmap <silent> <leader>sb :Buffers<CR>
 nmap <silent> <leader>st :Colors<CR>

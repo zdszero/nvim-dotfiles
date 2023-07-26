@@ -29,8 +29,8 @@ Plug 'akinsho/bufferline.nvim'
 "   CUSTOM THEME     "
 """"""""""""""""""""""
 Plug 'sainnhe/sonokai'
-Plug 'doums/darcula'
 Plug 'sainnhe/gruvbox-material'
+Plug 'doums/darcula'
 """"""""""""""""""""""
 "  COMPLETE SEARCH   "
 """"""""""""""""""""""
@@ -42,6 +42,7 @@ Plug 'antoinemadec/coc-fzf'
 "  FILETYPE PLUGINS  "
 """"""""""""""""""""""
 Plug 'plasticboy/vim-markdown'
+Plug 'dhruvasagar/vim-table-mode'
 Plug 'rhysd/vim-clang-format'
 Plug 'lervag/vimtex'
 Plug 'Vimjas/vim-python-pep8-indent'

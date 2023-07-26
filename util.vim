@@ -3,9 +3,11 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:sonokai_transparent_background = 1
+let g:edge_transparent_background = 1
+let g:gruvbox_material_transparent_background = 1
 let g:one_allow_italics = 1
-colorscheme darcula
-set background=light
+colorscheme gruvbox-material
+set background=dark
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             indent blank line                              "
@@ -108,3 +110,10 @@ nmap [h <Plug>(coc-git-prevchunk)
 nmap ]h <Plug>(coc-git-nextchunk)
 nmap [c <Plug>(coc-git-prevconflict)
 nmap ]c <Plug>(coc-git-nextconflict)
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               vim-table-mode                               "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let g:table_mode_corner='+'
+" let g:table_mode_corner_corner='+'
+" let g:table_mode_header_fillchar='='

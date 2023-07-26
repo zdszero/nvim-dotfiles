@@ -1,10 +1,7 @@
-let g:playground_home = '/home/zds/Documents/nvim_playground'
+let g:playground_home = expand('~/Documents/nvim_playground')
 
-fun! s:start_play(is_new)
-  let ext = input('Play FileType: ')
-  if ext == ''
-    return
-  endif
+fun! s:start_play(extension, is_new)
+  let ext = a:extension
   if !isdirectory(g:playground_home)
     call mkdir(g:playground_home, 'p')
   endif
@@ -21,5 +18,5 @@ fun! s:start_play(is_new)
   endif
 endfun
 
-command! Playground :call <SID>start_play(v:false)
-command! PlaygroundNew :call <SID>start_play(v:true)<CR>
+command! -nargs=+ Playground call <SID>start_play(<f-args>, v:false)
+command! -nargs=+ PlaygroundNew call <SID>start_play(<f-args>, v:true)
