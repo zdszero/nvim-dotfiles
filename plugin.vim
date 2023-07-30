@@ -31,6 +31,7 @@ Plug 'akinsho/bufferline.nvim'
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/gruvbox-material'
 Plug 'doums/darcula'
+Plug 'sainnhe/everforest'
 """"""""""""""""""""""
 "  COMPLETE SEARCH   "
 """"""""""""""""""""""

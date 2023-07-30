@@ -104,7 +104,7 @@
   "pyright.completion.snippetSupport": false,
   "pyright.disableProgressNotifications": true,
   "pyright.testing.provider": "pytest",
-  "python.formatting.provider": "autopep8",
+  "python.formatting.provider": "black",
   "clangd.disableSnippetCompletion": false,
   "languageserver": {
     "golang": {

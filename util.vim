@@ -3,11 +3,10 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:sonokai_transparent_background = 1
-let g:edge_transparent_background = 1
-let g:gruvbox_material_transparent_background = 1
-let g:one_allow_italics = 1
-colorscheme gruvbox-material
-set background=dark
+let g:gruvbox_material_transparent_background = 0
+let g:everforest_background = 'medium'
+colorscheme everforest
+set background=light
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             indent blank line                              "
