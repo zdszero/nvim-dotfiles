@@ -8,6 +8,25 @@ set nowritebackup
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
+" Choose a usable node from possible path
+" minimum version is v14.14.0
+let possible_paths = ["/usr/local/bin/node", "/usr/bin/node"]
+for nodepath in possible_paths
+  if !filereadable(nodepath)
+    continue
+  endif
+  let output = system(printf("%s -v", nodepath))
+  let ms = matchlist(output, 'v\(\d\+\).\(\d\+\).\(\d\+\)')
+  if empty(ms)
+    continue
+  elseif str2nr(ms[1]) < 14 || (str2nr(ms[1]) == 14 && str2nr(ms[2]) < 14)
+    continue
+  else
+    let g:coc_node_path = nodepath
+    break
+  endif
+endfor
+
 let g:coc_global_extensions = [
   \ 'coc-pairs',
   \ 'coc-snippets',
