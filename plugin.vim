@@ -5,7 +5,6 @@ call plug#begin(s:plug_dir)
 """"""""""""""""""""""
 "    ENHANCE VIM     "
 """"""""""""""""""""""
-Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -14,17 +13,13 @@ Plug 'tpope/vim-repeat'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'gcmt/wildfire.vim'
-Plug 'hotoo/pangu.vim'
+Plug 'vim-test/vim-test'
 """"""""""""""""""""""
 "      BUTTER UI     "
 """"""""""""""""""""""
 Plug 'mhinz/vim-startify'
-Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'liuchengxu/vista.vim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" Plug 'kyazdani42/nvim-web-devicons'
-Plug 'akinsho/bufferline.nvim'
 """"""""""""""""""""""
 "   CUSTOM THEME     "
 """"""""""""""""""""""
@@ -35,18 +30,38 @@ Plug 'sainnhe/everforest'
 """"""""""""""""""""""
 "  COMPLETE SEARCH   "
 """"""""""""""""""""""
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
-Plug 'junegunn/fzf.vim' " needed for previews
-Plug 'antoinemadec/coc-fzf'
+if g:config['coc_support'] == 1
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
+  Plug 'junegunn/fzf.vim' " needed for previews
+  Plug 'antoinemadec/coc-fzf'
+endif
 """"""""""""""""""""""
 "  FILETYPE PLUGINS  "
 """"""""""""""""""""""
-Plug 'plasticboy/vim-markdown'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'rhysd/vim-clang-format'
-Plug 'lervag/vimtex'
-Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'vim-test/vim-test'
+if g:config['markdown_support'] == 1
+  Plug 'plasticboy/vim-markdown'
+  Plug 'dhruvasagar/vim-table-mode'
+  Plug 'hotoo/pangu.vim'
+endif
+
+if g:config['tex_support'] == 1
+  Plug 'lervag/vimtex'
+endif
+
+if g:config['cpp_support'] == 1
+  Plug 'rhysd/vim-clang-format'
+endif
+
+if g:config['python_support'] == 1
+  Plug 'Vimjas/vim-python-pep8-indent'
+endif
+
+if g:config['lua_support'] == 1
+  Plug 'lukas-reineke/indent-blankline.nvim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'akinsho/bufferline.nvim'
+  " Plug 'kyazdani42/nvim-web-devicons'
+endif
 
 call plug#end()

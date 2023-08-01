@@ -13,18 +13,27 @@ let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-git',
   \ 'coc-explorer',
-  \ 'coc-clangd',
-  \ 'coc-cmake',
   \ 'coc-sh',
-  \ 'coc-pyright',
-  \ 'coc-texlab',
-  \ 'coc-html',
-  \ 'coc-css',
-  \ 'coc-tsserver',
   \ 'coc-vimlsp',
   \ 'coc-json',
   \ 'coc-yaml'
   \]
+
+if g:config['python_support'] == 1
+  let g:coc_global_extensions = extend(g:coc_global_extensions, ['coc-pyright'])
+endif
+
+if g:config['cpp_support'] == 1
+  let g:coc_global_extensions = extend(g:coc_global_extensions, ['coc-cmake', 'coc-clangd'])
+endif
+
+if g:config['tex_support'] == 1
+  let g:coc_global_extensions = extend(g:coc_global_extensions, ['coc-texlab'])
+endif
+
+if g:config['webdev_support'] == 1
+  let g:coc_global_extensions = extend(g:coc_global_extensions, ['coc-html', 'coc-css', 'coc-tsserver'])
+endif
 
 let g:coc_filetype_map = {
   \ 'h': 'c',
@@ -147,27 +156,3 @@ fun! s:GrepFromSelected(type)
   let @@ = saved_unnamed_register
   execute 'CocList grep '.word
 endfun
-
-" nmap <silent> gr <Plug>(coc-references)
-" nmap <silent> <leader>sd :CocList diagnostics --current-buf<CR>
-" nmap <silent> <leader>so :CocList outline<CR>
-" nmap <silent> <leader>sc :CocList commands<CR>
-" nmap <silent> <leader>sC :CocList vimcommands<CR>
-" nmap <silent> <expr> <leader>sf <SID>is_in_git_directory() ? ':CocList gfiles<CR>' : ':CocList files<CR>'
-" nmap <silent> <leader>sn :exe 'CocList files ' .. g:config_dir<CR>
-" nmap <silent> <leader>sb :CocList buffers<CR>
-" nmap <silent> <leader>st :CocList colors<CR>
-" nmap <silent> <leader>sl :CocList lines<CR>
-" nmap <silent> <leader>sg :CocList grep<CR>
-" nmap <silent> <leader>sh :CocList helptags<CR>
-" nmap <silent> <leader>sm :CocList mru<CR>
-" nmap <silent> <leader>ws :exe 'CocList files ' .. g:wiki_config['home'] .. '/' .. g:wiki_config['markdown_dir']<CR>
-" vnoremap <leader>g :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
-
-" augroup CocGroup
-"   autocmd!
-"   " Setup formatexpr specified filetype(s).
-"   " autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-"   " Update signature help on jump placeholder.
-"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-" augroup end
