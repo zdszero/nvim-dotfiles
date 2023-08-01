@@ -21,6 +21,7 @@ nmap <silent> <leader>sc :<C-u>CocFzfList commands<CR>
 
 nmap <silent> <expr> <leader>sf <SID>is_in_git_directory() ?
       \':GFiles<CR>' : printf(':Files %s<CR>', g:vim_initial_working_dir)
+nmap <silent> <expr> <leader>ss printf(':Files %s<CR>', g:vim_initial_working_dir)
 nmap <silent> <leader>sn :exe 'Files ' . g:config_dir<cr>
 nmap <silent> <leader>sb :Buffers<CR>
 nmap <silent> <leader>st :Colors<CR>

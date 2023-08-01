@@ -131,28 +131,3 @@ endfunction
 nmap <silent> <leader>rn <Plug>(coc-rename)
 nmap <leader>rf <plug>(coc-refactor)
 nmap <leader>rw :CocCommand document.renameCurrentWord<CR>
-
-" coc-lists
-
-fun! s:is_in_git_directory()
-  silent !git rev-parse --is-inside-work-tree
-  if v:shell_error == 0
-    return 1
-  endif
-  return 0
-endfun
-
-fun! s:GrepFromSelected(type)
-  let saved_unnamed_register = @@
-  if a:type ==# 'v'
-    normal! `<v`>y
-  elseif a:type ==# 'char'
-    normal! `[v`]y
-  else
-    return
-  endif
-  let word = substitute(@@, '\n$', '', 'g')
-  let word = escape(word, '| ')
-  let @@ = saved_unnamed_register
-  execute 'CocList grep '.word
-endfun
