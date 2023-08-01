@@ -39,6 +39,25 @@ endif
 """"""""""""""""""""""
 "  FILETYPE PLUGINS  "
 """"""""""""""""""""""
+if g:config["nvim_lsp_support"] == 1
+  " lspconfig and nvim-cmp
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+  Plug 'hrsh7th/cmp-nvim-lua'
+  Plug 'windwp/nvim-autopairs'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-tree/nvim-tree.lua'
+  Plug 'nvim-lualine/lualine.nvim'
+  Plug 'simrat39/symbols-outline.nvim'
+endif
+
 if g:config['markdown_support'] == 1
   Plug 'plasticboy/vim-markdown'
   Plug 'dhruvasagar/vim-table-mode'
