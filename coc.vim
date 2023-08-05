@@ -29,6 +29,8 @@ for nodepath in possible_paths
   endif
 endfor
 
+let g:coc_config_home = '~/.config/nvim'
+
 let g:coc_global_extensions = [
   \ 'coc-pairs',
   \ 'coc-snippets',
