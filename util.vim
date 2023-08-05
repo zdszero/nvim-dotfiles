@@ -95,6 +95,7 @@ nmap <leader>ga :Git add -A
 nmap <leader>gc :Git commit -m ""<Left>
 nmap <leader>gr :Git restore %
 nmap <leader>gd :Git diff %<CR>
+nmap <leader>gl :Git log --oneline --decorate --graph --all<CR>
 nmap <leader>gi :CocCommand git.chunkInfo<CR>
 nmap <leader>gu :CocCommand git.chunkUndo<CR>
 nmap <leader>g> :CocCommand git.chunkStage<CR>

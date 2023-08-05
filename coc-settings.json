@@ -1,7 +1,6 @@
 {
   "diagnostic.enable": true,
   "coc.preferences.extensionUpdateCheck": "weekly",
-  "snippets.priority": 100,
   "coc.source.file.priority": 10,
   "codeLens.enable": false,
   "codeLens.separator": "<>",
@@ -11,6 +10,7 @@
   "outline.expandLevel": 2,
   "tree.key.toggle": "o",
   "tree.key.collapseAll": "M",
+  "semanticTokens.enable": true,
   "signature.enable": true,
   "signature.target": "float",
   "signature.preferShownAbove": false,
@@ -48,7 +48,6 @@
     "typeParameter": "\uf728",
     "default": "\uf29c"
   },
-  "list.source.grep.command": "rg",
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableNerdfont": true,
   "explorer.keyMappings.global": {
@@ -71,6 +70,8 @@
       ".*egg-info"
     ]
   },
+  "snippets.priority": 100,
+  "snippets.ultisnips.pythonPrompt": false,
   "snippets.ultisnips.directories": [
     "UltiSnips"
   ],
@@ -96,11 +97,6 @@
     "`"
   ],
   "cmake.lsp.enable": false,
-  "Lua.runtime.version": "LuaJIT",
-  "Lua.diagnostics.globals": [
-    "vim"
-  ],
-  "sumneko-lua.enableNvimLuaDev": true,
   "pyright.completion.snippetSupport": false,
   "pyright.disableProgressNotifications": true,
   "pyright.testing.provider": "pytest",
@@ -125,6 +121,5 @@
         }
       }
     }
-  },
-  "snippets.ultisnips.pythonPrompt": false
+  }
 }

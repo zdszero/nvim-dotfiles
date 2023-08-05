@@ -11,6 +11,8 @@ set shortmess+=c
 " Choose a usable node from possible path
 " minimum version is v14.14.0
 let possible_paths = ["/usr/local/bin/node", "/usr/bin/node"]
+" add possible nvm path
+let possible_paths = extend(possible_paths, split(glob("~/.nvm/versions/node/*/bin/node"), "\n"))
 for nodepath in possible_paths
   if !filereadable(nodepath)
     continue
@@ -104,8 +106,9 @@ nmap <silent> gr <Plug>(coc-references)
 nmap [e <plug>(coc-diagnostic-prev)
 nmap ]e <plug>(coc-diagnostic-next)
 nmap <leader>ca <plug>(coc-codeaction)
-nmap <leader>cl  <Plug>(coc-codelens-action)
-nmap <leader>cf  <Plug>(coc-fix-current)
+nmap <leader>cl <Plug>(coc-codelens-action)
+nmap <leader>cf <Plug>(coc-fix-current)
+nmap <leader>cc <Plug>(coc-cursors-word)
 nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
 nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
 inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<c-d>"
