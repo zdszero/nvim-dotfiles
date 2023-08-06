@@ -110,7 +110,6 @@ nmap ]e <plug>(coc-diagnostic-next)
 nmap <leader>ca <plug>(coc-codeaction)
 nmap <leader>cl <Plug>(coc-codelens-action)
 nmap <leader>cf <Plug>(coc-fix-current)
-nmap <leader>cc <Plug>(coc-cursors-word)
 nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
 nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
 inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<c-d>"
@@ -142,7 +141,8 @@ nmap <leader>f :call CocAction('format')<CR>
 xmap <leader>f  <Plug>(coc-format-selected)
 
 nnoremap <silent><nowait> <space>o  :call ToggleOutline()<CR>
-function! ToggleOutline() abort
+
+fun! ToggleOutline() abort
   let winid = coc#window#find('cocViewId', 'OUTLINE')
   if winid == -1
     call CocActionAsync('showOutline', 1)
@@ -151,7 +151,33 @@ function! ToggleOutline() abort
   endif
 endfunction
 
-
 nmap <silent> <leader>rn <Plug>(coc-rename)
 nmap <leader>rf <plug>(coc-refactor)
-nmap <leader>rw :CocCommand document.renameCurrentWord<CR>
+" nmap <leader>rw :CocCommand document.renameCurrentWord<CR>
+nmap <silent> <C-x> <Plug>(coc-cursors-position)
+nmap <silent> <C-c> <Plug>(coc-cursors-word)
+xmap <silent> <C-c> <Plug>(coc-cursors-range)
+" use normal command like `<leader>xi(`
+" can be used with vim-repeat
+nmap <leader>x  <Plug>(coc-cursors-operator)
+nmap <expr> <silent> <C-s> <SID>select_current_word()
+nmap <silent> <leader>sw :call <SID>coc_search()<CR>
+
+fun! s:select_current_word()
+  if !get(b:, 'coc_cursors_activated', 0)
+    return "\<Plug>(coc-cursors-word)"
+  endif
+  return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
+endfun
+
+fun! s:coc_search()
+  if @/ != ""
+    exe 'CocSearch ' . getreg("/")[2:-3]
+  else
+    let pat = input('Search: ')
+    if pat == ''
+      return
+    endif
+    exe 'CocSearch ' . pat
+  endif
+endfun

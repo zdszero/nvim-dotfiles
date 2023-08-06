@@ -35,7 +35,6 @@ noremap <c-o> O
 nnoremap <c-p> P
 nnoremap <c-v> V
 nnoremap <c-e> E
-nnoremap <c-y> yy
 nnoremap <c-,> <<
 nnoremap <c-.> >>
 vnoremap <c-,> <
@@ -62,7 +61,7 @@ nnoremap U gUiw
 nnoremap R :source $MYVIMRC<CR>
 nnoremap Q :q<CR>
 nnoremap <leader>q :q!<CR>
-nnoremap <leader><CR> :nohlsearch<CR>
+nnoremap <leader><CR> :nohlsearch<CR>:call setreg("/", "")<CR>
 
 " resize
 nnoremap <up> :res +5<CR>
@@ -70,10 +69,38 @@ nnoremap <down> :res -5<CR>
 nnoremap <left> :vertical resize-5<CR>
 nnoremap <right> :vertical resize+5<CR>
 
-
 "
 " SOME CUSTOM KEYMAPS
 "
+xnoremap * :<C-u>call <SID>visual_star_search('/')<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>visual_star_search('?')<CR>?<C-R>=@/<CR><CR>
+
+nnoremap [f <cmd> call <SID>last_edit_file()<cr>
+nnoremap ]f <cmd> call <SID>last_edit_file()<cr>
+
+
+nnoremap ]t <Plug>(wintabs_move_right)
+nnoremap [t <Plug>(wintabs_move_left)
+nnoremap ]b <Plug>(wintabs_next)
+nnoremap [b <Plug>(wintabs_previous)
+
+command! BD call <SID>delete_buffer()
+nmap <silent> <leader>d :call <SID>delete_buffer()<CR>
+nmap <silent> <c-t> :FloatermToggle<CR>
+tmap <silent> <c-t> <Esc>:FloatermToggle<CR>
+
+xmap <silent> gQ :call <SID>format_to_oneline()<CR>
+
+tnoremap <c-[> <C-\><C-N>
+tnoremap <esc> <C-\><C-N>
+nnoremap [T :tabprevious<CR>
+nnoremap ]T :tabnext<CR>
+
+nmap <leader>ts :TestNearest<CR>
+nmap <leader>tf :TestFile<CR>
+nmap <leader>th :TestSuite<CR>
+
+nmap <leader>rw :call <SID>rename_visual_selection()<CR>
 
 fun! s:visual_star_search(cmdtype, ...)
   let temp = @"
@@ -88,9 +115,6 @@ fun! s:visual_star_search(cmdtype, ...)
   let @" = temp
 endfun
 
-xnoremap * :<C-u>call <SID>visual_star_search('/')<CR>/<C-R>=@/<CR><CR>
-xnoremap # :<C-u>call <SID>visual_star_search('?')<CR>?<C-R>=@/<CR><CR>
-
 fun! s:last_edit_file()
   let v:errmsg = ''
   silent! normal 
@@ -100,29 +124,14 @@ fun! s:last_edit_file()
   bprevious
 endfun
 
-nnoremap [f <cmd> call <SID>last_edit_file()<cr>
-nnoremap ]f <cmd> call <SID>last_edit_file()<cr>
-
-
-nnoremap ]t <cmd>BufferLineMoveNext<CR>
-nnoremap [t <cmd>BufferLineMovePrev<CR>
-nnoremap ]b <cmd>BufferLineCycleNext<CR>
-nnoremap [b <cmd>BufferLineCyclePrev<CR>
-
 fun! s:delete_buffer()
   if &modified
     bd!
     return
   endif
   let bufnum = bufnr()
-  BufferLineCyclePrev
   exe 'bdelete ' .. bufnum
 endfun
-
-command! BD call <SID>delete_buffer()
-nmap <silent> <leader>d :call <SID>delete_buffer()<CR>
-nmap <silent> <c-t> :FloatermToggle<CR>
-tmap <silent> <c-t> <Esc>:FloatermToggle<CR>
 
 fun! s:format_to_oneline() range
   let merge_line = ''
@@ -141,13 +150,15 @@ fun! s:format_to_oneline() range
   call append(a:firstline-1 > 0 ? a:firstline-1 : 0, merge_line)
 endfun
 
-xmap <silent> gQ :call <SID>format_to_oneline()<CR>
-
-tnoremap <c-[> <C-\><C-N>
-tnoremap <esc> <C-\><C-N>
-nnoremap [T :tabprevious<CR>
-nnoremap ]T :tabnext<CR>
-
-nmap <leader>ts :TestNearest<CR>
-nmap <leader>tf :TestFile<CR>
-nmap <leader>th :TestSuite<CR>
+fun! s:rename_visual_selection()
+  if @/ == ""
+    let subs = input('rename to: ')
+    if subs == ''
+      return
+    endif
+    let word = expand('<cword>')
+    exe '%s/' . word . '/' . subs . '/g'
+  else
+    sil! exe '%s//' . subs . '/g'
+  endif
+endfun

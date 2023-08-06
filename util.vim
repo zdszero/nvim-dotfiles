@@ -11,17 +11,11 @@ set background=light
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             indent blank line                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" let g:indent_blankline_char = '•'
-let g:indent_blankline_space_char_blankline = ' '
-" let g:indent_blankline_filetype = ['python', 'go']
-let g:indent_blankline_filetype_exclude = ['startify', 'coc-explorer', 'cmake', 'markdown', 'tex', 'vista', 'coctree', 'help']
-let g:indent_blankline_buftype_exclude = ['terminal', 'help']
-let g:indent_blankline_bufname_exclude = ['__vista__']
-
-let g:cpp_attributes_highlight = 1
-let g:cpp_member_highlight = 1
-
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_exclude_buftype = 0
+let g:indent_guides_exclude_filetypes = ['startify', 'coc-explorer', 'cmake', 'markdown', 'tex', 'vista', 'coctree', 'help']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   easy-align                               "
@@ -43,13 +37,13 @@ let g:vista_update_on_text_changed = 1
 
 let g:hugo_home_path = '~/Documents/blog'
 let g:hugo_post_template = [
-      \ '---',
-      \ 'title: HUGO_TITLE',
-      \ 'date: HUGO_DATE',
-      \ 'tags: []',
-      \ 'draft: true',
-      \ '---',
-      \ '' ]
+  \ '---',
+  \ 'title: HUGO_TITLE',
+  \ 'date: HUGO_DATE',
+  \ 'tags: []',
+  \ 'draft: true',
+  \ '---',
+  \ '' ]
 let g:hugo_build_script_path = '~/Documents/blog/update_blog'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

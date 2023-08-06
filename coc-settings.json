@@ -84,6 +84,7 @@
       "texmath"
     ]
   },
+  "snippets.userSnippetsDirectory": "~/.config/nvim/UltiSnips",
   "pairs.disableLanguages": [
     "racket",
     "scheme"

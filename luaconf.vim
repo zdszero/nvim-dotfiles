@@ -1,6 +1,7 @@
 if g:config['lua_support'] == 1
-  lua require('bufferline').setup{}
+  " lua require('bufferline').setup{}
   " lua require('plugins/treesitter')
+  " lua require('plugins/indent-blankline')
 endif
 
 if g:config["nvim_lsp_support"] == 1
