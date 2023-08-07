@@ -8,15 +8,15 @@ fun! s:edit_config_file(...)
   endif
   let arg = a:1
   if arg == 'o'
-    call EditConfig('option.vim')
+    call EditConfig('core/option.vim')
   elseif arg == 'm'
-    call EditConfig('keymap.vim')
+    call EditConfig('core/keymap.vim')
   elseif arg == 'p'
-    call EditConfig('plugin.vim')
+    call EditConfig('core/plugin.vim')
   elseif arg == 'c'
-    call EditConfig('command.vim')
+    call EditConfig('core/command.vim')
   elseif arg == 'u'
-    call EditConfig('util.vim')
+    call EditConfig('core/util.vim')
   elseif arg == 's'
     call EditConfig('UltiSnips/' . &ft . '.snippets')
   elseif arg == 't'

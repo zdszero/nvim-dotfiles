@@ -29,11 +29,11 @@ endfun
 
 call ParseConfigFile()
 
-call LoadConfig('option.vim')
-call LoadConfig('keymap.vim')
-call LoadConfig('command.vim')
-call LoadConfig('plugin.vim')
-call LoadConfig('util.vim')
+call LoadConfig('core/option.vim')
+call LoadConfig('core/keymap.vim')
+call LoadConfig('core/command.vim')
+call LoadConfig('core/plugin.vim')
+call LoadConfig('core/util.vim')
 
 if g:config['markdown_support'] == 1
   let g:vim_markdown_wiki_rtp = g:config_dir..'/'..'vimwiki-markdown'
@@ -43,10 +43,10 @@ if g:config['markdown_support'] == 1
 endif
 
 if g:config['coc_support'] == 1
-  call LoadConfig('coc.vim')
-  call LoadConfig('fzf.vim')
+  call LoadConfig('core/coc.vim')
+  call LoadConfig('core/fzf.vim')
 endif
 
 if has('nvim')
-  call LoadConfig('luaconf.vim')
+  call LoadConfig('core/luaconf.vim')
 endif
