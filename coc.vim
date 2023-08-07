@@ -171,13 +171,13 @@ fun! s:select_current_word()
 endfun
 
 fun! s:coc_search()
-  if @/ != ""
-    exe 'CocSearch ' . getreg("/")[2:-3]
-  else
+  if @0 == ""
     let pat = input('Search: ')
     if pat == ''
       return
     endif
     exe 'CocSearch ' . pat
+  else
+    exe 'CocSearch ' . getreg("0")
   endif
 endfun

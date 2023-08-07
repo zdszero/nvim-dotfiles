@@ -14,6 +14,14 @@ fun! s:get_root_dir()
   endif
 endfun
 
+fun! s:smart_grep()
+  if @0 == ""
+    PRg
+  else
+    call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(getreg("0")), 1, fzf#vim#with_preview({'dir': s:get_root_dir()}), 0)
+  endif
+endfun
+
 let g:vim_initial_working_dir = getcwd()
 
 let $BAT_THEME='Monokai Extended Light'
@@ -31,7 +39,7 @@ command! -bang -nargs=* PRg
 nmap <silent> <expr> <leader>sf <SID>is_in_git_directory() ?
   \':GFiles<CR>' : printf(':Files %s<CR>', g:vim_initial_working_dir)
 nmap <silent> <expr> <leader>ss printf(':Files %s<CR>', g:vim_initial_working_dir)
-nmap <silent> <leader>sg :PRg<CR>
+nmap <silent> <leader>sg :call <SID>smart_grep()<CR>
 nmap <silent> <leader>sn :exe 'Files ' . g:config_dir<cr>
 nmap <silent> <leader>sb :Buffers<CR>
 nmap <silent> <leader>st :Colors<CR>

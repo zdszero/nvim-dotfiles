@@ -61,7 +61,7 @@ nnoremap U gUiw
 nnoremap R :source $MYVIMRC<CR>
 nnoremap Q :q<CR>
 nnoremap <leader>q :q!<CR>
-nnoremap <leader><CR> :nohlsearch<CR>:call setreg("/", "")<CR>
+nnoremap <silent> <leader><CR> :nohlsearch<CR>:let @0=""<CR>
 
 " resize
 nnoremap <up> :res +5<CR>
@@ -72,6 +72,8 @@ nnoremap <right> :vertical resize+5<CR>
 "
 " SOME CUSTOM KEYMAPS
 "
+nnoremap * :<C-u>call <SID>search_cword()<CR>/<C-R>=@/<CR><CR>
+nnoremap # :<C-u>call <SID>search_cword()<CR>?<C-R>=@/<CR><CR>
 xnoremap * :<C-u>call <SID>visual_star_search('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>visual_star_search('?')<CR>?<C-R>=@/<CR><CR>
 
@@ -102,17 +104,18 @@ nmap <leader>th :TestSuite<CR>
 
 nmap <leader>rw :call <SID>rename_visual_selection()<CR>
 
-fun! s:visual_star_search(cmdtype, ...)
-  let temp = @"
-  normal! gvy
-  if !a:0 || a:1 != 'raw'
-    let @" = escape(@", a:cmdtype.'\*')
-  endif
-  let @/ = substitute(@", '\n', '\\n', 'g')
-  let @/ = substitute(@/, '\[', '\\[', 'g')
-  let @/ = substitute(@/, '\~', '\\~', 'g')
-  let @/ = substitute(@/, '\.', '\\.', 'g')
-  let @" = temp
+fun! s:search_cword()
+  let cword = expand('<cword>')
+  let @/ = '\<' . cword . '\>'
+  let @0 = @/[2:-3]
+endfun
+
+fun! s:visual_star_search(cmdtype)
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+  let @s = temp
+  let @0 = @/[2:-3]
 endfun
 
 fun! s:last_edit_file()
@@ -151,7 +154,7 @@ fun! s:format_to_oneline() range
 endfun
 
 fun! s:rename_visual_selection()
-  if @/ == ""
+  if @0 == ""
     let subs = input('rename to: ')
     if subs == ''
       return
