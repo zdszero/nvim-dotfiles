@@ -10,7 +10,7 @@
   "outline.expandLevel": 2,
   "tree.key.toggle": "o",
   "tree.key.collapseAll": "M",
-  "semanticTokens.enable": true,
+  "semanticTokens.enable": false,
   "signature.enable": true,
   "signature.target": "float",
   "signature.preferShownAbove": false,

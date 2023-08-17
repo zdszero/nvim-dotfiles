@@ -133,6 +133,7 @@ fun! s:delete_buffer()
     return
   endif
   let bufnum = bufnr()
+  WintabsPrevious
   exe 'bdelete ' .. bufnum
 endfun
 
@@ -154,11 +155,11 @@ fun! s:format_to_oneline() range
 endfun
 
 fun! s:rename_visual_selection()
+  let subs = input('rename to: ')
+  if subs == ''
+    return
+  endif
   if @0 == ""
-    let subs = input('rename to: ')
-    if subs == ''
-      return
-    endif
     let word = expand('<cword>')
     exe '%s/' . word . '/' . subs . '/g'
   else
