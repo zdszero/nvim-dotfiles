@@ -80,14 +80,6 @@ xnoremap # :<C-u>call <SID>visual_star_search('?')<CR>?<C-R>=@/<CR><CR>
 nnoremap [f <cmd> call <SID>last_edit_file()<cr>
 nnoremap ]f <cmd> call <SID>last_edit_file()<cr>
 
-
-nnoremap ]t <Plug>(wintabs_move_right)
-nnoremap [t <Plug>(wintabs_move_left)
-nnoremap ]b <Plug>(wintabs_next)
-nnoremap [b <Plug>(wintabs_previous)
-
-command! BD call <SID>delete_buffer()
-nmap <silent> <leader>d :call <SID>delete_buffer()<CR>
 nmap <silent> <c-t> :FloatermToggle<CR>
 tmap <silent> <c-t> <Esc>:FloatermToggle<CR>
 
@@ -125,16 +117,6 @@ fun! s:last_edit_file()
     return
   endif
   bprevious
-endfun
-
-fun! s:delete_buffer()
-  if &modified
-    bd!
-    return
-  endif
-  let bufnum = bufnr()
-  WintabsPrevious
-  exe 'bdelete ' .. bufnum
 endfun
 
 fun! s:format_to_oneline() range

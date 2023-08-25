@@ -20,11 +20,6 @@ Plug 'vim-test/vim-test'
 Plug 'mhinz/vim-startify'
 Plug 'voldikss/vim-floaterm'
 Plug 'liuchengxu/vista.vim'
-Plug 'zefei/vim-wintabs'
-Plug 'zefei/vim-wintabs-powerline'
-if !has('nvim')
-  Plug 'preservim/vim-indent-guides'
-endif
 """"""""""""""""""""""
 "   CUSTOM THEME     "
 """"""""""""""""""""""
@@ -83,9 +78,9 @@ endif
 
 if g:config['lua_support'] == 1
   Plug 'lukas-reineke/indent-blankline.nvim'
+  Plug 'akinsho/bufferline.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  " Plug 'akinsho/bufferline.nvim'
-  " Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'kyazdani42/nvim-web-devicons'
 endif
 
 call plug#end()
