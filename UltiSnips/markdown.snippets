@@ -61,3 +61,50 @@ geometry:
 - bottom=30mm
 ---
 endsnippet
+
+snippet alert "alert shortcode" b
+{{< alert title="" color="primary|info|warning" >}}$1{{< /alert >}}
+endsnippet
+
+snippet pageinfo "page info shortcode" b
+{{% pageinfo color="primary" %}}
+$1
+{{% /pageinfo %}}
+endsnippet
+
+snippet imgproc "image shortcode" b
+{{< imgproc ${1:image_pattern} ${2:Fit|Crop|Resize|Fill} "${3:800x300}" >}}
+$4
+{{< /imgproc >}}
+endsnippet
+
+snippet tabpane "tabpane" b
+{{< tabpane >}}
+$1
+{{< /tabpane >}}
+endsnippet
+
+snippet tab "tab" b
+{{< tab "${1:title}" >}}
+$2
+{{< /tab >}}
+endsnippet
+
+snippet cardpane "cardpane" b
+{{% cardpane %}}
+$1
+{{% /cardpane %}}
+endsnippet
+
+snippet card "card" b
+<!-- header, title, subtitle, footer -->
+{{% card %}}
+$1
+{{% /card %}}
+endsnippet
+
+snippet section "block_section" b
+{{% blocks/section %}}
+$1
+{{% /blocks/section %}}
+endsnippet

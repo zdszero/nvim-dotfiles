@@ -101,6 +101,7 @@
   "pyright.completion.snippetSupport": false,
   "pyright.disableProgressNotifications": true,
   "pyright.testing.provider": "pytest",
+  "python.pythonPath": "/usr/bin/python3",
   "python.formatting.provider": "black",
   "clangd.disableSnippetCompletion": false,
   "languageserver": {
