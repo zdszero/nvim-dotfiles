@@ -105,7 +105,28 @@ fun! s:make_math_block() range
   exe cmd
 endfun
 
+fun! s:format_chatgpt2list() range
+  let curidx = 1
+  let lineno = a:firstline
+  while lineno <= a:lastline
+    let curline = getline(lineno)
+    if empty(curline)
+      let lineno = lineno + 1
+      continue
+    endif
+    let text = "\t- "
+    if lineno < a:lastline && empty(getline(lineno + 1))
+      let text = printf("%d. ", curidx)
+      let curidx = curidx + 1
+    endif
+    call setline(lineno, text .. curline)
+    let lineno = lineno + 1
+  endwhile
+  exe printf("%d,%dg/^$/d", a:firstline, a:lastline)
+endfun
+
 vmap <leader>m :call <SID>make_math_block()<CR>
+vmap <leader>l :call <SID>format_chatgpt2list()<CR>
 
 command! ImageInfo call <SID>get_image_info()
 command! -nargs=? ImagePaste call <SID>paste_image(<f-args>)

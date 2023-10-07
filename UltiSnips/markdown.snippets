@@ -27,6 +27,7 @@
 priority -50
 
 extends plaintex
+extends texmath
 
 ###################
 # Text formatting #
@@ -78,6 +79,14 @@ $4
 {{< /imgproc >}}
 endsnippet
 
+snippet figure "figure" b
+<figure>
+  <img src="$1"
+       alt="$2"/>
+  <figcaption>$3</figcaption>
+</figure>
+endsnippet
+
 snippet tabpane "tabpane" b
 {{< tabpane >}}
 $1
@@ -107,4 +116,12 @@ snippet section "block_section" b
 {{% blocks/section %}}
 $1
 {{% /blocks/section %}}
+endsnippet
+
+snippet resource "image resource" b
+resources:
+  - src: "**.{png,jpg,svg}"
+    title: "Image #:counter"
+    params:
+      byline: "Photo: dingzf / CC-BY-CA"
 endsnippet
