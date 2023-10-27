@@ -27,6 +27,7 @@ fun! s:edit_config_file(...)
 endfun
 
 com! -nargs=? EF call <SID>edit_config_file(<f-args>)
+com! CD exe printf("cd %s", expand('%:p:h'))
 
 com! Tab2 setlocal softtabstop=2 | setlocal tabstop=2 | setlocal shiftwidth=2
 com! Tab4 setlocal softtabstop=4 | setlocal tabstop=4 | setlocal shiftwidth=4

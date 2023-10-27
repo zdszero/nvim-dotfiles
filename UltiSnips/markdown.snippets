@@ -67,6 +67,22 @@ snippet alert "alert shortcode" b
 {{< alert title="" color="primary|info|warning" >}}$1{{< /alert >}}
 endsnippet
 
+snippet note "note" b
+{{< alert color="warning" >}}
+__注意：__
+
+$1
+{{< /alert >}}
+endsnippet
+
+snippet example "example" b
+{{< alert color="info" >}}
+__例子：__
+
+$1
+{{< /alert >}}
+endsnippet
+
 snippet pageinfo "page info shortcode" b
 {{% pageinfo color="primary" %}}
 $1
@@ -124,4 +140,8 @@ resources:
     title: "Image #:counter"
     params:
       byline: "Photo: dingzf / CC-BY-CA"
+endsnippet
+
+snippet bilibili_link "bilibili link" b
+<i class="fa-brands fa-bilibili fa-xl" style="color: #73c9e5;"></i> <a href="$1">$2视频讲解</a>
 endsnippet

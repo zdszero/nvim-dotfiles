@@ -99,10 +99,10 @@ fun! s:paste_image(arg)
 endfun
 
 fun! s:make_math_block() range
-  let start = a:firstline
-  let end = a:lastline
-  let cmd = printf('%s,%ss/\v\w+/$\0x$/g', start, end)
-  exe cmd
+  sil! exe printf('%d,%ds/\v[a-zA-Z0-9,() +-^]+/$\0$/g', a:firstline, a:lastline)
+  sil! exe printf('%d,%ds/\v\$(\s*)\$/\1/g', a:firstline, a:lastline)
+  sil! exe printf('%d,%ds/\v^\$(\d*)\$/\1/g', a:firstline, a:lastline)
+  sil! exe printf('%d,%ds/\v\s*(\$.{-}\$)\s*/ \1 /g', a:firstline, a:lastline)
 endfun
 
 fun! s:format_chatgpt2list() range
@@ -122,7 +122,7 @@ fun! s:format_chatgpt2list() range
     call setline(lineno, text .. curline)
     let lineno = lineno + 1
   endwhile
-  exe printf("%d,%dg/^$/d", a:firstline, a:lastline)
+  sil! exe printf("%d,%dg/^$/d", a:firstline, a:lastline)
 endfun
 
 vmap <leader>m :call <SID>make_math_block()<CR>
