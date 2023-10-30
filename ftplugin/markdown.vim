@@ -100,9 +100,14 @@ endfun
 
 fun! s:make_math_block() range
   sil! exe printf('%d,%ds/\v[a-zA-Z0-9,() +-^]+/$\0$/g', a:firstline, a:lastline)
-  sil! exe printf('%d,%ds/\v\$(\s*)\$/\1/g', a:firstline, a:lastline)
-  sil! exe printf('%d,%ds/\v^\$(\d*)\$/\1/g', a:firstline, a:lastline)
-  sil! exe printf('%d,%ds/\v\s*(\$.{-}\$)\s*/ \1 /g', a:firstline, a:lastline)
+  sil! exe printf('%d,%ds/\v^\$(\s*(-|\d+\.)\s+)\$/\1/g', a:firstline, a:lastline)
+  sil! exe printf('%d,%ds/\v\$.{-}\$/ \0 /g', a:firstline, a:lastline)
+endfun
+
+fun! s:make_code_block() range
+  sil! exe printf('%d,%ds/\v[a-zA-Z0-9,() +-^]+/`\0`/g', a:firstline, a:lastline)
+  sil! exe printf('%d,%ds/\v^`(\s*(-|\d+\.)\s+)`/\1/g', a:firstline, a:lastline)
+  sil! exe printf('%d,%ds/\v`.{-}`/ \0 /g', a:firstline, a:lastline)
 endfun
 
 fun! s:format_chatgpt2list() range
@@ -126,6 +131,7 @@ fun! s:format_chatgpt2list() range
 endfun
 
 vmap <leader>m :call <SID>make_math_block()<CR>
+vmap <leader>c :call <SID>make_code_block()<CR>
 vmap <leader>l :call <SID>format_chatgpt2list()<CR>
 
 command! ImageInfo call <SID>get_image_info()
