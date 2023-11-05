@@ -99,14 +99,18 @@ fun! s:paste_image(arg)
 endfun
 
 fun! s:make_math_block() range
+  sil! exe printf('%d,%ds/\v^\s*(-|\d+\.)\s+/\0|||/g', a:firstline, a:lastline)
   sil! exe printf('%d,%ds/\v[a-zA-Z0-9,() +-^]+/$\0$/g', a:firstline, a:lastline)
-  sil! exe printf('%d,%ds/\v^\$(\s*(-|\d+\.)\s+)\$/\1/g', a:firstline, a:lastline)
+  sil! exe printf('%d,%ds/|||//g', a:firstline, a:lastline)
+  sil! exe printf('%d,%ds/\v^(\s*)\$(\s*(-|\d+\.)\s+)\$/\1\2/g', a:firstline, a:lastline)
   sil! exe printf('%d,%ds/\v\$.{-}\$/ \0 /g', a:firstline, a:lastline)
 endfun
 
 fun! s:make_code_block() range
+  sil! exe printf('%d,%ds/\v^\s*(-|\d+\.)\s+/\0|||/g', a:firstline, a:lastline)
   sil! exe printf('%d,%ds/\v[a-zA-Z0-9,() +-^]+/`\0`/g', a:firstline, a:lastline)
-  sil! exe printf('%d,%ds/\v^`(\s*(-|\d+\.)\s+)`/\1/g', a:firstline, a:lastline)
+  sil! exe printf('%d,%ds/|||//g', a:firstline, a:lastline)
+  sil! exe printf('%d,%ds/\v^(\s*)`(\s*(-|\d+\.)\s+)`/\1\2/g', a:firstline, a:lastline)
   sil! exe printf('%d,%ds/\v`.{-}`/ \0 /g', a:firstline, a:lastline)
 endfun
 
