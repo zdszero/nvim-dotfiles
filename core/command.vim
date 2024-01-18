@@ -75,4 +75,6 @@ function Copy()
   call s:raw_echo(msg)
 endfunction
 
-autocmd TextYankPost * call Copy()
+if !empty($SSH_TTY)
+  autocmd TextYankPost * call Copy()
+endif

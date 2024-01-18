@@ -60,7 +60,10 @@ set history=1000
 set nolist
 " true color support
 set termguicolors
-set guifont=JetBrains\ Mono\ Medium:h14
+if exists("g:neovide")
+  " set guifont=JetBrains\ Mono\ Medium:h14
+  set guifont=Consolas\ Nerd\ Font:h18
+endif
 
 let g:sql_type_default = 'mysql'
 
