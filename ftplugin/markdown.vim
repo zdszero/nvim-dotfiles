@@ -17,6 +17,8 @@ inoremap <c-;> <Esc>/<++><CR>:nohlsearch<CR>d4li
 inoremap ;f <Esc>/<++><CR>:nohlsearch<CR>d4li
 inoremap ;i __ <++><Esc>F_i
 inoremap ;b ____ <++><Esc>F_;i
+inoremap ;u <u></u><++><Esc>F<;i
+inoremap ;U <u><b></b></u><++><Esc>F<;;i
 inoremap ;n ______ <++><Esc>F_;;i
 inoremap ;s ~~~~ <++><Esc>F~;i
 inoremap ;t - [ ] 
@@ -137,6 +139,7 @@ endfun
 vmap <leader>m :call <SID>make_math_block()<CR>
 vmap <leader>c :call <SID>make_code_block()<CR>
 vmap <leader>l :call <SID>format_chatgpt2list()<CR>
+nmap <leader>o :sil! exe '!' .. g:wiki_preview_browser .. ' %'<CR>
 
 command! ImageInfo call <SID>get_image_info()
 command! -nargs=? ImagePaste call <SID>paste_image(<f-args>)

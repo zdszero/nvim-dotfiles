@@ -14,6 +14,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'gcmt/wildfire.vim'
 Plug 'vim-test/vim-test'
+Plug 'junegunn/goyo.vim'
 """"""""""""""""""""""
 "      BUTTER UI     "
 """"""""""""""""""""""

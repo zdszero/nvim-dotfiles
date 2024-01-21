@@ -62,7 +62,7 @@ let g:wiki_config = {
   \ 'home': '~/Wiki',
   \ 'markdown_dir': 'sources',
   \ 'html_dir': 'docs',
-  \ 'template_path': 'templates/github.html',
+  \ 'template_path': 'templates/default.html',
   \}
 
 let g:wiki_preview_browser = 'google-chrome-stable'
