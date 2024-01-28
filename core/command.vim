@@ -39,10 +39,10 @@ if !filereadable(g:autotab_bin)
   call system(join(['gcc', g:autotab_src, '-o', g:autotab_bin, '-O3'], ' '))
 endif
 
+" http://www.kylheku.com/cgit/c-snippets/tree/autotab.c
 aug SmartIndent
   au!
-  " http://www.kylheku.com/cgit/c-snippets/tree/autotab.c
-  au BufRead * execute 'set' system(g:autotab_bin .. " < " .. bufname("%"))
+  au BufRead * if !empty(bufname("%")) | execute 'set' system(g:autotab_bin .. " < " .. bufname("%")) | endif
 "   au FileType asm,python,sql,go setlocal softtabstop=4 | setlocal tabstop=4 | setlocal shiftwidth=4
 aug END
 

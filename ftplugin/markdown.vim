@@ -18,7 +18,7 @@ inoremap ;f <Esc>/<++><CR>:nohlsearch<CR>d4li
 inoremap ;i __ <++><Esc>F_i
 inoremap ;b ____ <++><Esc>F_;i
 inoremap ;u <u></u><++><Esc>F<;i
-inoremap ;U <u><b></b></u><++><Esc>F<;;i
+inoremap ;U <b><u></u></b><++><Esc>F<;;i
 inoremap ;n ______ <++><Esc>F_;;i
 inoremap ;s ~~~~ <++><Esc>F~;i
 inoremap ;t - [ ] 

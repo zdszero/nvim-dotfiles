@@ -1,4 +1,4 @@
-if g:config['lua_support'] == 1
+if has('nvim')
   lua require('plugins/buffer-line')
   lua require('plugins/treesitter')
   lua require('plugins/indent-blankline')

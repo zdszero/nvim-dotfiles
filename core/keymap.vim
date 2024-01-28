@@ -41,8 +41,8 @@ vnoremap <c-,> <
 vnoremap <c-.> >
 nnoremap <c-/> /\v
 " use <c-m> <c-n> to jump forward and backwoard
-nnoremap <c-m> <c-o>
-nnoremap <c-n> <c-i>
+nnoremap <backspace> <c-o>
+nnoremap \ <c-i>
 " insert
 inoremap <c-l> <esc>
 inoremap <c-f> <Right>
@@ -50,7 +50,6 @@ inoremap <c-b> <Left>
 inoremap <c-a> <c-c>I
 inoremap <c-e> <c-c>A
 inoremap <c-q> <c-c>gUawea
-xmap <c-s> S
 
 " copy and paste
 nnoremap V "+p

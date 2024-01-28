@@ -6,9 +6,9 @@ fun g:LoadConfig(filename)
   exe 'source ' . g:config_dir . a:filename
 endfun
 
-call g:LoadConfig('option.vim')
-call g:LoadConfig('keymap.vim')
-call g:LoadConfig('command.vim')
+call g:LoadConfig('core/option.vim')
+call g:LoadConfig('core/keymap.vim')
+call g:LoadConfig('core/command.vim')
 
 let s:plug_dir = g:config_dir . 'plugged'
 

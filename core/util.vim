@@ -4,18 +4,10 @@
 
 let g:sonokai_transparent_background = 1
 let g:gruvbox_material_transparent_background = 0
+let g:everforest_transparent_background = 0
 let g:everforest_background = 'medium'
 colorscheme everforest
 set background=light
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                             indent blank line                              "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-let g:indent_guides_exclude_buftype = 0
-let g:indent_guides_exclude_filetypes = ['startify', 'coc-explorer', 'cmake', 'markdown', 'tex', 'vista', 'coctree', 'help']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   easy-align                               "
@@ -62,13 +54,12 @@ let g:wiki_config = {
   \ 'home': '~/Wiki',
   \ 'markdown_dir': 'sources',
   \ 'html_dir': 'docs',
-  \ 'template_path': 'templates/default.html',
+  \ 'theme': 'bootstrap',
   \}
 
 let g:wiki_preview_browser = 'google-chrome-stable'
-let g:wiki_generate_toc = 1
 
-nnoremap <leader>ww <Plug>(WikiIndex)
+nnoremap <leader>ww <Plug>(WikiHome)
 nnoremap <leader>wo <Plug>(WikiOpenHTML)
 nnoremap <leader>wn <Plug>(WikiCreateFollowLink)
 nnoremap <leader>wN <Plug>(WikiCreateFollowDirectory)

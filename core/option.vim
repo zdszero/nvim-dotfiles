@@ -14,7 +14,7 @@ set tabstop=2
 set shiftwidth=2
 
 set autoindent smartindent
-if has("nvim-0.7")
+if has("nvim")
   set laststatus=3
 else
   set laststatus=2
@@ -52,7 +52,11 @@ set magic
 
 set autochdir
 set nobackup
-if has("vim")
+if !has("nvim")
+  let vim_undo = $HOME..'/.vim/undo'
+  if !isdirectory(vim_undo)
+    call mkdir(vim_undo, "p")
+  endif
   set undodir=$HOME/.vim/undo
 endif
 set undofile

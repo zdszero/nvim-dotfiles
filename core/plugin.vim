@@ -26,7 +26,6 @@ Plug 'liuchengxu/vista.vim'
 """"""""""""""""""""""
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/gruvbox-material'
-Plug 'doums/darcula'
 Plug 'sainnhe/everforest'
 """"""""""""""""""""""
 "  COMPLETE SEARCH   "
@@ -62,6 +61,7 @@ endif
 if g:config['markdown_support'] == 1
   Plug 'plasticboy/vim-markdown'
   Plug 'dhruvasagar/vim-table-mode'
+  Plug 'vim-pandoc/vim-pandoc-syntax'
   Plug 'hotoo/pangu.vim'
 endif
 
@@ -77,7 +77,7 @@ if g:config['python_support'] == 1
   Plug 'Vimjas/vim-python-pep8-indent'
 endif
 
-if g:config['lua_support'] == 1
+if has('nvim')
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'akinsho/bufferline.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
