@@ -14,13 +14,15 @@ fun! <SID>visual_word_count () range
 endfun
 
 inoremap <c-;> <Esc>/<++><CR>:nohlsearch<CR>d4li
-inoremap ;f <Esc>/<++><CR>:nohlsearch<CR>d4li
+inoremap <c-j> <Esc>/<++><CR>:nohlsearch<CR>d4li
 inoremap ;i __ <++><Esc>F_i
 inoremap ;b ____ <++><Esc>F_;i
 inoremap ;u <u></u><++><Esc>F<;i
 inoremap ;U <b><u></u></b><++><Esc>F<;;i
 inoremap ;n ______ <++><Esc>F_;;i
-inoremap ;s ~~~~ <++><Esc>F~;i
+" inoremap ;s ~~~~ <++><Esc>F~;i
+inoremap ;s <span id=""><++></span><++><Esc>F"i
+inoremap ;S <b><u><span id=""><++></span></u></b><++><Esc>F"i
 inoremap ;t - [ ] 
 inoremap ;h ------<Enter><Enter>
 inoremap ;l [](<++>)<Esc>F]i

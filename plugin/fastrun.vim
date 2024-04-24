@@ -12,6 +12,8 @@ fun! s:run_file()
     call s:complie_run('clang++')
   elseif &ft == 'python'
     exe '!python3'..' %'
+  elseif &ft == 'racket'
+    exe '!racket'..' %'
   elseif &ft == 'sh'
     !bash %
   elseif &ft == 'vim'

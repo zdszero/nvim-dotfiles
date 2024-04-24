@@ -10,6 +10,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-dispatch'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'gcmt/wildfire.vim'
@@ -61,7 +62,6 @@ endif
 if g:config['markdown_support'] == 1
   Plug 'plasticboy/vim-markdown'
   Plug 'dhruvasagar/vim-table-mode'
-  Plug 'vim-pandoc/vim-pandoc-syntax'
   Plug 'hotoo/pangu.vim'
 endif
 

@@ -4,7 +4,7 @@ set mouse=a
 " Set Editor Font
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
-    GuiFont! Consolas\ Nerd\ Font:h15
+    GuiFont! Consolas\ Nerd\ Font:h18
     " GuiFont! LXGW\ WenKai\ Mono:h15
 endif
 
@@ -29,5 +29,5 @@ inoremap <silent><RightMouse> <Esc>:call GuiShowContextMenu()<CR>
 xnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
 snoremap <silent><RightMouse> <C-G>:call GuiShowContextMenu()<CR>gv
 
-colorscheme gruvbox-material
+colorscheme everforest
 set background=light

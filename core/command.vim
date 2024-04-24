@@ -50,6 +50,7 @@ aug CommentStyle
   au!
   au FileType cpp    setlocal commentstring=//\ %s
   au FileType c      setlocal commentstring=//\ %s
+  au FileType racket setlocal commentstring=;\ %s
   au FileType vue    setlocal commentstring=<!--\ %s\ -->
 aug END
 

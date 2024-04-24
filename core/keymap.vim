@@ -50,6 +50,8 @@ inoremap <c-b> <Left>
 inoremap <c-a> <c-c>I
 inoremap <c-e> <c-c>A
 inoremap <c-q> <c-c>gUawea
+inoremap <c-v>l λ
+inoremap <c-v>; →
 
 " copy and paste
 nnoremap V "+p
