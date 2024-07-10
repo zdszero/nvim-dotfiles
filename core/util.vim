@@ -58,7 +58,11 @@ let g:wiki_config = {
   \ 'theme': 'bootstrap',
   \}
 
-let g:wiki_preview_browser = 'google-chrome-stable'
+if has('mac')
+  let g:wiki_preview_browser = 'open -a "Google Chrome"'
+else
+  let g:wiki_preview_browser = 'google-chrome-stable'
+endif
 
 nnoremap <leader>ww <Plug>(WikiHome)
 nnoremap <leader>wo <Plug>(WikiOpenHTML)
