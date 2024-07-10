@@ -58,6 +58,10 @@ if g:config['webdev_support'] == 1
   let g:coc_global_extensions = extend(g:coc_global_extensions, ['coc-html', 'coc-css', 'coc-tsserver'])
 endif
 
+if has('mac')
+  let g:coc_global_extensions = extend(g:coc_global_extensions, ['coc-imselect'])
+endif
+
 let g:coc_filetype_map = {
   \ 'h': 'c',
   \ 'hpp': 'cpp',

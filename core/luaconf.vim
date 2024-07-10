@@ -1,6 +1,8 @@
 if has('nvim')
   lua require('plugins/buffer-line')
-  lua require('plugins/treesitter')
+  if g:config['treesitter_support'] == 1
+    lua require('plugins/treesitter')
+  endif
   lua require('plugins/indent-blankline')
 endif
 

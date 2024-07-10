@@ -65,7 +65,6 @@ set nolist
 " true color support
 set termguicolors
 if exists("g:neovide")
-  " set guifont=JetBrains\ Mono\ Medium:h14
   set guifont=Consolas\ Nerd\ Font:h18
 endif
 
