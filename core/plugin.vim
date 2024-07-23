@@ -79,10 +79,7 @@ endif
 
 if has('nvim')
   Plug 'lukas-reineke/indent-blankline.nvim'
-  Plug 'akinsho/bufferline.nvim'
-  if g:config['treesitter_support'] == 1
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  endif
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'kyazdani42/nvim-web-devicons'
 endif
 

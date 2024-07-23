@@ -81,6 +81,10 @@ xnoremap # :<C-u>call <SID>visual_star_search('?')<CR>?<C-R>=@/<CR><CR>
 nnoremap [f <cmd> call <SID>last_edit_file()<cr>
 nnoremap ]f <cmd> call <SID>last_edit_file()<cr>
 
+nnoremap <leader>d :bdelete %<CR>
+nnoremap [b :bprev<CR>
+nnoremap ]b :bnext<CR>
+
 nmap <silent> <c-t> :FloatermToggle<CR>
 tmap <silent> <c-t> <Esc>:FloatermToggle<CR>
 
