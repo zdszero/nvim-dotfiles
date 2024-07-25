@@ -1,12 +1,13 @@
+if !has('linux')
+  finish
+endif
+
 if executable('fcitx5-remote')
   let g:fcitx_remote_command = 'fcitx5-remote'
 elseif executable('fcitx-remote')
   let g:fcitx_remote_command = 'fcitx-remote'
 else
   let g:fcitx_remote_command = ''
-endif
-
-if g:fcitx_remote_command == ''
   finish
 endif
 
@@ -29,9 +30,10 @@ endfun
 
 " set timeoutlen=150
 
-if g:fcitx_remote_command !=# ''
+augroup SwitchInputMethod
+  au!
   " set input method to en when leaving insert mode
   au InsertLeave * call Fcitx2en()
   " reset original input method when entering insert mode
   au InsertEnter * call Fcitx2zh()
-endif
+augroup END

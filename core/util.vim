@@ -6,7 +6,7 @@ let g:sonokai_transparent_background = 1
 let g:gruvbox_material_transparent_background = 0
 let g:everforest_transparent_background = 0
 let g:everforest_background = 'medium'
-colorscheme everforest
+colorscheme gruvbox-material
 set background=light
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -86,24 +86,3 @@ nmap <leader>gc :Git commit -m ""<Left>
 nmap <leader>gr :Git restore %
 nmap <leader>gd :Git diff %<CR>
 nmap <leader>gl :Git log --oneline --decorate --graph --all<CR>
-nmap <leader>gi :CocCommand git.chunkInfo<CR>
-nmap <leader>gu :CocCommand git.chunkUndo<CR>
-nmap <leader>g> :CocCommand git.chunkStage<CR>
-nmap <leader>g< :CocCommand git.chunkUnstage<CR>
-nmap <leader>gf :CocCommand git.foldUnchanged<CR>
-nmap <leader>gkc :CocCommand git.keepCurrent<CR>
-nmap <leader>gki :CocCommand git.keepIncoming<CR>
-nmap <leader>gkb :CocCommand git.keepBoth<CR>
-
-" navigate chunks of current buffer
-nmap [h <Plug>(coc-git-prevchunk)
-nmap ]h <Plug>(coc-git-nextchunk)
-nmap [c <Plug>(coc-git-prevconflict)
-nmap ]c <Plug>(coc-git-nextconflict)
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               vim-table-mode                               "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:table_mode_corner='+'
-" let g:table_mode_corner_corner='+'
-" let g:table_mode_header_fillchar='='

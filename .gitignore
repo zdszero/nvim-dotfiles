@@ -2,4 +2,5 @@ plugged
 sessions
 __pycache__
 bin/autotab
+bin/select
 vimwiki-markdown

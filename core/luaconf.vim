@@ -1,8 +1,5 @@
-if has('nvim')
-  lua require("nvim-treesitter.install").prefer_git = true
-  lua require('plugins/treesitter')
-  lua require('plugins/indent-blankline')
-endif
+lua require('plugins/treesitter')
+lua require('plugins/indent-blankline')
 
 if g:config["nvim_lsp_support"] == 1
   lua require('plugins/telescope')
