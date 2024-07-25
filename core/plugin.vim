@@ -1,4 +1,5 @@
 let s:plug_dir = g:config_dir..'/plugged'
+let g:plug_url_format = "git@github.com:%s.git"
 
 call plug#begin(s:plug_dir)
 
@@ -78,6 +79,7 @@ if g:config['python_support'] == 1
 endif
 
 if has('nvim')
+  Plug 'j-morano/buffer_manager.nvim'
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'kyazdani42/nvim-web-devicons'
