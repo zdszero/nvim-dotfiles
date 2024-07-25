@@ -35,14 +35,14 @@ com! Tab8 setlocal softtabstop=8 | setlocal tabstop=8 | setlocal shiftwidth=8
 
 let g:autotab_bin = g:config_dir..'/bin/autotab'
 if !filereadable(g:autotab_bin)
-  let autotab_src = g:autotab_bin..'.c'
+  let g:autotab_src = g:autotab_bin..'.c'
   call system(join(['gcc', g:autotab_src, '-o', g:autotab_bin, '-O3'], ' '))
 endif
 
 " http://www.kylheku.com/cgit/c-snippets/tree/autotab.c
 aug SmartIndent
   au!
-  au BufRead * if !empty(bufname("%")) | execute 'set' system(g:autotab_bin .. " < " .. bufname("%")) | endif
+  au BufRead * if !empty(bufname("%")) && bufname('%') !~# 'fugitive' | execute 'set' system(g:autotab_bin .. " < " .. bufname("%")) | endif
 "   au FileType asm,python,sql,go setlocal softtabstop=4 | setlocal tabstop=4 | setlocal shiftwidth=4
 aug END
 
