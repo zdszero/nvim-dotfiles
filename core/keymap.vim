@@ -81,7 +81,13 @@ xnoremap # :<C-u>call <SID>visual_star_search('?')<CR>?<C-R>=@/<CR><CR>
 nnoremap [f <cmd> call <SID>last_edit_file()<cr>
 nnoremap ]f <cmd> call <SID>last_edit_file()<cr>
 
-nnoremap <leader>d :bdelete %<CR>
+fun s:smart_bd()
+  let cur_bufnr = bufnr()
+  call s:last_edit_file()
+  exe 'bdelete ' .. cur_bufnr
+endfun
+
+nnoremap <silent> <leader>d :call <SID>smart_bd()<CR>
 nnoremap [b :bprev<CR>
 nnoremap ]b :bnext<CR>
 

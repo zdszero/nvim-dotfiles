@@ -41,7 +41,7 @@ vim.keymap.set("n", "<leader>sf", function()
     require('telescope.builtin').find_files()
   end
 end)
-vim.keymap.set("n", "<leader>sn", "<cmd>lua require('telescope.builtin').find_files({search_dirs={vim.g.config_dir}})<CR>")
+vim.keymap.set("n", "<leader>sn", "<cmd>lua require('telescope.builtin').find_files({cwd=vim.g.config_dir})<CR>")
 vim.keymap.set("n", "<leader>sb", "<cmd>lua require('telescope.builtin').buffers()<CR>")
 vim.keymap.set("n", "<leader>sl", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>")
 vim.keymap.set("n", "<leader>sg", "<cmd>lua require('telescope.builtin').live_grep()<CR>")
