@@ -17,13 +17,6 @@ xmap ga <Plug>(EasyAlign)
 map ge <Plug>(wildfire-fuel)
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'coc'
-let g:vista_ignore_kinds = ["Itemize", "Enumerate"]
-let g:vista_close_on_jump=0
-let g:vista#renderer#enable_icon = 1
-let g:vista_update_on_text_changed = 1
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  vim-hugo                                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

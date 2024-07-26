@@ -22,7 +22,6 @@ Plug 'junegunn/goyo.vim'
 """"""""""""""""""""""
 Plug 'mhinz/vim-startify'
 Plug 'voldikss/vim-floaterm'
-Plug 'liuchengxu/vista.vim'
 """"""""""""""""""""""
 "   CUSTOM THEME     "
 """"""""""""""""""""""
@@ -55,9 +54,6 @@ if g:config["nvim_lsp_support"] == 1
   Plug 'windwp/nvim-autopairs'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
-  Plug 'nvim-tree/nvim-tree.lua'
-  Plug 'nvim-lualine/lualine.nvim'
-  Plug 'simrat39/symbols-outline.nvim'
 endif
 
 if g:config['markdown_support'] == 1
@@ -79,7 +75,6 @@ if g:config['python_support'] == 1
 endif
 
 if has('nvim')
-  Plug 'j-morano/buffer_manager.nvim'
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'kyazdani42/nvim-web-devicons'
