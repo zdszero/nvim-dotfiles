@@ -12,26 +12,32 @@ if !filereadable(g:imselect)
   call system(["/usr/bin/clang", "-framework", "foundation", "-framework", "carbon", "-O3", "-o", g:imselect, imselect_src])
 endif
 
-fun! Imselect2en()
-  let s:input_status = system(g:imselect)
-  if s:input_status =~# s:im_zh
+fun! s:im_insert_leave()
+  if system(g:imselect) =~# s:im_zh
     let g:input_toggle = 1
     call system(g:imselect . ' ' . s:im_en)
   endif
 endfun
 
-fun! Imselect2zh()
-  let s:input_status = system(g:imselect)
-  if s:input_status =~# s:im_en && g:input_toggle == 1
+fun! s:im_insert_enter()
+  if g:input_toggle == 1 && system(g:imselect) =~# s:im_en
     let g:input_toggle = 0
     call system(g:imselect . ' ' . s:im_zh)
+  endif
+endfun
+
+fun! s:im_default()
+  if mode() == 'n'
+    call system(g:imselect . ' ' . s:im_en)
   endif
 endfun
 
 augroup SwitchInputMethod
   au!
   " set input method to en when leaving insert mode
-  au InsertLeave * call Imselect2en()
+  au InsertLeave * call s:im_insert_leave()
   " reset original input method when entering insert mode
-  au InsertEnter * call Imselect2zh()
+  au InsertEnter * call s:im_insert_enter()
+  " back to vim set default im
+  au FocusGained * call s:im_default()
 augroup END
