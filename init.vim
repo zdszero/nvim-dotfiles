@@ -35,19 +35,19 @@ call LoadConfig('core/command.vim')
 call LoadConfig('core/plugin.vim')
 call LoadConfig('core/util.vim')
 
-if g:config['markdown_support'] == 1
+if g:config['markdown'] == 1
   let g:vim_markdown_wiki_rtp = g:config_dir..'/'..'vimwiki-markdown'
   let g:vim_hugo_rtp = g:config_dir..'/'..'vim-hugo'
   let &rtp = join([&rtp, g:vim_markdown_wiki_rtp, g:vim_hugo_rtp], ',')
   let &packpath = &rtp
 endif
 
-if g:config['coc_support'] == 1
+if g:config['coc'] == 1
   call LoadConfig('core/coc.vim')
   call LoadConfig('core/fzf.vim')
 endif
 
-if g:config["nvim_lsp_support"] == 1
+if g:config["nvim_lsp"] == 1
   lua require('plugins/telescope')
   lua require('plugins/cmp')
   lua require('plugins/lspconfig')

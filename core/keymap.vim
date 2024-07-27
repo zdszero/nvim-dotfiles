@@ -64,6 +64,16 @@ nnoremap Q :q<CR>
 nnoremap <leader>q :q!<CR>
 nnoremap <silent> <leader><CR> :nohlsearch<CR>:let @0=""<CR>
 
+fun s:open_netrw()
+  if &filetype == 'netrw'
+    exe 'bd'
+  else
+    Ex
+  endif
+endfun
+
+nnoremap <silent> <leader>e :call <SID>open_netrw()<CR>
+
 " resize
 nnoremap <up> :res +5<CR>
 nnoremap <down> :res -5<CR>

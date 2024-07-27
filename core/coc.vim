@@ -42,19 +42,19 @@ let g:coc_global_extensions = [
   \ 'coc-yaml'
   \]
 
-if g:config['python_support'] == 1
+if g:config['python'] == 1
   let g:coc_global_extensions = extend(g:coc_global_extensions, ['coc-pyright'])
 endif
 
-if g:config['cpp_support'] == 1
+if g:config['cpp'] == 1
   let g:coc_global_extensions = extend(g:coc_global_extensions, ['coc-cmake', 'coc-clangd'])
 endif
 
-if g:config['tex_support'] == 1
+if g:config['tex'] == 1
   let g:coc_global_extensions = extend(g:coc_global_extensions, ['coc-texlab'])
 endif
 
-if g:config['webdev_support'] == 1
+if g:config['webdev'] == 1
   let g:coc_global_extensions = extend(g:coc_global_extensions, ['coc-html', 'coc-css', 'coc-tsserver'])
 endif
 

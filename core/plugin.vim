@@ -31,7 +31,7 @@ Plug 'sainnhe/everforest'
 """"""""""""""""""""""
 "  COMPLETE SEARCH   "
 """"""""""""""""""""""
-if g:config['coc_support'] == 1
+if g:config['coc'] == 1
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
   Plug 'junegunn/fzf.vim' " needed for previews
@@ -40,7 +40,7 @@ endif
 """"""""""""""""""""""
 "  FILETYPE PLUGINS  "
 """"""""""""""""""""""
-if g:config["nvim_lsp_support"] == 1
+if g:config["nvim_lsp"] == 1
   " lspconfig and nvim-cmp
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-cmp'
@@ -56,21 +56,21 @@ if g:config["nvim_lsp_support"] == 1
   Plug 'nvim-telescope/telescope.nvim'
 endif
 
-if g:config['markdown_support'] == 1
+if g:config['markdown'] == 1
   Plug 'plasticboy/vim-markdown'
   Plug 'dhruvasagar/vim-table-mode'
   Plug 'hotoo/pangu.vim'
 endif
 
-if g:config['tex_support'] == 1
+if g:config['tex'] == 1
   Plug 'lervag/vimtex'
 endif
 
-if g:config['cpp_support'] == 1
+if g:config['cpp'] == 1
   Plug 'rhysd/vim-clang-format'
 endif
 
-if g:config['python_support'] == 1
+if g:config['python'] == 1
   Plug 'Vimjas/vim-python-pep8-indent'
 endif
 
