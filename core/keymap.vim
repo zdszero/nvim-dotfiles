@@ -108,8 +108,8 @@ xmap <silent> gQ :call <SID>format_to_oneline()<CR>
 
 tnoremap <c-[> <C-\><C-N>
 tnoremap <esc> <C-\><C-N>
-nnoremap [T :tabprevious<CR>
-nnoremap ]T :tabnext<CR>
+nnoremap [t :tabprevious<CR>
+nnoremap ]t :tabnext<CR>
 
 nmap <leader>ts :TestNearest<CR>
 nmap <leader>tf :TestFile<CR>

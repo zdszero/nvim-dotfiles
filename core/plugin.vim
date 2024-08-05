@@ -78,6 +78,7 @@ if has('nvim')
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'nvim-tree/nvim-tree.lua'
 endif
 
 call plug#end()

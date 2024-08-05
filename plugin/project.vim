@@ -27,4 +27,4 @@ fun! s:load_project_setting()
   endif
 endfun
 
-command! -nargs=0 Project call s:load_project_setting()
+command! -nargs=0 LoadProject call s:load_project_setting()
