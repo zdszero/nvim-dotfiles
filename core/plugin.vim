@@ -1,5 +1,4 @@
 let s:plug_dir = g:config_dir..'/plugged'
-let g:plug_url_format = "git@github.com:%s.git"
 
 call plug#begin(s:plug_dir)
 
@@ -79,6 +78,7 @@ if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'nvim-tree/nvim-tree.lua'
+  Plug 'lewis6991/gitsigns.nvim'
 endif
 
 call plug#end()

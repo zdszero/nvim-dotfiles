@@ -52,6 +52,7 @@ if g:config["nvim_lsp"] == 1
   lua require('plugins/cmp')
   lua require('plugins/lspconfig')
   lua require('plugins/nvim-tree')
+  lua require('plugins/gitsigns')
   lua require("nvim-autopairs").setup{}
 endif
 
