@@ -1,37 +1,7 @@
-# A valid snippet should starts with:
-#
-#		snippet trigger_word [ "description" [ options ] ]
-#
-# and end with:
-#
-#		endsnippet
-#
-# Snippet options:
-#
-#		b - Beginning of line.
-#		i - In-word expansion.
-#		w - Word boundary.
-#		r - Regular expression
-#		e - Custom context snippet
-#		A - Snippet will be triggered automatically, when condition matches.
-#
-# Basic example:
-#
-#		snippet emitter "emitter properties" b
-#		private readonly ${1} = new Emitter<$2>()
-#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
-#		endsnippet
-#
-# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
-
 priority -50
 
 extends plaintex
 extends texmath
-
-###################
-# Text formatting #
-###################
 
 snippet '^([0-9])([0-9])tb' "new table" r
 $1`!p 
@@ -45,14 +15,15 @@ for i in range(int(cols)):
 row1 += "|\n"
 row2 += "|\n"
 out = row1 + row2 + (int(rows)-1) * row1
+out = out
 snip.rv = out
 `$0
 endsnippet
 
 snippet pandoc_meta "pandoc metadata" b
 ---
-title: adbs homework 3
-author: 丁子枫 SA21011205
+title: $1
+author: $2
 numbersections: false
 codeBlockCaptions: false
 geometry:
@@ -63,39 +34,36 @@ geometry:
 ---
 endsnippet
 
-snippet alert "alert shortcode" b
-{{< alert title="" color="primary|info|warning" >}}$1{{< /alert >}}
+snippet docsy_meta "Docsy Page Meta Data" b
+---
+title: $1
+type: docs
+tags:
+	- $2
+description: $3
+weight: $4
+---
 endsnippet
 
-snippet note "note" b
-{{< alert color="warning" >}}
-__注意：__
-
-$1
+snippet alert "docsy alert shortcode" b
+{{< alert title="$1" color="${2:primary|info|warning}" >}}
+$0
 {{< /alert >}}
 endsnippet
 
-snippet example "example" b
-{{< alert color="info" >}}
-__例子：__
-
-$1
-{{< /alert >}}
-endsnippet
-
-snippet pageinfo "page info shortcode" b
-{{% pageinfo color="primary" %}}
-$1
+snippet pageinfo "docsy pageinfo shortcode" b
+{{% pageinfo color="${1:primary|info|warning}" %}}
+$0
 {{% /pageinfo %}}
 endsnippet
 
-snippet imgproc "image shortcode" b
+snippet imgproc "docsy image shortcode" b
 {{< imgproc ${1:image_pattern} ${2:Fit|Crop|Resize|Fill} "${3:800x300}" >}}
 $4
 {{< /imgproc >}}
 endsnippet
 
-snippet figure "figure" b
+snippet figure "docsy figure" b
 <figure>
   <img src="$1"
        alt="$2"/>
@@ -103,7 +71,7 @@ snippet figure "figure" b
 </figure>
 endsnippet
 
-snippet tabpane "tabpane" b
+snippet tabpane "docsy tabpane" b
 {{< tabpane >}}
 $1
 {{< /tabpane >}}
@@ -115,13 +83,13 @@ $2
 {{< /tab >}}
 endsnippet
 
-snippet cardpane "cardpane" b
+snippet cardpane "docsy cardpane" b
 {{% cardpane %}}
 $1
 {{% /cardpane %}}
 endsnippet
 
-snippet card "card" b
+snippet card "docsy card" b
 <!-- header, title, subtitle, footer -->
 {{% card %}}
 $1
@@ -142,6 +110,22 @@ resources:
       byline: "Photo: dingzf / CC-BY-CA"
 endsnippet
 
-snippet bilibili_link "bilibili link" b
-<i class="fa-brands fa-bilibili fa-xl" style="color: #73c9e5;"></i> <a href="$1">$2视频讲解</a>
+snippet bilibili "bilibili link" b
+{{< bilibili ${1:video} ${2:hint} >}}
+endsnippet
+
+snippet notice "github style notice" b
+{{< notice ${1:tip|note|warning|info}>}}
+$2
+{{< /notice >}}
+endsnippet
+
+snippet details "expand to see details" b
+{{< details ${1:Description} >}}
+$0
+{{< /details >}}
+endsnippet
+
+snippet readfile "docsy readfile" b
+{{% readfile "${1:Filepath}" %}}
 endsnippet
