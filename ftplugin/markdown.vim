@@ -138,10 +138,56 @@ fun! s:format_chatgpt2list() range
   sil! exe printf("%d,%dg/^$/d", a:firstline, a:lastline)
 endfun
 
+fun! s:open_markdown()
+  let curfile = expand("%:p:h")
+  if curfile =~# 'cs-kaoyan-grocery'
+    let path = substitute(curfile, ".*/cs-kaoyan-grocery/content/", "", "g")
+    let url = printf("http://127.0.0.1:1313/%s", path)
+    let cmd = tolower(printf("!%s --app-url \"%s\"", g:wiki_preview_browser, url))
+    sil! exe cmd
+  else
+    sil! exe '!' .. g:wiki_preview_browser .. ' %'<CR>
+  endif
+endfun
+
+fun! s:wdbible_markdown()
+  s/\%u202A//g
+  s/\%u202C/ /g
+  s/\v^(.*) .*/__\1__/g
+  normal! oj
+  let begin_lineno = line('.')
+  let cur_lineno = line('.')
+  let extra_line_cnt = 0
+  while 1
+    let nextline = getline(cur_lineno + 1)
+    if empty(nextline)
+      break
+    elseif nextline =~# '\v^\d+'
+      normal! j
+      let extra_line_cnt = extra_line_cnt + 1
+      let cur_lineno = cur_lineno + 1
+    else
+      normal! J0
+    end
+  endwhile
+  let subcmd = printf("%d,%ds/\\v^\\d+ (.*)/> \\1/g", begin_lineno, begin_lineno + extra_line_cnt)
+  exe subcmd
+  if extra_line_cnt > 0
+    let subcmd = printf("%d,%ds/$/>/g", begin_lineno, begin_lineno + extra_line_cnt - 1)
+    sil! exe subcmd
+  else
+    let subcmd = printf("%ds/\\v\\s*\\d+\\s*/>> /g", begin_lineno)
+    echomsg subcmd
+    sil! exe subcmd
+  endif
+  Tcn
+endfun
+
 vmap <leader>m :call <SID>make_math_block()<CR>
 vmap <leader>c :call <SID>make_code_block()<CR>
 vmap <leader>l :call <SID>format_chatgpt2list()<CR>
-nmap <leader>o :sil! exe '!' .. g:wiki_preview_browser .. ' %'<CR>
+nmap <leader>o :call <SID>open_markdown()<CR>
+nmap <leader>b :call <SID>wdbible_markdown()<CR>
 
 command! ImageInfo call <SID>get_image_info()
 command! -nargs=? ImagePaste call <SID>paste_image(<f-args>)
