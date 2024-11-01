@@ -18,7 +18,11 @@ fun! s:edit_config_file(...)
   elseif arg == 'u'
     call EditConfig('core/util.vim')
   elseif arg == 's'
-    call EditConfig('UltiSnips/' . &ft . '.snippets')
+    if exists(':SnippyEdit') > 0
+      call EditConfig('snippets/' . &ft . '.snippets')
+    else
+      call EditConfig('UltiSnips/' . &ft . '.snippets')
+    end
   elseif arg == 't'
     call EditConfig('ftplugin/' .. &ft  .. '.vim')
   else

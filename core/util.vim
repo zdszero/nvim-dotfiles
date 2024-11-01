@@ -6,7 +6,11 @@ let g:sonokai_transparent_background = 1
 let g:gruvbox_material_transparent_background = 0
 let g:everforest_transparent_background = 0
 let g:everforest_background = 'medium'
-colorscheme sonokai
+if exists("g:gui_vimr")
+  colorscheme everforest
+else
+  colorscheme sonokai
+endif
 set background=light
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

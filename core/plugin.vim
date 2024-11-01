@@ -43,16 +43,17 @@ if g:config["nvim_lsp"] == 1
   " lspconfig and nvim-cmp
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-cmp'
+  Plug 'dcampos/nvim-snippy'
+  Plug 'dcampos/cmp-snippy'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-path'
-  Plug 'SirVer/ultisnips'
-  Plug 'quangnguyen30192/cmp-nvim-ultisnips'
   Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
   Plug 'hrsh7th/cmp-nvim-lua'
   Plug 'windwp/nvim-autopairs'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'smjonas/snippet-converter.nvim'
 endif
 
 if g:config['markdown'] == 1
@@ -79,7 +80,6 @@ if has('nvim')
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'nvim-tree/nvim-tree.lua'
   Plug 'lewis6991/gitsigns.nvim'
-  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 endif
 
 call plug#end()

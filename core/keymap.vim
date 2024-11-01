@@ -18,8 +18,8 @@ iabbrev ,l <=
 " normal and visual
 noremap <c-h> g0
 noremap <c-l> g$
-noremap j gj
-noremap k gk
+nnoremap j gj
+nnoremap k gk
 noremap <c-j> 7gj
 noremap <c-k> 7gk
 noremap <c-g> G

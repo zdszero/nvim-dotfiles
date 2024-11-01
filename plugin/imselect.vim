@@ -5,7 +5,8 @@ endif
 let g:imselect = g:config_dir .. '/bin/select'
 let g:input_toggle = 0
 let s:im_en = 'com.apple.keylayout.ABC'
-let s:im_zh = 'com.apple.inputmethod.SCIM.ITABC'
+" let s:im_zh = 'com.apple.inputmethod.SCIM.ITABC'
+let s:im_zh = 'com.sogou.inputmethod.sogou.pinyin'
 
 if !filereadable(g:imselect)
   let imselect_src = g:imselect .. '.m'

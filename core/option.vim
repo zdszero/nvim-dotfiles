@@ -68,7 +68,7 @@ if has('nvim') && exists("g:neovide")
   set guifont=Consolas\ Nerd\ Font:h18
 endif
 if has('mac')
-  set guifont=Monaco:h18
+  set guifont=Consolas\ Nerd\ Font:h18
 endif
 
 let g:sql_type_default = 'mysql'
