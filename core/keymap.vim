@@ -50,8 +50,33 @@ inoremap <c-b> <Left>
 inoremap <c-a> <c-c>I
 inoremap <c-e> <c-c>A
 inoremap <c-q> <c-c>gUawea
+inoremap <c-v>b β
+inoremap <c-v>a α
+inoremap <c-v>o ω
+inoremap <c-v>O Ω
+inoremap <c-v>z ζ
+inoremap <c-v>e η
+inoremap <c-v>E Η
+inoremap <c-v>g γ
+inoremap <c-v>G Γ
+inoremap <c-v>d δ
+inoremap <c-v>D Δ
+inoremap <c-v>m μ
 inoremap <c-v>l λ
+inoremap <c-v>L Λ
+inoremap <c-v>x ξ
+inoremap <c-v>X Ξ
+inoremap <c-v>t θ
+inoremap <c-v>t Θ
+inoremap <c-v>p π
+inoremap <c-v>P Π
+inoremap <c-v>s σ
+inoremap <c-v>s Σ
+inoremap <c-v>t τ
+inoremap <c-v>f φ
+inoremap <c-v>F Φ
 inoremap <c-v>; →
+inoremap <c-v>. ·
 
 " copy and paste
 nnoremap V "+p
