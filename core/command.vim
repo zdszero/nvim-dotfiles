@@ -37,9 +37,13 @@ com! Tab2 setlocal softtabstop=2 | setlocal tabstop=2 | setlocal shiftwidth=2
 com! Tab4 setlocal softtabstop=4 | setlocal tabstop=4 | setlocal shiftwidth=4
 com! Tab8 setlocal softtabstop=8 | setlocal tabstop=8 | setlocal shiftwidth=8
 
-let g:autotab_bin = g:config_dir..'/bin/autotab'
+let g:autotab_src = g:config_dir..'/bin/autotab.c'
+let g:autotab_dir = expand('~/.local/bin')
+let g:autotab_bin = g:autotab_dir .. '/autotab'
+if !isdirectory(g:autotab_dir)
+  call mkdir(g:autotab_dir, 'p')
+endif
 if !filereadable(g:autotab_bin)
-  let g:autotab_src = g:autotab_bin..'.c'
   call system(join(['gcc', g:autotab_src, '-o', g:autotab_bin, '-O3'], ' '))
 endif
 
