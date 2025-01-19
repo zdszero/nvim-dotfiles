@@ -54,7 +54,7 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     { name = 'path' },
-    { name = 'snippy' },
+    { name = 'snippy', keyword_length=2 },
     { name = 'nvim_lsp', max_item_count=5, keyword_length=3, priority=90, trigger_characters={} },
     { name = 'buffer', max_item_count=2, keyword_length=3, priority=80 },
     { name = 'nvim_lsp_signature_help' },

@@ -16,6 +16,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'gcmt/wildfire.vim'
 Plug 'vim-test/vim-test'
 Plug 'junegunn/goyo.vim'
+Plug 'ojroques/vim-oscyank'
 """"""""""""""""""""""
 "      BUTTER UI     "
 """"""""""""""""""""""

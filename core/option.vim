@@ -82,4 +82,11 @@ set foldminlines=1
 set nofoldenable
 set t_Co=256
 
-let g:python3_host_prog = '/usr/bin/python3'
+for conda_dir in ['miniconda', 'miniconda3']
+  if isdirectory(expand('~/' . conda_dir))
+    let g:python3_host_prog = expand('~/' . conda_dir . '/bin/python3')
+    break
+  else
+    let g:python3_host_prog = '/usr/bin/python3'
+  endif
+endfor

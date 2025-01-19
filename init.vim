@@ -29,6 +29,11 @@ endfun
 
 call s:parse_conf()
 
+if !has('nvim')
+  let g:config['coc'] = 1
+  let g:config['nvim_lsp'] = 0
+endif
+
 call LoadConfig('core/option.vim')
 call LoadConfig('core/keymap.vim')
 call LoadConfig('core/command.vim')
@@ -47,7 +52,7 @@ if g:config['coc'] == 1
   call LoadConfig('core/fzf.vim')
 endif
 
-if g:config["nvim_lsp"] == 1
+if g:config["nvim_lsp"] == 1 && has('nvim')
   lua require('plugins/telescope')
   lua require('plugins/cmp')
   lua require('plugins/lspconfig')

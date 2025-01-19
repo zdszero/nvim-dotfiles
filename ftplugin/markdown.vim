@@ -146,7 +146,7 @@ fun! s:open_markdown()
     let cmd = tolower(printf("!%s --app-url \"%s\"", g:wiki_preview_browser, url))
     sil! exe cmd
   else
-    sil! exe '!' .. g:wiki_preview_browser .. ' %'<CR>
+    exe '!' .. g:wiki_preview_browser .. ' %'
   endif
 endfun
 
@@ -195,3 +195,5 @@ command! ImageDelete call <SID>delete_image()
 command! ImageUnsharp call <SID>unsharp_image()
 command! -nargs=? ImageResize call <SID>resize_image(<f-args>)
 command! TOC call util#markdown#generate_toc()
+
+call LoadConfig("ftplugin/text.vim")

@@ -10,6 +10,8 @@ fun! s:run_file()
     call s:complie_run('gcc')
   elseif &ft == 'cpp'
     call s:complie_run('clang++')
+  elseif &ft == 'cuda'
+    call s:complie_run('nvcc')
   elseif &ft == 'python'
     exe '!python3'..' %'
   elseif &ft == 'racket'

@@ -6,12 +6,18 @@ let g:sonokai_transparent_background = 1
 let g:gruvbox_material_transparent_background = 0
 let g:everforest_transparent_background = 0
 let g:everforest_background = 'medium'
+
 if exists("g:gui_vimr")
   colorscheme everforest
 else
-  colorscheme sonokai
+  colorscheme gruvbox-material
 endif
-set background=light
+
+if strftime('%H') > 18
+  set background=dark
+else
+  set background=light
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   easy-align                               "
@@ -83,3 +89,11 @@ nmap <leader>gc :Git commit -m ""<Left>
 nmap <leader>gr :Git restore %
 nmap <leader>gd :Git diff %<CR>
 nmap <leader>gl :Git log --oneline --decorate --graph --all<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 SSH COPY                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <leader>c <Plug>OSCYankOperator
+nmap <leader>cc <leader>c_
+vmap <leader>c <Plug>OSCYankVisual
