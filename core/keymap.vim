@@ -86,8 +86,8 @@ nnoremap # :<C-u>call <SID>search_cword()<CR>?<C-R>=@/<CR><CR>
 xnoremap * :<C-u>call <SID>visual_star_search('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>visual_star_search('?')<CR>?<C-R>=@/<CR><CR>
 
-nnoremap [f <cmd> call <SID>last_edit_file()<cr>
-nnoremap ]f <cmd> call <SID>last_edit_file()<cr>
+nnoremap [v <cmd> call <SID>last_edit_file()<cr>
+nnoremap ]v <cmd> call <SID>last_edit_file()<cr>
 
 fun s:smart_bd()
   let cur_bufnr = bufnr()
@@ -167,3 +167,5 @@ fun! s:rename_visual_selection()
     sil! exe '%s//' . subs . '/g'
   endif
 endfun
+
+call LoadConfig('core/move.vim')

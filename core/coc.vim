@@ -193,7 +193,7 @@ nmap <leader>gki :CocCommand git.keepIncoming<CR>
 nmap <leader>gkb :CocCommand git.keepBoth<CR>
 
 " navigate chunks of current buffer
-nmap [h <Plug>(coc-git-prevchunk)
-nmap ]h <Plug>(coc-git-nextchunk)
+nmap [x <Plug>(coc-git-prevchunk)
+nmap ]x <Plug>(coc-git-nextchunk)
 nmap [c <Plug>(coc-git-prevconflict)
 nmap ]c <Plug>(coc-git-nextconflict)
