@@ -5,7 +5,7 @@
   "codeLens.enable": false,
   "codeLens.separator": "<>",
   "diagnostic.virtualText": false,
-  "inlayHint.enable": false,
+  "inlayHint.enable": true,
   "outline.autoPreview": false,
   "outline.expandLevel": 2,
   "tree.key.toggle": "o",
@@ -83,6 +83,9 @@
     "latex": [
       "tex",
       "texmath"
+    ],
+    "cuda": [
+      "cpp"
     ]
   },
   "snippets.userSnippetsDirectory": "~/.config/nvim/UltiSnips",

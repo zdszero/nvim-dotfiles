@@ -94,8 +94,8 @@ endfun
 " Highlight the symbol and its references when holding the cursor.
 " autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<cr>
+" Use gh to show documentation in preview window.
+nnoremap <silent> gh :call <SID>show_documentation()<cr>
 " coc explorer mapping
 nmap <silent> <leader>e :CocCommand explorer --sources file+ --preset left<cr>
 " coc general mapping

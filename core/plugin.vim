@@ -31,7 +31,7 @@ Plug 'sainnhe/everforest'
 """"""""""""""""""""""
 "  COMPLETE SEARCH   "
 """"""""""""""""""""""
-if g:config['coc'] == 1
+if g:config['coc'] == 1 && executable('node')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
   Plug 'junegunn/fzf.vim' " needed for previews

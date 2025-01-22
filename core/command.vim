@@ -31,7 +31,14 @@ fun! s:edit_config_file(...)
 endfun
 
 com! -nargs=? EF call <SID>edit_config_file(<f-args>)
-com! CD exe printf("cd %s", expand('%:p:h'))
+
+fun! s:cd()
+  let dir = expand('%:p:h')
+  exe printf("cd %s", dir)
+  let g:initial_dir = dir
+endfun
+
+com! CD call <SID>cd()
 
 com! Tab2 setlocal softtabstop=2 | setlocal tabstop=2 | setlocal shiftwidth=2
 com! Tab4 setlocal softtabstop=4 | setlocal tabstop=4 | setlocal shiftwidth=4
@@ -58,6 +65,7 @@ aug CommentStyle
   au!
   au FileType cpp    setlocal commentstring=//\ %s
   au FileType c      setlocal commentstring=//\ %s
+  au FileType cuda   setlocal commentstring=//\ %s
   au FileType racket setlocal commentstring=;\ %s
   au FileType vue    setlocal commentstring=<!--\ %s\ -->
 aug END
