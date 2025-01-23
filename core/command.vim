@@ -37,6 +37,7 @@ fun! s:cd()
   exe printf("cd %s", dir)
   let g:initial_dir = dir
 endfun
+let g:initial_dir = getcwd()
 
 com! CD call <SID>cd()
 
