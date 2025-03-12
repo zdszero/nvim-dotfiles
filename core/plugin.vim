@@ -17,6 +17,7 @@ Plug 'gcmt/wildfire.vim'
 Plug 'vim-test/vim-test'
 Plug 'junegunn/goyo.vim'
 Plug 'ojroques/vim-oscyank'
+Plug 'mg979/vim-visual-multi'
 """"""""""""""""""""""
 "      BUTTER UI     "
 """"""""""""""""""""""

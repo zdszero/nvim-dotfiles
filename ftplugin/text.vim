@@ -49,3 +49,4 @@ inoremap <c-v>6 ⑥
 inoremap <c-v>7 ⑦
 inoremap <c-v>8 ⑧
 inoremap <c-v>9 ⑨
+inoremap <c-v>~ ≈
