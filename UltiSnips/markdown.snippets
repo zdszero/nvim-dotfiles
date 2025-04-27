@@ -72,8 +72,8 @@ snippet figure "docsy figure" b
 endsnippet
 
 snippet tabpane "docsy tabpane" b
-{{< tabpane >}}
-$1
+{{< tabpane persist=false lang=$1 >}}
+$0
 {{< /tabpane >}}
 endsnippet
 
@@ -132,4 +132,10 @@ endsnippet
 
 snippet audio "hugo audio shortcode" b
 {{<audio src="$1" caption="$2" >}}
+endsnippet
+
+snippet solution "docsy solution" b
+{{< solution >}}
+$0
+{{< /solution >}}
 endsnippet

@@ -9,7 +9,7 @@ let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 1
 let g:vim_markdown_math = 1
 
-fun! <SID>visual_word_count () range
+fun! s:visual_word_count () range
   execute '!sed -n ' . a:firstline . ',' . a:lastline . 'p % | wc -w'
 endfun
 
@@ -72,7 +72,7 @@ fun! s:resize_image(arg)
   call system(cmd)
 endfun
 
-fun! s:delete_image () abort
+fun! s:delete_image() abort
   let l:path = matchstr(getline('.'), '\v\(\zs.*\ze\)')
   if l:path ==# ''
     return
@@ -103,19 +103,11 @@ fun! s:paste_image(arg)
 endfun
 
 fun! s:make_math_block() range
-  sil! exe printf('%d,%ds/\v^\s*(-|\d+\.)\s+/\0|||/g', a:firstline, a:lastline)
-  sil! exe printf('%d,%ds/\v[a-zA-Z0-9,() +-^]+/$\0$/g', a:firstline, a:lastline)
-  sil! exe printf('%d,%ds/|||//g', a:firstline, a:lastline)
-  sil! exe printf('%d,%ds/\v^(\s*)\$(\s*(-|\d+\.)\s+)\$/\1\2/g', a:firstline, a:lastline)
-  sil! exe printf('%d,%ds/\v\$.{-}\$/ \0 /g', a:firstline, a:lastline)
+  sil! exe printf('%d,%ds/\v([\x21-\x7E]+(\s+[\x21-\x7E]+)*)/$\1$/g', a:firstline, a:lastline)
 endfun
 
 fun! s:make_code_block() range
-  sil! exe printf('%d,%ds/\v^\s*(-|\d+\.)\s+/\0|||/g', a:firstline, a:lastline)
-  sil! exe printf('%d,%ds/\v[a-zA-Z0-9,() +-^]+/`\0`/g', a:firstline, a:lastline)
-  sil! exe printf('%d,%ds/|||//g', a:firstline, a:lastline)
-  sil! exe printf('%d,%ds/\v^(\s*)`(\s*(-|\d+\.)\s+)`/\1\2/g', a:firstline, a:lastline)
-  sil! exe printf('%d,%ds/\v`.{-}`/ \0 /g', a:firstline, a:lastline)
+  sil! exe printf('%d,%ds/\v([\x21-\x7E]+(\s+[\x21-\x7E]+)*)/`\1`/g', a:firstline, a:lastline)
 endfun
 
 fun! s:format_chatgpt2list() range
@@ -143,10 +135,25 @@ fun! s:open_markdown()
   if curfile =~# 'cs-kaoyan-grocery'
     let path = substitute(curfile, ".*/cs-kaoyan-grocery/content/", "", "g")
     let url = printf("http://127.0.0.1:1313/%s", path)
-    let cmd = tolower(printf("!%s --app-url \"%s\"", g:wiki_preview_browser, url))
+    let cmd = tolower(printf("!%s \"%s\"", g:wiki_preview_browser, url))
     sil! exe cmd
   else
     exe '!' .. g:wiki_preview_browser .. ' %'
+  endif
+endfun
+
+fun! s:yank_ref_link()
+  let curfile = expand("%:p:h")
+  if curfile =~# 'cs-kaoyan-grocery'
+    let curline = getline('.')
+    if curline !~# '^#'
+        return
+    endif
+    let path = substitute(curfile, ".*/cs-kaoyan-grocery/content", "", "g")
+    let tag = substitute(curline, '\v^\#+\s*', '', '')
+    let markdown_ref = tolower(printf("[%s](%s/#%s)", tag, path, tag))
+    echo markdown_ref
+    call setreg('l', markdown_ref)
   endif
 endfun
 
@@ -186,6 +193,7 @@ endfun
 vmap <leader>m :call <SID>make_math_block()<CR>
 vmap <leader>c :call <SID>make_code_block()<CR>
 vmap <leader>l :call <SID>format_chatgpt2list()<CR>
+nmap <leader>l :call <SID>yank_ref_link()<CR>
 nmap <leader>o :call <SID>open_markdown()<CR>
 nmap <leader>b :call <SID>wdbible_markdown()<CR>
 

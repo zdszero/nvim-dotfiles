@@ -7,11 +7,7 @@ let g:gruvbox_material_transparent_background = 0
 let g:everforest_transparent_background = 0
 let g:everforest_background = 'medium'
 
-if exists("g:gui_vimr")
-  colorscheme everforest
-else
-  colorscheme gruvbox-material
-endif
+colorscheme everforest
 
 if strftime('%H') > 18
   set background=dark
@@ -97,3 +93,12 @@ nmap <leader>gl :Git log --oneline --decorate --graph --all<CR>
 nmap <leader>c <Plug>OSCYankOperator
 nmap <leader>cc <leader>c_
 vmap <leader>c <Plug>OSCYankVisual
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                             VIM VISUAL MULTI                               "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has('mac')
+  nmap <m-down> <Plug>(VM-Add-Cursor-Down)
+  nmap <m-up> <Plug>(VM-Add-Cursor-Up)
+endif

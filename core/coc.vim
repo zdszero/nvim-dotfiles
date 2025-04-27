@@ -182,7 +182,6 @@ fun! s:coc_search()
   endif
 endfun
 
-
 nmap <leader>gi :CocCommand git.chunkInfo<CR>
 nmap <leader>gu :CocCommand git.chunkUndo<CR>
 nmap <leader>g> :CocCommand git.chunkStage<CR>

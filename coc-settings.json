@@ -10,6 +10,7 @@
   "outline.expandLevel": 2,
   "tree.key.toggle": "o",
   "tree.key.collapseAll": "M",
+  "imselect.enableFloating": false,
   "imselect.defaultInput": "com.apple.keylayout.ABC",
   "semanticTokens.enable": false,
   "signature.enable": true,

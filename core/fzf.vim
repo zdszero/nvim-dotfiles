@@ -24,7 +24,7 @@ nmap <silent> <leader>so :<C-u>CocFzfList outline<CR>
 nmap <silent> <leader>sc :<C-u>CocFzfList commands<CR>
 
 command! -bang -nargs=* PRg
-  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case -g '!*.{png,jpg,jpeg,gif,bmp,webp,svg}' ".shellescape(<q-args>), 1, fzf#vim#with_preview({'dir': s:get_root_dir()}), <bang>0)
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case -g '!*.{png,jpg,jpeg,gif,bmp,webp,svg,drawio}' ".shellescape(<q-args>), 1, fzf#vim#with_preview({'dir': s:get_root_dir()}), <bang>0)
 
 nmap <silent> <expr> <leader>sf <SID>is_in_git_directory() ?
   \':GFiles<CR>' : printf(':Files %s<CR>', g:initial_dir)

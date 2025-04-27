@@ -29,6 +29,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/everforest'
+Plug 'liuchengxu/vista.vim'
 """"""""""""""""""""""
 "  COMPLETE SEARCH   "
 """"""""""""""""""""""
@@ -70,10 +71,6 @@ endif
 
 if g:config['cpp'] == 1
   Plug 'rhysd/vim-clang-format'
-endif
-
-if g:config['python'] == 1
-  Plug 'Vimjas/vim-python-pep8-indent'
 endif
 
 if has('nvim')

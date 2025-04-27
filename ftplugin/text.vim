@@ -14,6 +14,7 @@ inoremap <c-v>l λ
 inoremap <c-v>L Λ
 inoremap <c-v>x ξ
 inoremap <c-v>X Ξ
+inoremap <c-v>* ×
 inoremap <c-v>t θ
 inoremap <c-v>t Θ
 inoremap <c-v>p π
@@ -50,3 +51,5 @@ inoremap <c-v>7 ⑦
 inoremap <c-v>8 ⑧
 inoremap <c-v>9 ⑨
 inoremap <c-v>~ ≈
+inoremap <c-v>y ✅
+inoremap <c-v>n ❌
