@@ -151,6 +151,7 @@ fun! s:yank_ref_link()
     endif
     let path = substitute(curfile, ".*/cs-kaoyan-grocery/content", "", "g")
     let tag = substitute(curline, '\v^\#+\s*', '', '')
+    let tag = substitute(tag, ' ', '-', 'g')
     let markdown_ref = tolower(printf("[%s](%s/#%s)", tag, path, tag))
     echo markdown_ref
     call setreg('l', markdown_ref)
