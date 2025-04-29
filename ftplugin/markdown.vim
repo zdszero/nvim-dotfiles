@@ -15,6 +15,7 @@ endfun
 
 inoremap <c-;> <Esc>/<++><CR>:nohlsearch<CR>d4li
 inoremap <c-j> <Esc>/<++><CR>:nohlsearch<CR>d4li
+inoremap ;a <a name=""><b><++></b></a><Esc>F"i
 inoremap ;i __ <++><Esc>F_i
 inoremap ;b ____ <++><Esc>F_;i
 inoremap ;u <u></u><++><Esc>F<;i
@@ -146,12 +147,16 @@ fun! s:yank_ref_link()
   let curfile = expand("%:p:h")
   if curfile =~# 'cs-kaoyan-grocery'
     let curline = getline('.')
-    if curline !~# '^#'
+    if curline =~# '^#'
+      let tag = substitute(curline, '\v^\#+\s*', '', '')
+    else
+      let tag = matchstr(curline, '<a name="\zs[^"]\+\ze">.*</a>')
+      if tag == ''
         return
+      endif
     endif
-    let path = substitute(curfile, ".*/cs-kaoyan-grocery/content", "", "g")
-    let tag = substitute(curline, '\v^\#+\s*', '', '')
     let tag = substitute(tag, ' ', '-', 'g')
+    let path = substitute(curfile, ".*/cs-kaoyan-grocery/content", "", "g")
     let markdown_ref = tolower(printf("[%s](%s/#%s)", tag, path, tag))
     echo markdown_ref
     call setreg('l', markdown_ref)
