@@ -211,3 +211,14 @@ command! -nargs=? ImageResize call <SID>resize_image(<f-args>)
 command! TOC call util#markdown#generate_toc()
 
 call LoadConfig("ftplugin/text.vim")
+
+command! -bang -nargs=* CRg call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case' .
+  \   ' --glob "!**/408quiz/**"' .
+  \   ' --glob "!*.{png,jpg,jpeg,gif,bmp,webp,svg,drawio}" ' .
+  \   shellescape(<q-args>),
+  \   1,
+  \   fzf#vim#with_preview({'dir': matchstr(expand("%:p:h"), ".*/cs-kaoyan-grocery/content/")}),
+  \   <bang>0)
+
+nmap <leader>sj :CRg<CR>

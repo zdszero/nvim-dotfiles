@@ -102,3 +102,5 @@ if has('mac')
   nmap <m-down> <Plug>(VM-Add-Cursor-Down)
   nmap <m-up> <Plug>(VM-Add-Cursor-Up)
 endif
+
+nnoremap <leader>d :Bdelete<CR>
