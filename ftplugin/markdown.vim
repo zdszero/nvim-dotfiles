@@ -150,12 +150,13 @@ fun! s:yank_ref_link()
     if curline =~# '^#'
       let tag = substitute(curline, '\v^\#+\s*', '', '')
     else
-      let tag = matchstr(curline, '<a name="\zs[^"]\+\ze">.*</a>')
+      let tag = matchstr(curline, 'id="\zs[^"]\+\ze"')
       if tag == ''
         return
       endif
     endif
     let tag = substitute(tag, ' ', '-', 'g')
+    let tag = substitute(tag, '/', '', 'g')
     let path = substitute(curfile, ".*/cs-kaoyan-grocery/content", "", "g")
     let markdown_ref = tolower(printf("[%s](%s/#%s)", tag, path, tag))
     echo markdown_ref
