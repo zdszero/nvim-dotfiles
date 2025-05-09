@@ -149,16 +149,26 @@ fun! s:yank_ref_link()
     let curline = getline('.')
     if curline =~# '^#'
       let tag = substitute(curline, '\v^\#+\s*', '', '')
+    elseif curline =~# '^title:'
+      let hint = matchstr(curline, 'title: \zs.*\ze')
+      let tag = ''
     else
       let tag = matchstr(curline, 'id="\zs[^"]\+\ze"')
       if tag == ''
         return
       endif
     endif
+    if tag != ''
+      let hint = tag
+    endif
     let tag = substitute(tag, ' ', '-', 'g')
     let tag = substitute(tag, '/', '', 'g')
     let path = substitute(curfile, ".*/cs-kaoyan-grocery/content", "", "g")
-    let markdown_ref = tolower(printf("[%s](%s/#%s)", tag, path, tag))
+    if tag == ''
+      let markdown_ref = printf("[%s](%s/)", hint, tolower(path))
+    else
+      let markdown_ref = printf("[%s](%s/#%s)", hint, tolower(path), tolower(tag))
+    endif
     echo markdown_ref
     call setreg('l', markdown_ref)
   endif
@@ -217,6 +227,7 @@ command! -bang -nargs=* CRg call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case' .
   \   ' --glob "!**/408quiz/**"' .
   \   ' --glob "!*.{png,jpg,jpeg,gif,bmp,webp,svg,drawio}" ' .
+  \   ' --glob "!*_index.md" ' .
   \   shellescape(<q-args>),
   \   1,
   \   fzf#vim#with_preview({'dir': matchstr(expand("%:p:h"), ".*/cs-kaoyan-grocery/content/")}),
