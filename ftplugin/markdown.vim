@@ -131,12 +131,12 @@ fun! s:format_chatgpt2list() range
   sil! exe printf("%d,%dg/^$/d", a:firstline, a:lastline)
 endfun
 
-fun! s:open_markdown()
+fun! s:open_markdown(browser)
   let curfile = expand("%:p:h")
   if curfile =~# 'cs-kaoyan-grocery'
     let path = substitute(curfile, ".*/cs-kaoyan-grocery/content/", "", "g")
     let url = printf("http://127.0.0.1:1313/%s", path)
-    let cmd = tolower(printf("!%s \"%s\"", g:wiki_preview_browser, url))
+    let cmd = tolower(printf("!%s \"%s\"", a:browser, url))
     sil! exe cmd
   else
     exe '!' .. g:wiki_preview_browser .. ' %'
@@ -211,7 +211,12 @@ vmap <leader>m :call <SID>make_math_block()<CR>
 vmap <leader>c :call <SID>make_code_block()<CR>
 vmap <leader>l :call <SID>format_chatgpt2list()<CR>
 nmap <leader>l :call <SID>yank_ref_link()<CR>
-nmap <leader>o :call <SID>open_markdown()<CR>
+if has('mac')
+  nmap <leader>o :call <SID>open_markdown('open -a "Google Chrome"')<CR>
+  nmap <leader>O :call <SID>open_markdown('open -a safari')<CR>
+else
+  nmap <leader>o :call <SID>open_markdown('google-chrome')<CR>
+endif
 nmap <leader>b :call <SID>wdbible_markdown()<CR>
 
 command! ImageInfo call <SID>get_image_info()
@@ -234,3 +239,5 @@ command! -bang -nargs=* CRg call fzf#vim#grep(
   \   <bang>0)
 
 nmap <leader>sj :CRg<CR>
+
+nnoremap <leader>f :sil !autocorrect --fix %<CR>

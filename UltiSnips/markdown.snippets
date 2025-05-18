@@ -115,9 +115,16 @@ snippet bilibili "bilibili link" b
 endsnippet
 
 snippet notice "github style notice" b
-{{< notice ${1:tip|note|warning|info}>}}
+{{< notice ${1:tip|note|warning|info} >}}
 $2
 {{< /notice >}}
+endsnippet
+
+
+snippet region "hugo region shortcode" b
+{{< region ${1:info|tip|note|warn|danger} >}}
+$2
+{{< /region >}}
 endsnippet
 
 snippet details "expand to see details" b
@@ -143,3 +150,4 @@ endsnippet
 snippet anchor "hugo anchored" w
 {{< anchored id="$1" block="${2:false}" >}}$1{{< /anchored >}}$0
 endsnippet
+
