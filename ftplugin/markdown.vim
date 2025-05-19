@@ -240,4 +240,21 @@ command! -bang -nargs=* CRg call fzf#vim#grep(
 
 nmap <leader>sj :CRg<CR>
 
-nnoremap <leader>f :sil !autocorrect --fix %<CR>
+fun! s:autocorrect_markdown()
+  let save_cursor = getpos(".")
+  %!autocorrect
+  call setpos('.', save_cursor)
+endfun
+
+nnoremap <leader>f :call <SID>autocorrect_markdown()<CR>
+
+fun! s:handle_markdown_outline(line) abort
+  let [file, line, text] = split(a:line, ':')
+  execute 'normal! '.line.'Gzz'
+endfun
+
+nnoremap <leader>so :call fzf#run(fzf#wrap({
+      \ 'source': 'rg --no-heading --color=never --line-number "^#+\s+.+" '.expand('%:p'),
+    \ 'sink': function('<SID>handle_markdown_outline'),
+    \ 'options': '--delimiter=: --preview="head -n {2} {1} \| tail -n 20"'
+    \ }))<CR>

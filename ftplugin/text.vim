@@ -25,8 +25,11 @@ inoremap <c-v>t τ
 inoremap <c-v>f φ
 inoremap <c-v>F Φ
 inoremap <c-v>any ∃
-inoremap <c-v>; →
-inoremap <c-v>. ·
+inoremap <c-v>, ，
+inoremap <c-v>; ；
+inoremap <c-v>. 。
+inoremap <c-v>) ）
+inoremap <c-v>( （
 inoremap <c-v>r √
 inoremap <c-v>w ×
 inoremap <c-v><Left> ←
@@ -39,7 +42,6 @@ inoremap <c-v>le ≤
 inoremap <c-v>in ∈
 inoremap <c-v>cup ∪
 inoremap <c-v>hat ∩
-inoremap <c-v>times ×
 inoremap <c-v>div ÷
 inoremap <c-v>1 ①
 inoremap <c-v>2 ②
