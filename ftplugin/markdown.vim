@@ -131,11 +131,23 @@ fun! s:format_chatgpt2list() range
   sil! exe printf("%d,%dg/^$/d", a:firstline, a:lastline)
 endfun
 
+fun! GetBackwardTag()
+  let lnum = search('\v^#+ ', 'bnw')
+  let line = getline(lnum)
+  let tag = matchstr(line, '\v^#+ \zs.*\ze')
+  return tag
+endfun
+
 fun! s:open_markdown(browser)
   let curfile = expand("%:p:h")
   if curfile =~# 'cs-kaoyan-grocery'
     let path = substitute(curfile, ".*/cs-kaoyan-grocery/content/", "", "g")
     let url = printf("http://127.0.0.1:1313/%s", path)
+    let tag = GetBackwardTag()
+    echomsg tag
+    if tag != ''
+      let url = url .. '/\#' .. tag
+    endif
     let cmd = tolower(printf("!%s \"%s\"", a:browser, url))
     sil! exe cmd
   else

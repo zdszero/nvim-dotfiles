@@ -27,6 +27,7 @@ inoremap <c-v>F Φ
 inoremap <c-v>any ∃
 inoremap <c-v>, ，
 inoremap <c-v>; ；
+inoremap <c-v>\ 、
 inoremap <c-v>. 。
 inoremap <c-v>) ）
 inoremap <c-v>( （
