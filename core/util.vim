@@ -59,6 +59,8 @@ let g:wiki_config = {
 
 if has('mac')
   let g:wiki_preview_browser = 'open -a "Google Chrome"'
+elseif has('wsl')
+  let g:wiki_preview_browser = '/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe'
 else
   let g:wiki_preview_browser = 'google-chrome-stable'
 endif

@@ -226,6 +226,8 @@ nmap <leader>l :call <SID>yank_ref_link()<CR>
 if has('mac')
   nmap <leader>o :call <SID>open_markdown('open -a "Google Chrome"')<CR>
   nmap <leader>O :call <SID>open_markdown('open -a safari')<CR>
+elseif has('wsl')
+  nmap <leader>o :call <SID>open_markdown('/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe')<CR>
 else
   nmap <leader>o :call <SID>open_markdown('google-chrome')<CR>
 endif
