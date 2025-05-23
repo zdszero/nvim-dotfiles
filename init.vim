@@ -1,5 +1,14 @@
 let g:config_dir = expand("<sfile>:p:h")
 
+function! IsWSL()
+  return has('unix') && filereadable('/proc/version') &&
+        \ (match(readfile('/proc/version')[0], 'Microsoft') >= 0)
+endfunction
+
+function! IsMac()
+  return has('mac') || has('macunix') || system('uname') =~? '^darwin'
+endfunction
+
 fun LoadConfig(filename)
   exe 'so ' . g:config_dir..'/'..a:filename
 endfun

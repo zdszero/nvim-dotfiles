@@ -1,6 +1,6 @@
 let g:enable_imselect = 0
 
-if !has('mac') || g:enable_imselect == 0
+if !IsMac() || g:enable_imselect == 0
   finish
 endif
 
