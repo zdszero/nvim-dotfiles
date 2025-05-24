@@ -9,6 +9,10 @@ function! IsMac()
   return has('mac') || has('macunix') || system('uname') =~? '^darwin'
 endfunction
 
+function! IsWindows()
+    return has('win32') || has('win64')
+endfunction
+
 fun LoadConfig(filename)
   exe 'so ' . g:config_dir..'/'..a:filename
 endfun
@@ -46,6 +50,9 @@ endif
 call LoadConfig('core/option.vim')
 call LoadConfig('core/keymap.vim')
 call LoadConfig('core/command.vim')
+if IsWindows()
+  finish
+endif
 call LoadConfig('core/plugin.vim')
 call LoadConfig('core/util.vim')
 

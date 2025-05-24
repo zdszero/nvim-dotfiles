@@ -45,6 +45,19 @@ com! Tab2 setlocal softtabstop=2 | setlocal tabstop=2 | setlocal shiftwidth=2
 com! Tab4 setlocal softtabstop=4 | setlocal tabstop=4 | setlocal shiftwidth=4
 com! Tab8 setlocal softtabstop=8 | setlocal tabstop=8 | setlocal shiftwidth=8
 
+aug CommentStyle
+  au!
+  au FileType cpp    setlocal commentstring=//\ %s
+  au FileType c      setlocal commentstring=//\ %s
+  au FileType cuda   setlocal commentstring=//\ %s
+  au FileType racket setlocal commentstring=;\ %s
+  au FileType vue    setlocal commentstring=<!--\ %s\ -->
+aug END
+
+if IsWindows()
+  finish
+endif
+
 let g:autotab_src = g:config_dir..'/bin/autotab.c'
 let g:autotab_dir = expand('~/.local/bin')
 let g:autotab_bin = g:autotab_dir .. '/autotab'
@@ -60,13 +73,4 @@ aug SmartIndent
   au!
   au BufRead * if !empty(bufname("%")) && bufname('%') !~# 'fugitive' | execute 'set' system(g:autotab_bin .. " < " .. bufname("%")) | endif
 "   au FileType asm,python,sql,go setlocal softtabstop=4 | setlocal tabstop=4 | setlocal shiftwidth=4
-aug END
-
-aug CommentStyle
-  au!
-  au FileType cpp    setlocal commentstring=//\ %s
-  au FileType c      setlocal commentstring=//\ %s
-  au FileType cuda   setlocal commentstring=//\ %s
-  au FileType racket setlocal commentstring=;\ %s
-  au FileType vue    setlocal commentstring=<!--\ %s\ -->
 aug END

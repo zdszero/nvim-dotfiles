@@ -64,11 +64,15 @@ set history=1000
 set nolist
 " true color support
 set termguicolors
+
 if has('nvim') && exists("g:neovide")
   set guifont=Consolas\ Nerd\ Font:h18
 endif
-if has('mac')
+
+if IsMac()
   set guifont=Consolas\ Nerd\ Font:h24
+elseif IsWindows()
+  set guifont=Consolas:h24
 endif
 
 let g:sql_type_default = 'mysql'
