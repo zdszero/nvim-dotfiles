@@ -28,6 +28,7 @@ command! -bang -nargs=* PRg
 
 nmap <silent> <expr> <leader>sf <SID>is_in_git_directory() ?
   \':GFiles<CR>' : printf(':Files %s<CR>', g:initial_dir)
+nmap <silent> <expr> <leader>sa printf(':Files %s<CR>', g:initial_dir)
 nmap <silent> <expr> <leader>ss printf(':Files %s<CR>', g:initial_dir)
 nmap <silent> <leader>sg :PRg<CR>
 nmap <silent> <leader>sn :exe 'Files ' . g:config_dir<cr>

@@ -245,6 +245,7 @@ call LoadConfig("ftplugin/text.vim")
 command! -bang -nargs=* CRg call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case' .
   \   ' --glob "!**/408quiz/**"' .
+  \   ' --glob "!**/exercise/**"' .
   \   ' --glob "!*.{png,jpg,jpeg,gif,bmp,webp,svg,drawio}" ' .
   \   ' --glob "!*_index.md" ' .
   \   shellescape(<q-args>),
@@ -255,8 +256,11 @@ command! -bang -nargs=* CRg call fzf#vim#grep(
 nmap <leader>sj :CRg<CR>
 
 fun! s:autocorrect_markdown()
-  let save_cursor = getpos(".")
+  let save_cursor = getpos('.')
   %!autocorrect
+  silent %!prettier --stdin-filepath %
+  sil! %s#\($\n\s*\)\+\%$##
+  sil! %s/\v\s*(\{\{\<.*\>\}\})/\1/
   call setpos('.', save_cursor)
 endfun
 
@@ -272,3 +276,36 @@ nnoremap <leader>so :call fzf#run(fzf#wrap({
     \ 'sink': function('<SID>handle_markdown_outline'),
     \ 'options': '--delimiter=: --preview="head -n {2} {1} \| tail -n 20"'
     \ }))<CR>
+
+command! Renum let save_cursor = getpos(".") |  let counter = 1 | g/^##### \zs\d\+/s//\=counter/ | let counter += 1 |  call setpos('.', save_cursor)
+
+
+function! ToSuperscript() range
+  let l:sup_map = {
+        \ '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴',
+        \ '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹',
+        \ 'a': 'ᵃ', 'b': 'ᵇ', 'c': 'ᶜ', 'd': 'ᵈ', 'e': 'ᵉ',
+        \ 'f': 'ᶠ', 'g': 'ᵍ', 'h': 'ʰ', 'i': 'ⁱ', 'j': 'ʲ',
+        \ 'k': 'ᵏ', 'l': 'ˡ', 'm': 'ᵐ', 'n': 'ⁿ', 'o': 'ᵒ',
+        \ 'p': 'ᵖ', 'r': 'ʳ', 's': 'ˢ', 't': 'ᵗ', 'u': 'ᵘ',
+        \ 'v': 'ᵛ', 'w': 'ʷ', 'x': 'ˣ', 'y': 'ʸ', 'z': 'ᶻ',
+        \ '+': '⁺', '-': '⁻', '=': '⁼', '(': '⁽', ')': '⁾',
+        \ 'A': 'ᴬ', 'B': 'ᴮ', 'D': 'ᴰ', 'E': 'ᴱ', 'G': 'ᴳ',
+        \ 'H': 'ᴴ', 'I': 'ᴵ', 'J': 'ᴶ', 'K': 'ᴷ', 'L': 'ᴸ',
+        \ 'M': 'ᴹ', 'N': 'ᴺ', 'O': 'ᴼ', 'P': 'ᴾ', 'R': 'ᴿ',
+        \ 'T': 'ᵀ', 'U': 'ᵁ', 'V': 'ⱽ', 'W': 'ᵂ'
+        \ }
+
+  " Get the visually selected text
+  let l:orig = getreg('"')
+  let l:visual = ''
+  for l:char in split(l:orig, '\zs')
+    let l:visual .= has_key(l:sup_map, l:char) ? l:sup_map[l:char] : l:char
+  endfor
+
+  " Replace selection with superscript
+  call setreg('"', l:visual)
+  normal! gvp
+endfunction
+
+xnoremap g^ :<C-u>call ToSuperscript()<CR>
