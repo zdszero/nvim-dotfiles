@@ -309,3 +309,28 @@ function! ToSuperscript() range
 endfunction
 
 xnoremap g^ :<C-u>call ToSuperscript()<CR>
+
+function! ToSubscript() range
+  let l:sub_map = {
+        \ '0': '₀', '1': '₁', '2': '₂', '3': '₃', '4': '₄',
+        \ '5': '₅', '6': '₆', '7': '₇', '8': '₈', '9': '₉',
+        \ 'a': 'ₐ', 'e': 'ₑ', 'h': 'ₕ', 'i': 'ᵢ', 'j': 'ⱼ',
+        \ 'k': 'ₖ', 'l': 'ₗ', 'm': 'ₘ', 'n': 'ₙ', 'o': 'ₒ',
+        \ 'p': 'ₚ', 'r': 'ᵣ', 's': 'ₛ', 't': 'ₜ', 'u': 'ᵤ',
+        \ 'v': 'ᵥ', 'x': 'ₓ', '+': '₊', '-': '₋', '=': '₌',
+        \ '(': '₍', ')': '₎'
+        \ }
+
+  " Get the visually selected text
+  let l:orig = getreg('"')
+  let l:visual = ''
+  for l:char in split(l:orig, '\zs')
+    let l:visual .= has_key(l:sub_map, l:char) ? l:sub_map[l:char] : l:char
+  endfor
+
+  " Replace selection with subscript
+  call setreg('"', l:visual)
+  normal! gvp
+endfunction
+
+xnoremap g_ :<C-u>call ToSubscript()<CR>
