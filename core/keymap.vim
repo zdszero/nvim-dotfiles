@@ -52,7 +52,11 @@ inoremap <c-e> <c-c>A
 inoremap <c-q> <c-c>gUawea
 
 " copy and paste
-nnoremap V "+p
+if IsWSL()
+	nnoremap V :call setreg('+', substitute(getreg('+'), '\r', '', 'g'))<CR>"+p
+else
+  nnoremap V "+p
+endif
 xnoremap C "+y
 
 " alphabet

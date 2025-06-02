@@ -258,7 +258,7 @@ nmap <leader>sj :CRg<CR>
 fun! s:autocorrect_markdown()
   let save_cursor = getpos('.')
   %!autocorrect
-  silent %!prettier --stdin-filepath %
+  " silent %!prettier --stdin-filepath %
   sil! %s#\($\n\s*\)\+\%$##
   sil! %s/\v\s*(\{\{\<.*\>\}\})/\1/
   call setpos('.', save_cursor)
@@ -334,3 +334,15 @@ function! ToSubscript() range
 endfunction
 
 xnoremap g_ :<C-u>call ToSubscript()<CR>
+
+function! CustomPath()
+  let curfile = expand('%:p')
+  if curfile =~# 'cs-kaoyan-grocery'
+    return substitute(curfile, '.*/cs-kaoyan-grocery/content/', '', 'g')
+  else
+    return expand('%:p')
+  endif
+endfunction
+
+set laststatus=2
+set statusline=%{CustomPath()}
