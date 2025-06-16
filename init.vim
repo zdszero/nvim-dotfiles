@@ -5,6 +5,11 @@ function! IsWSL()
         \ (match(readfile('/proc/version')[0], 'Microsoft') >= 0)
 endfunction
 
+function! GetWSLPath(filepath)
+  return 'file://wsl.localhost/Ubuntu-24.04' . a:filepath
+endfunction
+
+
 function! IsMac()
   return has('mac') || has('macunix') || system('uname') =~? '^darwin'
 endfunction

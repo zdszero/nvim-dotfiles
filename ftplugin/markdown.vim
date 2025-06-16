@@ -9,10 +9,6 @@ let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 1
 let g:vim_markdown_math = 1
 
-fun! s:visual_word_count () range
-  execute '!sed -n ' . a:firstline . ',' . a:lastline . 'p % | wc -w'
-endfun
-
 inoremap <c-;> <Esc>/<++><CR>:nohlsearch<CR>d4li
 inoremap <c-j> <Esc>/<++><CR>:nohlsearch<CR>d4li
 inoremap ;a <a name=""><b><++></b></a><Esc>F"i
@@ -39,7 +35,6 @@ inoremap ;4 ####<Space><Enter><Enter><++><Esc>2kA
 inoremap ;5 #####<Space><Enter><Enter><++><Esc>2kA
 inoremap ;6 ######<Space><Enter><Enter><++><Esc>2kA
 inoremap ;{ \text{\{\}} <++><Esc>F\i
-xnoremap <silent> <c-w> :call <SID>visual_word_count()<CR>
 
 fun! s:get_image_info()
   if !executable('identify')
@@ -140,7 +135,7 @@ endfun
 
 fun! s:open_markdown(browser)
   let curfile = expand("%:p:h")
-  if curfile =~# 'cs-kaoyan-grocery'
+  if curfile =~# 'cs-kaoyan-grocery/content'
     let path = substitute(curfile, ".*/cs-kaoyan-grocery/content/", "", "g")
     let url = printf("http://127.0.0.1:1313/%s", path)
     let tag = GetBackwardTag()
@@ -151,7 +146,11 @@ fun! s:open_markdown(browser)
     let cmd = tolower(printf("!%s \"%s\"", a:browser, url))
     sil! exe cmd
   else
-    exe '!' .. g:wiki_preview_browser .. ' %'
+    if IsWSL()
+      exe '!' .. g:wiki_preview_browser .. ' ' .. GetWSLPath(expand('%:p'))
+    else
+      exe '!' .. g:wiki_preview_browser .. ' %'
+    endif
   endif
 endfun
 
