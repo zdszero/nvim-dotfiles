@@ -158,6 +158,11 @@ fun! s:yank_ref_link()
   let curfile = expand("%:p:h")
   if curfile =~# 'cs-kaoyan-grocery'
     let curline = getline('.')
+    let path = matchstr(curline, '{{<\s*svg\s*"\zs[^"]\+\ze"')
+    if !empty(path)
+      call setreg('l', '<img src="../content' . l:path . '" width="100%">')
+      return
+    endif
     if curline =~# '^#'
       let tag = substitute(curline, '\v^\#+\s*', '', '')
     elseif curline =~# '^title:'
