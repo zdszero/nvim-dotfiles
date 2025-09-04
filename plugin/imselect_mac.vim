@@ -7,7 +7,7 @@ endif
 let g:imselect = g:config_dir .. '/bin/select'
 let g:input_toggle = 0
 let s:im_en = 'com.apple.keylayout.ABC'
-let s:im_zh = ''
+let s:im_zh = 'org.fcitx.inputmethod.Fcitx5.fcitx5'
 
 if !filereadable(g:imselect)
   let imselect_src = g:imselect .. '.m'

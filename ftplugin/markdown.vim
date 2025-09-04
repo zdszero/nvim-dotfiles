@@ -5,6 +5,8 @@ set shiftwidth=4
 set conceallevel=2
 set textwidth=0
 
+nnoremap <leader>rs :syntax sync fromstart<CR>:redraw!<CR>
+
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 1
 let g:vim_markdown_math = 1
@@ -130,6 +132,7 @@ fun! GetBackwardTag()
   let lnum = search('\v^#+ ', 'bnw')
   let line = getline(lnum)
   let tag = matchstr(line, '\v^#+ \zs.*\ze')
+  let tag = substitute(tag, ' ', '-', 'g')
   return tag
 endfun
 
@@ -350,3 +353,11 @@ endfunction
 
 set laststatus=2
 set statusline=%{CustomPath()}
+
+function! RemoveMarkdownBold() range
+    sil! execute a:firstline . ',' . a:lastline . 's/\s*\*\*\([^*]\+\)\*\*\s*/\1/g'
+    sil! execute a:firstline . ',' . a:lastline . 's/\s*__\([^_]\+\)__\s*/\1/g'
+endfunction
+
+nnoremap <leader>b :call RemoveMarkdownBold()<CR>
+xnoremap <leader>b :call RemoveMarkdownBold()<CR>
