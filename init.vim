@@ -86,4 +86,5 @@ endif
 if has('nvim')
   lua require('plugins/treesitter')
   lua require('plugins/indent-blankline')
+  lua require('plugins/aigen')
 endif

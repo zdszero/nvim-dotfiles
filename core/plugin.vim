@@ -31,6 +31,7 @@ Plug 'sainnhe/sonokai'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/everforest'
 Plug 'liuchengxu/vista.vim'
+Plug 'David-Kunz/gen.nvim'
 """"""""""""""""""""""
 "  COMPLETE SEARCH   "
 """"""""""""""""""""""
