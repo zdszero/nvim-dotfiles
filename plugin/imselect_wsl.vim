@@ -2,7 +2,7 @@ if !IsWSL()
   finish
 endif
 
-let g:enable_imselect = 0
+let g:enable_imselect = 1
 
 let g:input_toggle = 0
 let g:imselect_see = g:config_dir . '/bin/im-select-mspy.exe'

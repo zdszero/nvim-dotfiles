@@ -11,6 +11,7 @@ let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 1
 let g:vim_markdown_math = 1
 
+nnoremap <leader>rs :syntax sync fromstart<CR>:redraw!<CR>
 inoremap <c-;> <Esc>/<++><CR>:nohlsearch<CR>d4li
 inoremap <c-j> <Esc>/<++><CR>:nohlsearch<CR>d4li
 inoremap ;a <a name=""><b><++></b></a><Esc>F"i
@@ -100,32 +101,27 @@ fun! s:paste_image(arg)
   call wiki#image#markdown_clipboard_image()
 endfun
 
-fun! s:make_math_block() range
-  sil! exe printf('%d,%ds/\v([\x21-\x7E]+(\s+[\x21-\x7E]+)*)/$\1$/g', a:firstline, a:lastline)
+fun! s:smart_math_block() range
+  " Check if there are any $ delimiters in the range
+  let has_dollars = 0
+  for lnum in range(a:firstline, a:lastline)
+    if getline(lnum) =~ '\$'
+      let has_dollars = 1
+      break
+    endif
+  endfor
+  
+  if has_dollars
+    " Use \_.{-} without \v, or use (\_.\{-}) with \v
+    sil! exe a:firstline.','.a:lastline.'s:\$\$\(\_.\{-}\)\$\$:\\[\1\\]:g'
+    sil! exe a:firstline.','.a:lastline.'s:\$\(\_.\{-}\)\$:\\(\1\\):g'
+  else
+    sil! exe printf('%d,%ds/\v([\x21-\x7E]+(\s+[\x21-\x7E]+)*)/\\(\1\\)/g', a:firstline, a:lastline)
+  endif
 endfun
 
 fun! s:make_code_block() range
   sil! exe printf('%d,%ds/\v([\x21-\x7E]+(\s+[\x21-\x7E]+)*)/`\1`/g', a:firstline, a:lastline)
-endfun
-
-fun! s:format_chatgpt2list() range
-  let curidx = 1
-  let lineno = a:firstline
-  while lineno <= a:lastline
-    let curline = getline(lineno)
-    if empty(curline)
-      let lineno = lineno + 1
-      continue
-    endif
-    let text = "\t- "
-    if lineno < a:lastline && empty(getline(lineno + 1))
-      let text = printf("%d. ", curidx)
-      let curidx = curidx + 1
-    endif
-    call setline(lineno, text .. curline)
-    let lineno = lineno + 1
-  endwhile
-  sil! exe printf("%d,%dg/^$/d", a:firstline, a:lastline)
 endfun
 
 fun! GetBackwardTag()
@@ -226,9 +222,8 @@ fun! s:wdbible_markdown()
   Tcn
 endfun
 
-vmap <leader>m :call <SID>make_math_block()<CR>
+vmap <leader>m :call <SID>smart_math_block()<CR>
 vmap <leader>c :call <SID>make_code_block()<CR>
-vmap <leader>l :call <SID>format_chatgpt2list()<CR>
 nmap <leader>l :call <SID>yank_ref_link()<CR>
 if has('mac')
   nmap <leader>o :call <SID>open_markdown('open -a "Google Chrome"')<CR>
