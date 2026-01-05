@@ -19,6 +19,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'ojroques/vim-oscyank'
 Plug 'mg979/vim-visual-multi'
 Plug 'moll/vim-bbye'
+Plug 'Vimjas/vim-python-pep8-indent'
 """"""""""""""""""""""
 "      BUTTER UI     "
 """"""""""""""""""""""
@@ -35,7 +36,7 @@ Plug 'David-Kunz/gen.nvim'
 """"""""""""""""""""""
 "  COMPLETE SEARCH   "
 """"""""""""""""""""""
-if g:config['coc'] == 1 && executable('node')
+if g:config['coc'] == 1 && (executable('node') || isdirectory(expand('~/.nvm')))
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
   Plug 'junegunn/fzf.vim' " needed for previews

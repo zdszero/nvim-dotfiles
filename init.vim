@@ -68,7 +68,7 @@ if g:config['markdown'] == 1
   let &packpath = &rtp
 endif
 
-if g:config['coc'] == 1 && executable('node')
+if g:config['coc'] == 1 && (executable('node') || isdirectory(expand('~/.nvm')))
   call LoadConfig('core/coc.vim')
   call LoadConfig('core/fzf.vim')
 endif

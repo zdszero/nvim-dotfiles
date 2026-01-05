@@ -29,8 +29,8 @@ inoremap ;l [](<++>)<Esc>F]i
 inoremap ;p ![](<++>)<Esc>F]i
 inoremap ;c ```<Enter><++><Enter>```<Esc>kkA
 inoremap ;v `` <++><Esc>F`i
-inoremap ;m $$ <++><Esc>F$i
-inoremap ;M $$$$ <++><Esc>F$;i
+inoremap ;m \(\) <++><Esc>F\i
+inoremap ;M \[\] <++><Esc>F\i
 inoremap ;1 #<Space><Enter><Enter><++><Esc>2kA
 inoremap ;2 ##<Space><Enter><Enter><++><Esc>2kA
 inoremap ;3 ###<Space><Enter><Enter><++><Esc>2kA

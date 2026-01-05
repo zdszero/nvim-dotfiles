@@ -28,3 +28,12 @@ nnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>
 inoremap <silent><RightMouse> <Esc>:call GuiShowContextMenu()<CR>
 xnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
 snoremap <silent><RightMouse> <C-G>:call GuiShowContextMenu()<CR>gv
+
+nnoremap <LeftDrag>  <Nop>
+vnoremap <LeftDrag>  <Nop>
+inoremap <LeftDrag>  <Nop>
+
+nnoremap <LeftMouse> <Nop>
+vnoremap <LeftMouse> <Nop>
+inoremap <LeftMouse> <Nop>
+
